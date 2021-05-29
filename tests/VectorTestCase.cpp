@@ -25,6 +25,18 @@ void VectorTestCase::initTests()
         testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapacityIsOneElementAddedCanBeRetreivedWithIndexZero
     };
     VectorTestCase::allTests.push_back(t1);
+    TestNameAndFunc t2 = 
+    { 
+        "testPushBack_PushBackTwoElementsToEmptyVEctor_SizeIsTwoCapacityIsTwoElementAddedLastIsAccessibleAtIndexOne", 
+        testPushBack_PushBackTwoElementsToEmptyVEctor_SizeIsTwoCapacityIsTwoElementAddedLastIsAccessibleAtIndexOne
+    };
+    VectorTestCase::allTests.push_back(t2);
+    TestNameAndFunc t3 = 
+    { 
+        "testPushBack_PushBackThreeElementsToEmptyVector_SizeIsThreeCapacityIsFourElementAddedLastIsAccessibleAtIndexTwo", 
+        testPushBack_PushBackThreeElementsToEmptyVector_SizeIsThreeCapacityIsFourElementAddedLastIsAccessibleAtIndexTwo
+    };
+    VectorTestCase::allTests.push_back(t3);
 }
 
 void VectorTestCase::run()
@@ -50,14 +62,31 @@ void VectorTestCase::testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapac
     assertTrue(actual.capacity() == 1);
     assertTrue(actual.size() == 1);
 }
-// void VectorTestCase::testFuncName()
-// {
-
-// }
-// void VectorTestCase::testFuncName()
-// {
-
-// }
+void VectorTestCase::testPushBack_PushBackTwoElementsToEmptyVEctor_SizeIsTwoCapacityIsTwoElementAddedLastIsAccessibleAtIndexOne()
+{
+    //Arrange
+    ft::vector<int> actual;
+    //Act
+    actual.push_back(1);
+    actual.push_back(2);
+    //Assert
+    assertTrue(actual.capacity() == 2);
+    assertTrue(actual.size() == 2);
+    assertTrue(actual[1] == 2);
+}
+void VectorTestCase::testPushBack_PushBackThreeElementsToEmptyVector_SizeIsThreeCapacityIsFourElementAddedLastIsAccessibleAtIndexTwo()
+{
+    //Arrange
+    ft::vector<int> actual;
+    //Act
+    actual.push_back(1);
+    actual.push_back(2);
+    actual.push_back(3);
+    //Assert
+    assertTrue(actual.size() == 3);
+    assertTrue(actual.capacity() == 4);
+    assertTrue(actual[2] == 3);
+}
 // void VectorTestCase::testFuncName()
 // {
 

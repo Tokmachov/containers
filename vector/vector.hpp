@@ -30,6 +30,14 @@ namespace ft
                 _pushBack();
             }
             //Capacity:
+            size_type size() const
+            {
+                return _elementsCount;
+            }
+            size_type capacity() const
+            {
+                return _capacity;
+            }
         private:
             pointer _storage;
             allocator_type _alloc;

@@ -1,3 +1,5 @@
+#ifndef VECTORITERATORBASE_HPP
+# define VECTORITERATORBASE_HPP
 template <typename Value>
 class VectorIteratorBase
 {
@@ -31,3 +33,5 @@ class VectorIteratorBase
     protected:
         Value *_storagePtr;
 };
+
+#endif

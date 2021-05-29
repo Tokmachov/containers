@@ -19,12 +19,12 @@ VectorTestCase &VectorTestCase::operator=( VectorTestCase const & rhs )
 //and funciton names
 void VectorTestCase::initTests()
 {
-    // TestNameAndFunc t1 = 
-    // { 
-    //     "testIteratorsOfTwoListsWithSameSequencesMustNotBeEqual", 
-    //     testCopyConstructionMustProduceEqualIterators
-    // };
-    // VectorTestCase::allTests.push_back(t1);
+    TestNameAndFunc t1 = 
+    { 
+        "testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapacityIsOneElementAddedCanBeRetreivedWithIndexZero", 
+        testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapacityIsOneElementAddedCanBeRetreivedWithIndexZero
+    };
+    VectorTestCase::allTests.push_back(t1);
 }
 
 void VectorTestCase::run()
@@ -38,8 +38,30 @@ void VectorTestCase::run()
 */
 //write here definitions of test functions
 //after fucnction proves to work correctly, change "CONSTRUCTION" to "DONE"
-//CONSTRUCTION
+//RED
+void VectorTestCase::testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapacityIsOneElementAddedCanBeRetreivedWithIndexZero()
+{
+    //Arrange
+    ft::vector<int> actual;
+    //Act
+    actual.push_back(1);
+    //Assert
+    assertTrue(actual[0] == 1);
+    assertTrue(actual.capacity() == 1);
+    assertTrue(actual.size() == 1);
+}
+// void VectorTestCase::testFuncName()
+// {
 
+// }
+// void VectorTestCase::testFuncName()
+// {
+
+// }
+// void VectorTestCase::testFuncName()
+// {
+
+// }
 // void VectorTestCase::testFuncName()
 // {
 

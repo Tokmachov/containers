@@ -27,7 +27,7 @@ namespace ft
             //Modifiers
             void push_back (const value_type& val)
             {
-                _pushBack();
+                _pushBack(val);
             }
             //Capacity:
             size_type size() const
@@ -74,17 +74,17 @@ namespace ft
                 if (_capacity == 0)
                 {
                     _capacity = 1;
-                    _storage = _alloc.alloc(_capacity);
+                    _storage = _alloc.allocate(_capacity);
                     return ;
                 }
                 size_t prevCapacity = _capacity;
                 _capacity *= 2;
-                pointer newStorage = _alloc.alloc(_capacity);
+                pointer newStorage = _alloc.allocate(_capacity);
                 for (size_t i = 0; i < _elementsCount; i++)
-                    _alloc.construct(newStorage[i], _storage[i]);
+                    _alloc.construct(newStorage + i, _storage[i]);
                 for (size_t i = 0; i < _elementsCount; i++)
-                    _alloc.destroy(_storage[i]);
-                _alloc.deallocate(_storage[prevCapacity]);
+                    _alloc.destroy(_storage + i);
+                _alloc.deallocate(_storage, prevCapacity);
                 _storage = newStorage;
             }
     };

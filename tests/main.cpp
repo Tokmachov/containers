@@ -7,5 +7,6 @@ int main(void)
 {
     //ListIteratorTestCase::run();
     //ListTestCase::run();
+    VectorTestCase::run();
     return 0;
 }

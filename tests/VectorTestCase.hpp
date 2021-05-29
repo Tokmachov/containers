@@ -27,7 +27,7 @@ class VectorTestCase : public TestCase
             int value;
         };
         //Test functions
-        //static void testPushBack_PushBackOneElementToEmptyVector_
+        static void testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapacityIsOneElementAddedCanBeRetreivedWithIndexZero();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

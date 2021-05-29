@@ -27,8 +27,7 @@ class VectorTestCase : public TestCase
             int value;
         };
         //Test functions
-        //Please write declaration of test functions here
-        //static void testIteratorsOfTwoListsWithSameSequencesMustNotBeEqual();
+        //static void testPushBack_PushBackOneElementToEmptyVector_
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

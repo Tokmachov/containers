@@ -38,6 +38,15 @@ namespace ft
             {
                 return _capacity;
             }
+            //Element access:
+            reference operator[] (size_type n)
+            {
+                return _storage[n];
+            }
+            const_reference operator[] (size_type n) const
+            {
+                return _storage[n];
+            }
         private:
             pointer _storage;
             allocator_type _alloc;

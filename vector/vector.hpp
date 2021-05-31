@@ -57,6 +57,14 @@ namespace ft
             {
                 return reverse_iterator_const(_storage + _elementsCount - 1);
             }
+            reverse_iterator rend()
+            {
+                return reverse_iterator(_storage- 1);
+            }
+            const_reverse_iterator rend() const
+            {
+                return reverse_iterator_const(_storage- 1);
+            }
             //Modifiers
             void push_back (const value_type& val)
             {

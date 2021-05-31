@@ -3,8 +3,8 @@
 
 # include "VectorIterator.hpp"
 # include "VectorIteratorConst.hpp"
-# include "VectorIteratorReversed.hpp"
-# include "VectorIteratorConstReverse.hpp"
+# include "VectorIteratorReverse.hpp"
+//# include "VectorIteratorConstReverse.hpp"
 
 namespace ft
 {
@@ -20,8 +20,8 @@ namespace ft
             typedef typename allocator_type::const_pointer const_pointer;
             typedef ft::VectorIterator<T> iterator;
             typedef ft::VectorIteratorConst<T> const_iterator;
-            typedef ft::VectorIteratorReversed<T> reverse_iterator;
-            typedef ft::VectorIteratorConstReverse<T> const_reverse_iterator;
+            typedef ft::VectorIteratorReverse<T> reverse_iterator;
+            //typedef ft::VectorIteratorConstReverse<T> const_reverse_iterator;
             typedef typename allocator_type::difference_type difference_type;
             typedef size_t size_type;
 
@@ -53,18 +53,18 @@ namespace ft
             {
                 return reverse_iterator(_storage + _elementsCount - 1);
             }
-            const_reverse_iterator rbegin() const
-            {
-                return reverse_iterator_const(_storage + _elementsCount - 1);
-            }
+            // const_reverse_iterator rbegin() const
+            // {
+            //     return reverse_iterator_const(_storage + _elementsCount - 1);
+            // }
             reverse_iterator rend()
             {
                 return reverse_iterator(_storage- 1);
             }
-            const_reverse_iterator rend() const
-            {
-                return reverse_iterator_const(_storage- 1);
-            }
+            // const_reverse_iterator rend() const
+            // {
+            //     return reverse_iterator_const(_storage- 1);
+            // }
             //Modifiers
             void push_back (const value_type& val)
             {

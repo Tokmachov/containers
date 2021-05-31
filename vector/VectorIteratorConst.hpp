@@ -12,16 +12,15 @@ namespace ft
             typedef Value* pointer;
             typedef Value& reference;
             typedef std::random_access_iterator_tag iterator_category;
-            friend VectorIteratorConst<Value> &operator+(const VectorIteratorConst & it, difference_type offset);
-            friend VectorIteratorConst<Value> &operator+(difference_type offset, const VectorIteratorConst & it);
-            friend VectorIteratorConst<Value> &operator-(const VectorIteratorConst & it, difference_type offset);
-            friend VectorIteratorConst<Value> &operator-(difference_type offset, const VectorIteratorConst & it);
+            friend VectorIteratorConst<Value> &operator+(difference_type offset, const VectorIteratorConst<Value> & it);
+            friend VectorIteratorConst<Value> &operator-(const VectorIteratorConst<Value> & it, difference_type offset);
             VectorIteratorConst<Value>() {}
             VectorIteratorConst<Value>(const VectorIteratorConst &src) 
                 : VectorIteratorBase<Value>(src._storagePtr) {}
             VectorIteratorConst &operator=(const VectorIteratorConst &rhs)
             {
                 this->_storagePtr = rhs._storagePtr;
+                return *this;
             }
             const Value &operator*() const { return *this->_storagePtr; };
             const Value *operator->() const { return &(*this->_storagePtr); };
@@ -50,12 +49,20 @@ namespace ft
             VectorIteratorConst<Value> &operator+=(difference_type offset)
             {
                 this->_storagePtr += offset;
-                return this;
+                return *this;
             }
             VectorIteratorConst<Value> &operator-=(difference_type offset)
             {
                 this->_storagePtr -= offset;
-                return this;
+                return *this;
+            }
+            difference_type operator-(const ft::VectorIteratorConst<Value> & itRhs)
+            {
+                return this->_storagePtr - itRhs._storagePtr;
+            }
+            ft::VectorIteratorConst<Value> operator+(difference_type offset)
+            {
+                return this->_storagePtr + offset;
             }
             const value_type &operator[] (difference_type idx) const
             {
@@ -63,18 +70,11 @@ namespace ft
             }
     };
 }
-template <typename Value>
-ft::VectorIteratorConst<Value> &operator+(const ft::VectorIteratorConst<Value> & it, typename ft::VectorIteratorConst<Value>::difference_type offset)
-{
-    it._storagePtr += offset;
-    return it;
-}
 
 template <typename Value>
-ft::VectorIteratorConst<Value> &operator+(typename ft::VectorIteratorConst<Value>::difference_type offset, const ft::VectorIteratorConst<Value> & it)
-{
-    it._storagePtr += offset;
-    return it;
+ft::VectorIteratorConst<Value> operator+(typename ft::VectorIteratorConst<Value>::difference_type offset, const ft::VectorIteratorConst<Value> & it)
+{    
+    return it._storagePtr + offset;
 }
 
 template <typename Value>
@@ -84,10 +84,4 @@ ft::VectorIteratorConst<Value> &operator-(const ft::VectorIteratorConst<Value> &
     return it;
 }
 
-template <typename Value>
-ft::VectorIteratorConst<Value> &operator-(typename ft::VectorIteratorConst<Value>::difference_type offset, const ft::VectorIteratorConst<Value> & it)
-{
-    it._storagePtr -= offset;
-    return it;
-}
 #endif

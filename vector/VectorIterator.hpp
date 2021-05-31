@@ -1,7 +1,9 @@
-#ifndif VECTORITERATOR_HPP
+#ifndef VECTORITERATOR_HPP
 # define VECTORITERATOR_HPP
-template <typename Value>
 
+#include "VectorIteratorBase.hpp"
+
+template <typename Value>
 class VectorIterator : public VectorIteratorBase<Value>
 {
     public:
@@ -14,73 +16,75 @@ class VectorIterator : public VectorIteratorBase<Value>
         friend VectorIterator<Value> &operator+(difference_type offset, const VectorIterator & it);
         friend VectorIterator<Value> &operator-(const VectorIterator & it, difference_type offset);
         friend VectorIterator<Value> &operator-(difference_type offset, const VectorIterator & it);
-        friend VectorIterator<Value> &operator+=(difference_type offset);
-        friend VectorIterator<Value> &operator-=(difference_type offset);
         VectorIterator<Value>() {}
         VectorIterator<Value>(const VectorIterator &src) 
-            : VectorIteratorBase(src._storagePtr) {}
+            : VectorIteratorBase<Value>(src._storagePtr) {}
         VectorIterator &operator=(const VectorIterator &rhs)
         {
-            _storagePtr = src._storagePtr;
+            this->_storagePtr = rhs._storagePtr;
         }
-        Value &operator*() const { return *_storagePtr; };
-        Value *operator->() const { return &(*_storagePtr); };
+        Value &operator*() { return *this->_storagePtr; };
+        Value *operator->() { return &(*this->_storagePtr); };
         VectorIterator &operator++()
         {
-            _storage++;
+            this->_storagePtr++;
             return this;
         }
         VectorIterator operator++(int)
         {
             VectorIterator tmp = *this;
-            _storagePtr++;
+            this->_storagePtr++;
             return tmp;
         }
         VectorIterator &operator--()
         {
-            _storage--;
+            this->_storagePtr--;
             return this;
         }
         VectorIterator operator--(int)
         {
             VectorIterator tmp = *this;
-            _storagePtr--;
+            this->_storagePtr--;
             return tmp;
         }
-    private:
-        //pointer value_addr;
-
+        VectorIterator<Value> &operator+=(VectorIterator<Value>::difference_type offset)
+        {
+            this->_storagePtr += offset;
+            return this;
+        }
+        VectorIterator<Value> &operator-=(typename VectorIterator<Value>::difference_type offset)
+        {
+            this->_storagePtr -= offset;
+            return this;
+        }
+        value_type &operator[] (difference_type idx)
+        {
+            return this->_storagePtr[idx];
+        }
 };
 
 template <typename Value>
-VectorIterator<Value> &operator+(const VectorIterator<Value> & it, ptrdiff_t offset)
+VectorIterator<Value> &operator+(const VectorIterator<Value> & it, typename VectorIterator<Value>::difference_type offset)
 {
     it._storagePtr += offset;
 }
 
-VectorIterator<Value> &operator+(ptrdiff_t offset, const VectorIterator & it)
+template <typename Value>
+VectorIterator<Value> &operator+(typename VectorIterator<Value>::difference_type offset, const VectorIterator<Value> & it)
 {
     it._storagePtr += offset;
 }
 
-VectorIterator<Value> &operator-(const VectorIterator & it, difference_type offset)
-{
-    it._storagePtr -= offset;
-}
-VectorIterator<Value> &operator-(difference_type offset, const VectorIterator & it)
+template <typename Value>
+VectorIterator<Value> &operator-(const VectorIterator<Value> & it, typename VectorIterator<Value>::difference_type offset)
 {
     it._storagePtr -= offset;
 }
 
-VectorIterator<Value> &operator+=(difference_type offset)
+template <typename Value>
+VectorIterator<Value> &operator-(typename VectorIterator<Value>::difference_type offset, const VectorIterator<Value> & it)
 {
-    _storagePtr += offst;
-    return this;
-}
-VectorIterator<Value> &operator-=(difference_type offset)
-{
-    _storagePtr -= offst;
-    return this;
+    it._storagePtr -= offset;
 }
 
 #endif

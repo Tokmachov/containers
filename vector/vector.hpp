@@ -1,3 +1,9 @@
+#ifndef VECTOR_HPP
+# define VECTOR_HPP 
+
+# include "VectorIterator.hpp"
+# include "VectorIteratorConst.hpp"
+
 namespace ft
 {
     template < class T, class Alloc = std::allocator<T> > 
@@ -89,3 +95,5 @@ namespace ft
             }
     };
 }
+
+#endif

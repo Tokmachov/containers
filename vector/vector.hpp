@@ -18,7 +18,7 @@ namespace ft
             typedef typename allocator_type::const_reference const_reference;
             typedef typename allocator_type::pointer pointer;
             typedef typename allocator_type::const_pointer const_pointer;
-            //typedef iterator	a random access iterator to value_type
+            //typedef   iterator
             //const_iterator	a random access iterator to const value_type
             //reverse_iterator	reverse_iterator<iterator>
             //const_reverse_iterator	reverse_iterator<const_iterator>
@@ -32,6 +32,15 @@ namespace ft
             {
                 _deleteStorageFromMemory();
             }
+            //Iterators
+            // iterator begin()
+            // {
+                
+            // }
+            // const_iterator begin() const
+            // {
+
+            // }
             //Modifiers
             void push_back (const value_type& val)
             {

@@ -18,11 +18,11 @@ namespace ft
             typedef typename allocator_type::const_reference const_reference;
             typedef typename allocator_type::pointer pointer;
             typedef typename allocator_type::const_pointer const_pointer;
-            //typedef   iterator
-            //const_iterator	a random access iterator to const value_type
-            //reverse_iterator	reverse_iterator<iterator>
-            //const_reverse_iterator	reverse_iterator<const_iterator>
-            //difference_type
+            typedef ft::VectorIterator<T> iterator;
+            typedef ft::VectorIteratorConst<T> const_iterator;
+            typedef ft::VectorIteratorReversed<T> reverse_iterator;
+            typedef ft::VectorIteratorConstReverse<T> const_reverse_iterator;
+            typedef typename allocator_type::difference_type difference_type;
             typedef size_t size_type;
 
             //Constructors, destructors, assignment op

@@ -62,21 +62,25 @@ class VectorIteratorConst : public VectorIteratorBase<Value>
 };
 
 template <typename Value>
-VectorIteratorConst<Value> &operator+(const VectorIteratorConst<Value> & it, VectorIteratorConst<Value>::difference_type offset)
+VectorIteratorConst<Value> &operator+(const VectorIteratorConst<Value> & it, typename VectorIteratorConst<Value>::difference_type offset)
 {
     it._storagePtr += offset;
 }
 
-VectorIteratorConst<Value> &operator+(VectorIteratorConst<Value>::difference_type offset, const VectorIteratorConst<Value> & it)
+template <typename Value>
+VectorIteratorConst<Value> &operator+(typename VectorIteratorConst<Value>::difference_type offset, const VectorIteratorConst<Value> & it)
 {
     it._storagePtr += offset;
 }
 
-VectorIteratorConst<Value> &operator-(const VectorIteratorConst<Value> & it, VectorIteratorConst<Value>::difference_type offset)
+template <typename Value>
+VectorIteratorConst<Value> &operator-(const VectorIteratorConst<Value> & it, typename VectorIteratorConst<Value>::difference_type offset)
 {
     it._storagePtr -= offset;
 }
-VectorIteratorConst<Value> &operator-(VectorIteratorConst<Value>::difference_type offset, const VectorIteratorConst<Value> & it)
+
+template <typename Value>
+VectorIteratorConst<Value> &operator-(typename VectorIteratorConst<Value>::difference_type offset, const VectorIteratorConst<Value> & it)
 {
     it._storagePtr -= offset;
 }

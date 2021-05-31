@@ -67,24 +67,28 @@ template <typename Value>
 VectorIterator<Value> &operator+(const VectorIterator<Value> & it, typename VectorIterator<Value>::difference_type offset)
 {
     it._storagePtr += offset;
+    return it;
 }
 
 template <typename Value>
 VectorIterator<Value> &operator+(typename VectorIterator<Value>::difference_type offset, const VectorIterator<Value> & it)
 {
     it._storagePtr += offset;
+    return it;
 }
 
 template <typename Value>
 VectorIterator<Value> &operator-(const VectorIterator<Value> & it, typename VectorIterator<Value>::difference_type offset)
 {
     it._storagePtr -= offset;
+    return it;
 }
 
 template <typename Value>
 VectorIterator<Value> &operator-(typename VectorIterator<Value>::difference_type offset, const VectorIterator<Value> & it)
 {
     it._storagePtr -= offset;
+    return it;
 }
 
 #endif

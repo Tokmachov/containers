@@ -3,6 +3,7 @@
 
 # include "VectorIterator.hpp"
 # include "VectorIteratorConst.hpp"
+# include "VectorIteratorReversed.hpp"
 
 namespace ft
 {

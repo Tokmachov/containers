@@ -34,18 +34,29 @@ class VectorTestCase : public TestCase
         static void testVectorIterator_SortVectorOfRandomIntsFromOneToFive_SortedVectorOfIntsFromOneTwoFive();
         static void testVectorIterator_SortTenInts_SortedVectorOfInts();
         static void testVectorIterator_SortTenIntsWithSortHeap_SortedVectorOfInts();
-        //Reverse ++a
+        //Reverse ++it
         static void testVectorIteratorReverse_PlusPlusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
-        //Reverse a++
+        //Reverse it++
         static void testVectorIteratorReverse_CallPlusPlusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
-        //Reverse a--
+        //Reverse it--
         static void testVectorIteratorReverse_CallMinusMinusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
-        //Reverse --a
+        //Reverse --it
         static void testVectorIteratorReverse_CallMinusMinusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
-        //Reverse a + n
+        //Reverse it + n
         static void testVectorIteratorReverse_AddIteratorAndTwo_ProducesIteratorSimilarToStdIteratorUnderSameOperations();
         //VectorIterator n + it
         static void testVectorIterator_OffsetPlusIterator_IteratorPointsToElementOffsetByOffsetValueForward();
+        //VectorIteratorReverse n + it
+        static void testVectorIteratorReverse_OnePlusIterator_IteratorPointingOnePositionCloserToVectorBeginning();
+        //it - n
+        static void testVectorIteratorReverse_IteratorMinusOne_IteratorPointingToElementOnePositionCloserToVectorsEnd();
+        //it - it1
+        static void testVectorIteratorReverse_LeftIteratorMinusThreePositionsRighterIterator_PositiveThree();
+        static void testVectorIteratorReverse_RightIteratorMinusThreePositionsLefterIterator_NegativeThree();
+        //it < it1
+        static void testVectotIteratorReversed_IterPositionedCloserToVectorBeginingIsGreaterThenIterPositionedCloserToEnd_true();
+        //it > it1
+        static void testVectorIteratorRevered_IteratorPositionedCloserToVectorEndIsLessThenIteratorPositionCloserToVectorBeginning_true();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

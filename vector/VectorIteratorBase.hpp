@@ -14,22 +14,6 @@ class VectorIteratorBase
         {
             return _storagePtr != rhs._storagePtr;
         }
-        bool operator<(const VectorIteratorBase &rhs)
-        {
-            return _storagePtr < rhs._storagePtr;
-        } 
-        bool operator>(const VectorIteratorBase &rhs)
-        {
-            return _storagePtr > rhs._storagePtr;
-        }
-        bool operator<=(const VectorIteratorBase &rhs)
-        {
-            return _storagePtr <= rhs._storagePtr;
-        }
-        bool operator>=(const VectorIteratorBase &rhs)
-        {
-            return _storagePtr >= rhs._storagePtr;
-        }
     protected:
         Value *_storagePtr;
 };

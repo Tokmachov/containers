@@ -90,8 +90,26 @@ namespace ft
                 return this->_storagePtr - itRhs._storagePtr;
             }
             
-            //(random_access_iterator requirement) a < b, a > b, a <= b, a >= b declared in VectorIteratorBase        
+            //(random_access_iterator requirement) a < b, a > b, a <= b, a >= b
+            bool operator<(const VectorIterator &rhs)
+            {
+                return this->_storagePtr < rhs._storagePtr;
+            }
+            bool operator>(const VectorIterator &rhs)
+            {
+                return this->_storagePtr > rhs._storagePtr;
+            }
+            bool operator<=(const VectorIterator &rhs)
+            {
+                return this->_storagePtr <= rhs._storagePtr;
+            }
+            bool operator>=(const VectorIterator &rhs)
+            {
+                return this->_storagePtr >= rhs._storagePtr;
+            }
             
+            //(random_access_iterator requirement) it == it1 it != it1 
+
             //(random_access_iterator requirement) a += n
             VectorIterator<Value> &operator+=(VectorIterator<Value>::difference_type offset)
             {

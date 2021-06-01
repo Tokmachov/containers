@@ -97,6 +97,42 @@ void VectorTestCase::initTests()
 		testVectorIterator_OffsetPlusIterator_IteratorPointsToElementOffsetByOffsetValueForward
 	};
 	VectorTestCase::allTests.push_back(t13);
+	TestNameAndFunc t14 =
+	{
+		"testVectorIteratorReverse_OnePlusIterator_IteratorPointingOnePositionCloserToVectorBeginning", 
+		testVectorIteratorReverse_OnePlusIterator_IteratorPointingOnePositionCloserToVectorBeginning
+	};
+	VectorTestCase::allTests.push_back(t14);
+	TestNameAndFunc t15 =
+	{
+		"testVectorIteratorReverse_IteratorMinusOne_IteratorPointingToElementOnePositionCloserToVectorsEnd", 
+		testVectorIteratorReverse_IteratorMinusOne_IteratorPointingToElementOnePositionCloserToVectorsEnd
+	};
+	VectorTestCase::allTests.push_back(t15);
+	TestNameAndFunc t16 =
+	{
+		"testVectorIteratorReverse_LeftIteratorMinusThreePositionsRighterIterator_PositiveThree", 
+		testVectorIteratorReverse_LeftIteratorMinusThreePositionsRighterIterator_PositiveThree
+	};
+	VectorTestCase::allTests.push_back(t16);
+	TestNameAndFunc t17 =
+	{
+		"testVectorIteratorReverse_RightIteratorMinusThreePositionsLefterIterator_NegativeThree", 
+		testVectorIteratorReverse_RightIteratorMinusThreePositionsLefterIterator_NegativeThree
+	};
+	VectorTestCase::allTests.push_back(t17);
+	TestNameAndFunc t18 =
+	{
+		"testVectotIteratorReversed_IterPositionedCloserToVectorBeginingIsGreaterThenIterPositionedCloserToEnd_true", 
+		testVectotIteratorReversed_IterPositionedCloserToVectorBeginingIsGreaterThenIterPositionedCloserToEnd_true
+	};
+	VectorTestCase::allTests.push_back(t18);
+	TestNameAndFunc t19 =
+	{
+		"testVectorIteratorRevered_IteratorPositionedCloserToVectorEndIsLessThenIteratorPositionCloserToVectorBeginning_true", 
+		testVectorIteratorRevered_IteratorPositionedCloserToVectorEndIsLessThenIteratorPositionCloserToVectorBeginning_true
+	};
+	VectorTestCase::allTests.push_back(t19);
 }
 
 void VectorTestCase::run()
@@ -378,6 +414,122 @@ void VectorTestCase::testVectorIterator_OffsetPlusIterator_IteratorPointsToEleme
     //Assert
     assertTrue(*it == 4);
 }
+void VectorTestCase::testVectorIteratorReverse_OnePlusIterator_IteratorPointingOnePositionCloserToVectorBeginning()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::reverse_iterator it = vec.rbegin();
+	//Act
+    size_t n = 1;
+    it = n + it;
+    //Assert
+    assertTrue(*it == 4);
+}
+void VectorTestCase::testVectorIteratorReverse_IteratorMinusOne_IteratorPointingToElementOnePositionCloserToVectorsEnd()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::reverse_iterator it = vec.rbegin();
+	//Act
+    it++;
+    size_t n = 1;
+    it = it - n;
+    //Assert
+    assertTrue(*it == 5);
+}
+
+void VectorTestCase::testVectorIteratorReverse_LeftIteratorMinusThreePositionsRighterIterator_PositiveThree()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::reverse_iterator leftIt = vec.rbegin();
+	leftIt++;
+    leftIt++;
+    leftIt++;
+    ft::vector<int>::reverse_iterator rightIt = vec.rbegin();
+    //Act
+    int result = leftIt - rightIt;
+    //Assert
+    assertTrue(result == 3);
+}
+void VectorTestCase::testVectorIteratorReverse_RightIteratorMinusThreePositionsLefterIterator_NegativeThree()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::reverse_iterator leftIt = vec.rbegin();
+	leftIt++;
+    leftIt++;
+    leftIt++;
+    ft::vector<int>::reverse_iterator rightIt = vec.rbegin();
+    //Act
+    int result = rightIt - leftIt;
+    //Assert
+    assertTrue(result == -3);
+}
+void VectorTestCase::testVectotIteratorReversed_IterPositionedCloserToVectorBeginingIsGreaterThenIterPositionedCloserToEnd_true()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::reverse_iterator leftIt = vec.rbegin();
+	leftIt++;
+    leftIt++;
+    leftIt++;
+    ft::vector<int>::reverse_iterator rightIt = vec.rbegin();
+    //Act
+    
+    //Assert
+    assertTrue(rightIt < leftIt);
+}
+void VectorTestCase::testVectorIteratorRevered_IteratorPositionedCloserToVectorEndIsLessThenIteratorPositionCloserToVectorBeginning_true()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::reverse_iterator leftIt = vec.rbegin();
+	leftIt++;
+    leftIt++;
+    leftIt++;
+    ft::vector<int>::reverse_iterator rightIt = vec.rbegin();
+    //Act
+    
+    //Assert
+    assertTrue(leftIt > rightIt);
+}
+
+
+
+
+
+
 
 
 

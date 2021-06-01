@@ -3,6 +3,8 @@
 
 # include "VectorIterator.hpp"
 # include "VectorIteratorReverse.hpp"
+# include "../utils.hpp"
+# include <sys/time.h>
 
 namespace ft
 {
@@ -39,6 +41,26 @@ namespace ft
                 _capacity = n;
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(_storage + i, val);
+            }
+            template <class InputIterator>
+            vector 
+            (
+                InputIterator first, 
+                typename enable_if<is_suitable_as_input_iterator<InputIterator>::value, InputIterator>::type last,
+                const allocator_type& alloc = allocator_type()
+            )
+                : _storage(0), _alloc(alloc), _elementsCount(0), _capacity(0)
+            {
+                size_t dist = distance(first, last);
+                _storage = _alloc.allocate(dist);
+                _elementsCount = dist;
+                _capacity = dist;
+                dist = 0;
+                for (;first != last; first++)
+                {
+                    _alloc.construct(_storage + dist, *first);
+                    dist++;
+                }
             }
             ~vector()
             {
@@ -105,6 +127,7 @@ namespace ft
             allocator_type _alloc;
             size_type _elementsCount;
             size_type _capacity;
+            int _memAllocCount;
             //methods
             void _deleteStorageFromMemory()
             {

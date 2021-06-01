@@ -34,6 +34,14 @@ namespace ft
     {
         static const bool value = true;
     };
+    template <typename InputIterator>
+    size_t distance(InputIterator first, const InputIterator &last)
+    {
+        size_t dist = 0;
+        for (;first != last; first++)
+            dist++;
+        return dist;
+    }
 }
 
 #endif

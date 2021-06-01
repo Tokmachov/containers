@@ -157,6 +157,12 @@ void VectorTestCase::initTests()
 		testVectorFillConstructor_CallFillConstructorWithParamsNEqualZeroAndValEqualTwo_VectorOfSizeZero
 	};
 	VectorTestCase::allTests.push_back(t23);
+	TestNameAndFunc t24 =
+	{
+		"testVectorRangeConstructor_CallRangeConstructorWithIntsArrayFromOneToFiveStartAndEnd_VectorContainsElementsFromOneToFiveAndItsSizeIsFour", 
+		testVectorRangeConstructor_CallRangeConstructorWithIntsArrayFromOneToFiveStartAndEnd_VectorContainsElementsFromOneToFiveAndItsSizeIsFour
+	};
+	VectorTestCase::allTests.push_back(t24);
 }
 
 void VectorTestCase::run()
@@ -621,6 +627,18 @@ void VectorTestCase::testVectorFillConstructor_CallFillConstructorWithParamsNEqu
     assertTrue(vec.size() == n);
     assertTrue(areAllElementsEqualVal);
 }
+void VectorTestCase::testVectorRangeConstructor_CallRangeConstructorWithIntsArrayFromOneToFiveStartAndEnd_VectorContainsElementsFromOneToFiveAndItsSizeIsFour()
+{
+	//Arrange
+    int arr[] = {1, 2, 3, 4, 5};
+
+    //Act
+    ft::vector<int> vec(arr, arr + 5);
+    
+    //Assert
+    assertTrue(areEqualInSizeAndElements(vec.begin(), vec.end(), arr, arr + 5));
+}
+
 
 
 

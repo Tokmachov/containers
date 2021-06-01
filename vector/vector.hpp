@@ -125,11 +125,6 @@ namespace ft
             {
                 return const_reverse_iterator(_storage - 1);
             }
-            //Modifiers
-            void push_back (const value_type& val)
-            {
-                _pushBack(val);
-            }
             //Capacity:
             size_type size() const
             {
@@ -147,6 +142,11 @@ namespace ft
             const_reference operator[] (size_type n) const
             {
                 return _storage[n];
+            }
+            //Modifiers
+            void push_back (const value_type& val)
+            {
+                _pushBack(val);
             }
         private:
             pointer _storage;

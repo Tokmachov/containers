@@ -175,6 +175,18 @@ void VectorTestCase::initTests()
 		testVectorAssignment_AssignOneVectorWithMultipleElementsToAnotherVectorWithMultipleElemnts_SrcVectorAndResultVectorAreEqualInSizeAndElements
 	};
 	VectorTestCase::allTests.push_back(t26);
+	TestNameAndFunc t27 =
+	{
+		"testVectorSize_CreateVectorOfFiveIntsWithFillConstructor_SizeYieldsFive", 
+		testVectorSize_CreateVectorOfFiveIntsWithFillConstructor_SizeYieldsFive
+	};
+	VectorTestCase::allTests.push_back(t27);
+	TestNameAndFunc t28 =
+	{
+		"testVectoSize_AddOneELementToVectorOfFiveELement_SizeYieldsSix", 
+		testVectoSize_AddOneELementToVectorOfFiveELement_SizeYieldsSix
+	};
+	VectorTestCase::allTests.push_back(t28);
 }
 
 void VectorTestCase::run()
@@ -675,6 +687,35 @@ void VectorTestCase::testVectorAssignment_AssignOneVectorWithMultipleElementsToA
     //Assert
     assertTrue(areEqualInSizeAndElements(srcVector.begin(), srcVector.end(), resultVector.begin(), resultVector.end()));
 }
+void VectorTestCase::testVectorSize_CreateVectorOfFiveIntsWithFillConstructor_SizeYieldsFive()
+{
+	//Arrange
+    size_t n = 5;
+    int val = 2;
+    
+    //Act
+    ft::vector<int> vec(n, val);
+    ft::vector<int>::size_type size = vec.size();
+    
+    //Assert
+    assertTrue(size == n);
+}
+void VectorTestCase::testVectoSize_AddOneELementToVectorOfFiveELement_SizeYieldsSix()
+{
+	//Arrange
+    size_t n = 5;
+    int val = 2;
+    ft::vector<int> vec(n, val);
+    vec.push_back(22);
+    
+    //Act
+    ft::vector<int>::size_type size = vec.size();
+    
+    //Assert
+    assertTrue(size == 6);
+}
+
+
 
 
 

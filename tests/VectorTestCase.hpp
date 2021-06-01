@@ -64,6 +64,8 @@ class VectorTestCase : public TestCase
         static void testVectorRangeConstructor_CallRangeConstructorWithIntsArrayFromOneToFiveStartAndEnd_VectorContainsElementsFromOneToFiveAndItsSizeIsFour();
         static void testVectorCopyConstructor_ConstructVectorWithCopyConstructorFromAnotherVector_SrcVectorIsEqualInSizeAndElementsToResultVector();
         static void testVectorAssignment_AssignOneVectorWithMultipleElementsToAnotherVectorWithMultipleElemnts_SrcVectorAndResultVectorAreEqualInSizeAndElements();
+        static void testVectorSize_CreateVectorOfFiveIntsWithFillConstructor_SizeYieldsFive();
+        static void testVectoSize_AddOneELementToVectorOfFiveELement_SizeYieldsSix();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

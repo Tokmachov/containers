@@ -62,6 +62,18 @@ namespace ft
                     dist++;
                 }
             }
+            vector (const vector& x)
+                : _storage(0), 
+                _alloc(x._alloc), 
+                _elementsCount(x._elementsCount), 
+                _capacity(x._capacity)
+            {
+                _storage = _alloc.allocate(_capacity);
+                int i = 0;
+                typename ft::vector<value_type>::const_iterator it = x.begin();
+                for (; it < x.end(); it++, i++)
+                    _alloc.construct(_storage + i, *it);
+            }
             ~vector()
             {
                 _deleteStorageFromMemory();
@@ -81,7 +93,7 @@ namespace ft
             }
             const_iterator end() const
             {
-                return iterator_const(_storage + _elementsCount);
+                return const_iterator(_storage + _elementsCount);
             }
             reverse_iterator rbegin()
             {
@@ -89,7 +101,7 @@ namespace ft
             }
             const_reverse_iterator rbegin() const
             {
-                return reverse_iterator_const(_storage + _elementsCount - 1);
+                return const_reverse_iterator(_storage + _elementsCount - 1);
             }
             reverse_iterator rend()
             {
@@ -97,7 +109,7 @@ namespace ft
             }
             const_reverse_iterator rend() const
             {
-                return reverse_iterator(_storage - 1);
+                return const_reverse_iterator(_storage - 1);
             }
             //Modifiers
             void push_back (const value_type& val)

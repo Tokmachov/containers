@@ -163,6 +163,12 @@ void VectorTestCase::initTests()
 		testVectorRangeConstructor_CallRangeConstructorWithIntsArrayFromOneToFiveStartAndEnd_VectorContainsElementsFromOneToFiveAndItsSizeIsFour
 	};
 	VectorTestCase::allTests.push_back(t24);
+	TestNameAndFunc t25 =
+	{
+		"testVectorCopyConstructor_ConstructVectorWithCopyConstructorFromAnotherVector_SrcVectorIsEqualInSizeAndElementsToResultVector", 
+		testVectorCopyConstructor_ConstructVectorWithCopyConstructorFromAnotherVector_SrcVectorIsEqualInSizeAndElementsToResultVector
+	};
+	VectorTestCase::allTests.push_back(t25);
 }
 
 void VectorTestCase::run()
@@ -638,6 +644,18 @@ void VectorTestCase::testVectorRangeConstructor_CallRangeConstructorWithIntsArra
     //Assert
     assertTrue(areEqualInSizeAndElements(vec.begin(), vec.end(), arr, arr + 5));
 }
+void VectorTestCase::testVectorCopyConstructor_ConstructVectorWithCopyConstructorFromAnotherVector_SrcVectorIsEqualInSizeAndElementsToResultVector()
+{
+	//Arrange
+    int arr[] = {1, 2, 3, 4, 5};
+    ft::vector<int> srcVector(arr, arr + 5);
+
+    //Act
+    ft::vector<int> resultVector(srcVector);
+    //Assert
+    assertTrue(areEqualInSizeAndElements(srcVector.begin(), srcVector.end(), resultVector.begin(), resultVector.end()));
+}
+
 
 
 

@@ -169,6 +169,12 @@ void VectorTestCase::initTests()
 		testVectorCopyConstructor_ConstructVectorWithCopyConstructorFromAnotherVector_SrcVectorIsEqualInSizeAndElementsToResultVector
 	};
 	VectorTestCase::allTests.push_back(t25);
+	TestNameAndFunc t26 =
+	{
+		"testVectorAssignment_AssignOneVectorWithMultipleElementsToAnotherVectorWithMultipleElemnts_SrcVectorAndResultVectorAreEqualInSizeAndElements", 
+		testVectorAssignment_AssignOneVectorWithMultipleElementsToAnotherVectorWithMultipleElemnts_SrcVectorAndResultVectorAreEqualInSizeAndElements
+	};
+	VectorTestCase::allTests.push_back(t26);
 }
 
 void VectorTestCase::run()
@@ -655,6 +661,21 @@ void VectorTestCase::testVectorCopyConstructor_ConstructVectorWithCopyConstructo
     //Assert
     assertTrue(areEqualInSizeAndElements(srcVector.begin(), srcVector.end(), resultVector.begin(), resultVector.end()));
 }
+void VectorTestCase::testVectorAssignment_AssignOneVectorWithMultipleElementsToAnotherVectorWithMultipleElemnts_SrcVectorAndResultVectorAreEqualInSizeAndElements()
+{
+	//Arrange
+    int arr[] = {1, 2, 3, 4, 5};
+    ft::vector<int> srcVector(arr, arr + 5);
+    
+    ft::vector<int> resultVector;
+    resultVector.push_back(1);
+    resultVector.push_back(1);
+    //Act
+    resultVector = srcVector;
+    //Assert
+    assertTrue(areEqualInSizeAndElements(srcVector.begin(), srcVector.end(), resultVector.begin(), resultVector.end()));
+}
+
 
 
 

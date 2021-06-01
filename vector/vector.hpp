@@ -74,6 +74,20 @@ namespace ft
                 for (; it < x.end(); it++, i++)
                     _alloc.construct(_storage + i, *it);
             }
+            vector& operator= (const vector& x)
+            {
+                for (size_type i = 0; i < _elementsCount; i++)
+                    _alloc.destroy(_storage + i);
+                _alloc.deallocate(_storage, _capacity);
+                _storage = _alloc.allocate(x._capacity);
+                _elementsCount = x._elementsCount;
+                _capacity = x._capacity;
+                for (size_type i = 0; i < _elementsCount; i++)
+                {
+                    _alloc.construct(_storage + i, x[i]);
+                }
+                return *this;
+            }
             ~vector()
             {
                 _deleteStorageFromMemory();

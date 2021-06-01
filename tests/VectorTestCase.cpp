@@ -133,6 +133,18 @@ void VectorTestCase::initTests()
 		testVectorIteratorRevered_IteratorPositionedCloserToVectorEndIsLessThenIteratorPositionCloserToVectorBeginning_true
 	};
 	VectorTestCase::allTests.push_back(t19);
+	TestNameAndFunc t20 =
+	{
+		"testVectorRend_CallRend_IteratorPointingAtElementBeforVectorTrueBeginning", 
+		testVectorRend_CallRend_IteratorPointingAtElementBeforVectorTrueBeginning
+	};
+	VectorTestCase::allTests.push_back(t20);
+	TestNameAndFunc t21 =
+	{
+		"testVectorReverseIter_AssignReverseIterToConstReverseIterVar_ReverseIteratorIsConvertedToConstReverseAndProgramDoesntCrash", 
+		testVectorReverseIter_AssignReverseIterToConstReverseIterVar_ReverseIteratorIsConvertedToConstReverseAndProgramDoesntCrash
+	};
+	VectorTestCase::allTests.push_back(t21);
 }
 
 void VectorTestCase::run()
@@ -524,19 +536,38 @@ void VectorTestCase::testVectorIteratorRevered_IteratorPositionedCloserToVectorE
     //Assert
     assertTrue(leftIt > rightIt);
 }
+void VectorTestCase::testVectorRend_CallRend_IteratorPointingAtElementBeforVectorTrueBeginning()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
 
+    //Act
+    ft::vector<int>::reverse_iterator itRend = vec.rend();
+    ft::vector<int>::iterator itBeforBeginning = vec.begin();
+    itBeforBeginning--;    
+    //Assert
+    assertTrue(&(*itRend) == &(*itBeforBeginning));
+}
+void VectorTestCase::testVectorReverseIter_AssignReverseIterToConstReverseIterVar_ReverseIteratorIsConvertedToConstReverseAndProgramDoesntCrash()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
 
-
-
-
-
-
-
-
-
-
-
-
-
+    //Act
+    ft::vector<int>::reverse_iterator nonConstReverseIter = vec.rbegin();
+    ft::vector<int>::const_reverse_iterator constReverseIter = nonConstReverseIter;
+    //Assert
+    assertTrue(true);
+}
 
 /* ************************************************************************** */

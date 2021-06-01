@@ -57,6 +57,8 @@ class VectorTestCase : public TestCase
         static void testVectotIteratorReversed_IterPositionedCloserToVectorBeginingIsGreaterThenIterPositionedCloserToEnd_true();
         //it > it1
         static void testVectorIteratorRevered_IteratorPositionedCloserToVectorEndIsLessThenIteratorPositionCloserToVectorBeginning_true();
+        static void testVectorRend_CallRend_IteratorPointingAtElementBeforVectorTrueBeginning();
+        static void testVectorReverseIter_AssignReverseIterToConstReverseIterVar_ReverseIteratorIsConvertedToConstReverseAndProgramDoesntCrash();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

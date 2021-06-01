@@ -99,11 +99,11 @@ namespace ft
             }
             bool operator<=(const VectorIteratorReverse &rhs)
             {
-                return this->_storagePtr >= rhs._storagePtr;
+                return !(this->operator> (rhs));
             }
             bool operator>=(const VectorIteratorReverse &rhs)
             {
-                return this->_storagePtr <= rhs._storagePtr;
+                return !(this->operator< (rhs));
             }
             
             //(random_access_iterator requirement) it == it1 it != it1 

@@ -27,20 +27,20 @@ namespace ft
             // VectorIterator(const VectorIterator &src)
             //     : VectorIteratorBase<const Value>(src._storagePtr) {}
             
-            //(random_access_iterator requirement) b = a
+            //(random_access_iterator requirement) it = it1
             VectorIterator &operator=(const VectorIterator &rhs)
             {
                 this->_storagePtr = rhs._storagePtr;
                 return *this;
             }
             
-            //(random_access_iterator requirement) *a or *a = t where reference is const Value&
+            //(random_access_iterator requirement) *it or *it = t where reference is const Value&
             reference operator*() { return *this->_storagePtr; };
             
-            //(random_access_iterator requirement) a->m
+            //(random_access_iterator requirement) it->m
             pointer operator->() { return &(*this->_storagePtr); };
             
-            //(random_access_iterator requirement) ++a
+            //(random_access_iterator requirement) ++it
             VectorIterator &operator++()
             {
                 this->_storagePtr++;
@@ -108,7 +108,7 @@ namespace ft
                 return this->_storagePtr >= rhs._storagePtr;
             }
             
-            //(random_access_iterator requirement) it == it1 it != it1 
+            //(random_access_iterator requirement) it == it1 it != it1 defined in VectorIteratorBase
 
             //(random_access_iterator requirement) a += n
             VectorIterator<Value> &operator+=(VectorIterator<Value>::difference_type offset)

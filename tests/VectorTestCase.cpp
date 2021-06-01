@@ -145,6 +145,18 @@ void VectorTestCase::initTests()
 		testVectorReverseIter_AssignReverseIterToConstReverseIterVar_ReverseIteratorIsConvertedToConstReverseAndProgramDoesntCrash
 	};
 	VectorTestCase::allTests.push_back(t21);
+	TestNameAndFunc t22 =
+	{
+		"testVectorFillConstructor_FillConstructorWithParamsNEqualFiveAndValEqualTwo_VectorOfSizeFiveAndEachValueIsEqualToTwo", 
+		testVectorFillConstructor_FillConstructorWithParamsNEqualFiveAndValEqualTwo_VectorOfSizeFiveAndEachValueIsEqualToTwo
+	};
+	VectorTestCase::allTests.push_back(t22);
+	TestNameAndFunc t23 =
+	{
+		"testVectorFillConstructor_CallFillConstructorWithParamsNEqualZeroAndValEqualTwo_VectorOfSizeZero", 
+		testVectorFillConstructor_CallFillConstructorWithParamsNEqualZeroAndValEqualTwo_VectorOfSizeZero
+	};
+	VectorTestCase::allTests.push_back(t23);
 }
 
 void VectorTestCase::run()
@@ -569,5 +581,47 @@ void VectorTestCase::testVectorReverseIter_AssignReverseIterToConstReverseIterVa
     //Assert
     assertTrue(true);
 }
+void VectorTestCase::testVectorFillConstructor_FillConstructorWithParamsNEqualFiveAndValEqualTwo_VectorOfSizeFiveAndEachValueIsEqualToTwo()
+{
+	//Arrange
+    size_t n = 5;
+    int val = 2;
+    
+    //Act
+    ft::vector<int> vec(n, val);
+
+    //Assert
+    bool areAllElementsEqualVal = true;
+    for (ft::vector<int>::const_iterator it = vec.begin(); it < vec.end(); it++)
+    {
+        if (*it != val)
+            areAllElementsEqualVal = false;
+    }
+    //Assert
+    assertTrue(vec.size() == n);
+    assertTrue(areAllElementsEqualVal);
+}
+void VectorTestCase::testVectorFillConstructor_CallFillConstructorWithParamsNEqualZeroAndValEqualTwo_VectorOfSizeZero()
+{
+	//Arrange
+    size_t n = 0;
+    int val = 2;
+    
+    //Act
+    ft::vector<int> vec(n, val);
+
+    //Assert
+    bool areAllElementsEqualVal = true;
+    for (ft::vector<int>::const_iterator it = vec.begin(); it < vec.end(); it++)
+    {
+        if (*it != val)
+            areAllElementsEqualVal = false;
+    }
+    //Assert
+    assertTrue(vec.size() == n);
+    assertTrue(areAllElementsEqualVal);
+}
+
+
 
 /* ************************************************************************** */

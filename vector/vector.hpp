@@ -26,6 +26,20 @@ namespace ft
             //Constructors, destructors, assignment op
             explicit vector (const allocator_type& alloc = allocator_type())
                 : _storage(0), _alloc(alloc), _elementsCount(0), _capacity(0) {}
+            explicit vector 
+            (
+                size_type n, 
+                const value_type& val = value_type(),
+                const allocator_type& alloc = allocator_type()
+            )
+                : _storage(0), _alloc(alloc), _elementsCount(0), _capacity(0)
+            {
+                _storage = _alloc.allocate(n);
+                _elementsCount = n;
+                _capacity = n;
+                for (size_type i = 0; i < n; i++)
+                    _alloc.construct(_storage + i, val);
+            }
             ~vector()
             {
                 _deleteStorageFromMemory();

@@ -130,6 +130,10 @@ namespace ft
             {
                 return _elementsCount;
             }
+            size_type max_size() const
+            {
+                return _alloc.max_size();
+            }
             size_type capacity() const
             {
                 return _capacity;

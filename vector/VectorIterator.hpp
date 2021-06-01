@@ -14,77 +14,121 @@ namespace ft
             typedef Value* pointer;
             typedef Value& reference;
             typedef std::random_access_iterator_tag iterator_category;
-            friend VectorIterator<Value> &operator+(difference_type offset, const VectorIterator & it);
-            friend VectorIterator<Value> &operator-(const VectorIterator & it, difference_type offset);
-            VectorIterator<Value>() {}
-            VectorIterator<Value>(Value *storagePtr)
+            
+            //(random_access_iterator requirement) X a
+            VectorIterator()
+                : VectorIteratorBase<Value>(0) {}
+            VectorIterator(Value *storagePtr)
                 : VectorIteratorBase<Value>(storagePtr) {}
-            VectorIterator<Value>(const VectorIterator &src) 
+            //(random_access_iterator requirement) X b(a)
+            VectorIterator<Value>(const VectorIterator<Value> &src)
                 : VectorIteratorBase<Value>(src._storagePtr) {}
+            
+            // VectorIterator(const VectorIterator &src)
+            //     : VectorIteratorBase<const Value>(src._storagePtr) {}
+            
+            //(random_access_iterator requirement) b = a
             VectorIterator &operator=(const VectorIterator &rhs)
             {
                 this->_storagePtr = rhs._storagePtr;
                 return *this;
             }
-            Value &operator*() { return *this->_storagePtr; };
-            Value *operator->() { return &(*this->_storagePtr); };
+            
+            //(random_access_iterator requirement) *a or *a = t where reference is const Value&
+            reference operator*() { return *this->_storagePtr; };
+            
+            //(random_access_iterator requirement) a->m
+            pointer operator->() { return &(*this->_storagePtr); };
+            
+            //(random_access_iterator requirement) ++a
             VectorIterator &operator++()
             {
                 this->_storagePtr++;
                 return *this;
             }
+            
+            //(random_access_iterator requirement) a++
             VectorIterator operator++(int)
             {
                 VectorIterator tmp = *this;
                 this->_storagePtr++;
                 return tmp;
             }
+            
+            //(random_access_iterator requirement) --it
             VectorIterator &operator--()
             {
                 this->_storagePtr--;
                 return *this;
             }
+            
+            //(random_access_iterator requirement) it--
             VectorIterator operator--(int)
             {
                 VectorIterator tmp = *this;
                 this->_storagePtr--;
                 return tmp;
             }
+            
+            //(random_access_iterator requirement) it + n
+            ft::VectorIterator<Value> operator+(difference_type offset)
+            {
+                return this->_storagePtr + offset;
+            }
+            
+            //(random_access_iterator requirement) n + it is defined globally
+            
+            //(random_access_iterator requirement) it - n
+            VectorIterator<Value> operator-(difference_type offset)
+            {
+                return this->_storagePtr - offset;
+            }
+            
+            //(random_access_iterator requirement) it1 - it2
+            difference_type operator-(const ft::VectorIterator<Value> & itRhs)
+            {
+                return this->_storagePtr - itRhs._storagePtr;
+            }
+            
+            //(random_access_iterator requirement) a < b, a > b, a <= b, a >= b declared in VectorIteratorBase        
+            
+            //(random_access_iterator requirement) a += n
             VectorIterator<Value> &operator+=(VectorIterator<Value>::difference_type offset)
             {
                 this->_storagePtr += offset;
                 return *this;
             }
+            
+            //(random_access_iterator requirement) a -= n
             VectorIterator<Value> &operator-=(typename VectorIterator<Value>::difference_type offset)
             {
                 this->_storagePtr -= offset;
                 return *this;
             }
-            difference_type operator-(const ft::VectorIterator<Value> & itRhs)
-            {
-                return this->_storagePtr - itRhs._storagePtr;
-            }
-            ft::VectorIterator<Value> operator+(difference_type offset)
-            {
-                return this->_storagePtr + offset;
-            }
-            value_type &operator[] (difference_type idx)
+            
+            //(random_access_iterator requirement) a[n]
+            reference operator[] (difference_type idx)
             {
                 return this->_storagePtr[idx];
             }
+            
+            //(random_access_iterator requirement) convertible to const_iterator
+            operator VectorIterator<const value_type>()
+            {
+                const value_type *constStoragePtr = this->_storagePtr;
+                return VectorIterator<const value_type>(constStoragePtr);
+            }
     };
-}
-
-template <typename Value>
-ft::VectorIterator<Value> operator+(typename ft::VectorIterator<Value>::difference_type offset, const ft::VectorIterator<Value> & it)
-{
-    return it._storagePtr + offset;
-}
-
-template <typename Value>
-ft::VectorIterator<Value> operator-(const ft::VectorIterator<Value> & it, typename ft::VectorIterator<Value>::difference_type offset)
-{
-    return it._storagePtr - offset;
+    //(random_access_iterator requirement) n + it
+    template <typename Value>
+    ft::VectorIterator<Value> operator+
+    (
+        typename ft::VectorIterator<Value>::difference_type offset, 
+        ft::VectorIterator<Value> & it
+    )
+    {
+        return ft::VectorIterator<Value>(&(*it) + offset);
+    }
 }
 
 #endif

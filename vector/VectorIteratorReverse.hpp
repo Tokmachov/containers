@@ -1,12 +1,12 @@
-#ifndef VECTORITERATORREVERSE_HPP
-# define VECTORITERATORREVERSE_HPP
+#ifndef VECTORITERATOR_HPP
+# define VECTORITERATOR_HPP
 
 #include "VectorIteratorBase.hpp"
 
 namespace ft
 {
     template <typename Value>
-    class VectorIteratorReverse : public VectorIteratorBase<Value>
+    class VectorIterator : public VectorIteratorBase<Value>
     {
         public:
             typedef Value value_type;
@@ -14,77 +14,121 @@ namespace ft
             typedef Value* pointer;
             typedef Value& reference;
             typedef std::random_access_iterator_tag iterator_category;
-            friend VectorIteratorReverse<Value> &operator+(difference_type offset, const VectorIteratorReverse & it);
-            friend VectorIteratorReverse<Value> &operator-(const VectorIteratorReverse & it, difference_type offset);
-            VectorIteratorReverse<Value>() {}
-            VectorIteratorReverse<Value>(Value *storagePtr)
+            
+            //(random_access_iterator requirement) X a
+            VectorIterator()
+                : VectorIteratorBase<Value>(0) {}
+            VectorIterator(Value *storagePtr)
                 : VectorIteratorBase<Value>(storagePtr) {}
-            VectorIteratorReverse<Value>(const VectorIteratorReverse &src) 
+            //(random_access_iterator requirement) X b(a)
+            VectorIterator<Value>(const VectorIterator<Value> &src)
                 : VectorIteratorBase<Value>(src._storagePtr) {}
-            VectorIteratorReverse &operator=(const VectorIteratorReverse &rhs)
+            
+            // VectorIterator(const VectorIterator &src)
+            //     : VectorIteratorBase<const Value>(src._storagePtr) {}
+            
+            //(random_access_iterator requirement) b = a
+            VectorIterator &operator=(const VectorIterator &rhs)
             {
                 this->_storagePtr = rhs._storagePtr;
                 return *this;
             }
-            Value &operator*() { return *this->_storagePtr; };
-            Value *operator->() { return &(*this->_storagePtr); };
-            VectorIteratorReverse &operator++()
-            {
-                this->_storagePtr--;
-                return *this;
-            }
-            VectorIteratorReverse operator++(int)
-            {
-                VectorIteratorReverse tmp = *this;
-                this->_storagePtr--;
-                return tmp;
-            }
-            VectorIteratorReverse &operator--()
+            
+            //(random_access_iterator requirement) *a or *a = t where reference is const Value&
+            reference operator*() { return *this->_storagePtr; };
+            
+            //(random_access_iterator requirement) a->m
+            pointer operator->() { return &(*this->_storagePtr); };
+            
+            //(random_access_iterator requirement) ++a
+            VectorIterator &operator++()
             {
                 this->_storagePtr++;
                 return *this;
             }
-            VectorIteratorReverse operator--(int)
+            
+            //(random_access_iterator requirement) a++
+            VectorIterator operator++(int)
             {
-                VectorIteratorReverse tmp = *this;
+                VectorIterator tmp = *this;
                 this->_storagePtr++;
                 return tmp;
             }
-            VectorIteratorReverse<Value> &operator+=(VectorIteratorReverse<Value>::difference_type offset)
+            
+            //(random_access_iterator requirement) --it
+            VectorIterator &operator--()
             {
-                this->_storagePtr -= offset;
+                this->_storagePtr--;
                 return *this;
             }
-            VectorIteratorReverse<Value> &operator-=(typename VectorIteratorReverse<Value>::difference_type offset)
+            
+            //(random_access_iterator requirement) it--
+            VectorIterator operator--(int)
+            {
+                VectorIterator tmp = *this;
+                this->_storagePtr--;
+                return tmp;
+            }
+            
+            //(random_access_iterator requirement) it + n
+            ft::VectorIterator<Value> operator+(difference_type offset)
+            {
+                return this->_storagePtr + offset;
+            }
+            
+            //(random_access_iterator requirement) n + it is defined globally
+            
+            //(random_access_iterator requirement) it - n
+            VectorIterator<Value> operator-(difference_type offset)
+            {
+                return this->_storagePtr - offset;
+            }
+            
+            //(random_access_iterator requirement) it1 - it2
+            difference_type operator-(const ft::VectorIterator<Value> & itRhs)
+            {
+                return this->_storagePtr - itRhs._storagePtr;
+            }
+            
+            //(random_access_iterator requirement) a < b, a > b, a <= b, a >= b declared in VectorIteratorBase        
+            
+            //(random_access_iterator requirement) a += n
+            VectorIterator<Value> &operator+=(VectorIterator<Value>::difference_type offset)
             {
                 this->_storagePtr += offset;
                 return *this;
             }
-            difference_type operator-(const ft::VectorIteratorReverse<Value> & itRhs)
+            
+            //(random_access_iterator requirement) a -= n
+            VectorIterator<Value> &operator-=(typename VectorIterator<Value>::difference_type offset)
             {
-                return this->_storagePtr - itRhs._storagePtr;
+                this->_storagePtr -= offset;
+                return *this;
             }
-            ft::VectorIteratorReverse<Value> operator+(difference_type offset)
-            {
-                return this->_storagePtr - offset;
-            }
-            value_type &operator[] (difference_type idx)
+            
+            //(random_access_iterator requirement) a[n]
+            reference operator[] (difference_type idx)
             {
                 return this->_storagePtr[idx];
             }
+            
+            //(random_access_iterator requirement) convertible to const_iterator
+            operator VectorIterator<const value_type>()
+            {
+                const value_type *constStoragePtr = this->_storagePtr;
+                return VectorIterator<const value_type>(constStoragePtr);
+            }
     };
-}
-
-template <typename Value>
-ft::VectorIteratorReverse<Value> operator+(typename ft::VectorIteratorReverse<Value>::difference_type offset, const ft::VectorIteratorReverse<Value> & it)
-{
-    return it._storagePtr - offset;
-}
-
-template <typename Value>
-ft::VectorIteratorReverse<Value> operator-(const ft::VectorIteratorReverse<Value> & it, typename ft::VectorIteratorReverse<Value>::difference_type offset)
-{
-    return it._storagePtr + offset;
+    //(random_access_iterator requirement) n + it
+    template <typename Value>
+    ft::VectorIterator<Value> operator+
+    (
+        typename ft::VectorIterator<Value>::difference_type offset, 
+        ft::VectorIterator<Value> & it
+    )
+    {
+        return ft::VectorIterator<Value>(&(*it) + offset);
+    }
 }
 
 #endif

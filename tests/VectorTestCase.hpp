@@ -34,11 +34,18 @@ class VectorTestCase : public TestCase
         static void testVectorIterator_SortVectorOfRandomIntsFromOneToFive_SortedVectorOfIntsFromOneTwoFive();
         static void testVectorIterator_SortTenInts_SortedVectorOfInts();
         static void testVectorIterator_SortTenIntsWithSortHeap_SortedVectorOfInts();
-        //++a
+        //Reverse ++a
         static void testVectorIteratorReverse_PlusPlusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
-        //a++
+        //Reverse a++
         static void testVectorIteratorReverse_CallPlusPlusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
-        
+        //Reverse a--
+        static void testVectorIteratorReverse_CallMinusMinusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
+        //Reverse --a
+        static void testVectorIteratorReverse_CallMinusMinusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues();
+        //Reverse a + n
+        static void testVectorIteratorReverse_AddIteratorAndTwo_ProducesIteratorSimilarToStdIteratorUnderSameOperations();
+        //VectorIterator n + it
+        static void testVectorIterator_OffsetPlusIterator_IteratorPointsToElementOffsetByOffsetValueForward();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

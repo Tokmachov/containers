@@ -73,6 +73,30 @@ void VectorTestCase::initTests()
 		testVectorIteratorReverse_CallPlusPlusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues
 	};
 	VectorTestCase::allTests.push_back(t9);
+	TestNameAndFunc t10 =
+	{
+		"testVectorIteratorReverse_CallMinusMinusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues", 
+		testVectorIteratorReverse_CallMinusMinusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues
+	};
+	VectorTestCase::allTests.push_back(t10);
+	TestNameAndFunc t11 =
+	{
+		"testVectorIteratorReverse_CallMinusMinusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues", 
+		testVectorIteratorReverse_CallMinusMinusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues
+	};
+	VectorTestCase::allTests.push_back(t11);
+	TestNameAndFunc t12 =
+	{
+		"testVectorIteratorReverse_AddIteratorAndTwo_ProducesIteratorSimilarToStdIteratorUnderSameOperations", 
+		testVectorIteratorReverse_AddIteratorAndTwo_ProducesIteratorSimilarToStdIteratorUnderSameOperations
+	};
+	VectorTestCase::allTests.push_back(t12);
+	TestNameAndFunc t13 =
+	{
+		"testVectorIterator_OffsetPlusIterator_IteratorPointsToElementOffsetByOffsetValueForward", 
+		testVectorIterator_OffsetPlusIterator_IteratorPointsToElementOffsetByOffsetValueForward
+	};
+	VectorTestCase::allTests.push_back(t13);
 }
 
 void VectorTestCase::run()
@@ -275,6 +299,91 @@ void VectorTestCase::testVectorIteratorReverse_CallPlusPlusPostfix_ReturnsAndCha
     assertEqual(*itFtReceived, *itStdReceived);
     assertEqual(*itFtReverse, *itStdReverse);
 }
+void VectorTestCase::testVectorIteratorReverse_CallMinusMinusPostfix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues()
+{
+	//Arrange
+    ft::vector<int> ftVector;
+    ftVector.push_back(1);
+	ftVector.push_back(2);
+    ftVector.push_back(3);
+    ft::vector<int>::reverse_iterator itFtReverse = ftVector.rbegin();
+    
+    std::vector<int> stdVector;
+    stdVector.push_back(1);
+	stdVector.push_back(2);
+    stdVector.push_back(3);
+    std::vector<int>::reverse_iterator itStdReverse = stdVector.rbegin();
+    //Act
+    ft::vector<int>::reverse_iterator itFtReceived = itFtReverse--;
+    std::vector<int>::reverse_iterator itStdReceived = itStdReverse--;
+
+    assertEqual(*itFtReceived, *itStdReceived);
+    assertEqual(*itFtReverse, *itStdReverse);
+}
+void VectorTestCase::testVectorIteratorReverse_CallMinusMinusPrefix_ReturnsAndChangesIteratorSimilarlyToStdIteratorWithTheSameValues()
+{
+	//Arrange
+    ft::vector<int> ftVector;
+    ftVector.push_back(1);
+	ftVector.push_back(2);
+    ftVector.push_back(3);
+    ft::vector<int>::reverse_iterator itFtReverse = ftVector.rbegin();
+    
+    std::vector<int> stdVector;
+    stdVector.push_back(1);
+	stdVector.push_back(2);
+    stdVector.push_back(3);
+    std::vector<int>::reverse_iterator itStdReverse = stdVector.rbegin();
+    //Act
+    ft::vector<int>::reverse_iterator itFtReceived = --itFtReverse;
+    std::vector<int>::reverse_iterator itStdReceived = --itStdReverse;
+
+    assertEqual(*itFtReceived, *itStdReceived);
+    assertEqual(*itFtReverse, *itStdReverse);
+}
+void VectorTestCase::testVectorIteratorReverse_AddIteratorAndTwo_ProducesIteratorSimilarToStdIteratorUnderSameOperations()
+{
+	//Arrange
+    ft::vector<int> ftVector;
+    ftVector.push_back(1);
+	ftVector.push_back(2);
+    ftVector.push_back(3);
+    ft::vector<int>::reverse_iterator itFtReverse = ftVector.rbegin();
+    
+    std::vector<int> stdVector;
+    stdVector.push_back(1);
+	stdVector.push_back(2);
+    stdVector.push_back(3);
+    std::vector<int>::reverse_iterator itStdReverse = stdVector.rbegin();
+    //Act
+    size_t n = 1;
+    ft::vector<int>::reverse_iterator itFtReceived = itFtReverse + n;
+    std::vector<int>::reverse_iterator itStdReceived = itStdReverse + n;
+
+    assertEqual(*itFtReceived, *itStdReceived);
+}
+void VectorTestCase::testVectorIterator_OffsetPlusIterator_IteratorPointsToElementOffsetByOffsetValueForward()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+	vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    ft::vector<int>::iterator it = vec.begin();
+	//Act
+    size_t n = 3;
+    it = n + it;
+    //Assert
+    assertTrue(*it == 4);
+}
+
+
+
+
+
+
 
 
 

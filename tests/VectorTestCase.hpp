@@ -66,6 +66,9 @@ class VectorTestCase : public TestCase
         static void testVectorAssignment_AssignOneVectorWithMultipleElementsToAnotherVectorWithMultipleElemnts_SrcVectorAndResultVectorAreEqualInSizeAndElements();
         static void testVectorSize_CreateVectorOfFiveIntsWithFillConstructor_SizeYieldsFive();
         static void testVectoSize_AddOneELementToVectorOfFiveELement_SizeYieldsSix();
+        static void testVectorResize_ResizeToParamNLessThenSize_SizeIsEqualToN();
+        static void testVectorResize_ResizeToNThatIsGreaterByThreeThenSizeAndValueIsProvided_ResultVectorIsEqualInSizeAndElementsToVectorAsIfCreatedFromInitialVectorByPushingBackThreeTimesElementsEqualToValueParameterOfResize();
+        static void testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorMustBeEqualToInitialVectorAsIfItWasPushBackedWithValParamOfResizeNMinusSizeAndResultCapacityIsGreaterThenInitialCapacity();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

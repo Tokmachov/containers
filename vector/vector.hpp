@@ -134,6 +134,24 @@ namespace ft
             {
                 return _alloc.max_size();
             }
+            void resize (size_type n, value_type val = value_type())
+            {
+                if (n < _elementsCount)
+                {
+                    for (size_type i = n; i < _elementsCount; i++)
+                        _alloc.destroy(_storage + i);
+                    _elementsCount = n;
+                    return ;
+                }
+                if (n > _elementsCount)
+                {
+                    if (n >= _capacity)
+                        _reallocStorage(n);
+                    for (size_type i = _elementsCount; i < n; i++)
+                        _alloc.construct(_storage + i, val);
+                    _elementsCount = n;
+                }
+            }
             size_type capacity() const
             {
                 return _capacity;
@@ -175,23 +193,19 @@ namespace ft
             {
                 return _elementsCount == _capacity;
             }
-            void _reallocStorage()
+            void _reallocStorage(size_type newCapacity = 0)
             {
-                if (_capacity == 0)
+                if (newCapacity == 0 || newCapacity <= _capacity)
+                    newCapacity = (_capacity + 1) * 2;
+                pointer newStorage = _alloc.allocate(newCapacity);
+                for (size_t i = 0; i < _elementsCount; i++)
                 {
-                    _capacity = 1;
-                    _storage = _alloc.allocate(_capacity);
-                    return ;
-                }
-                size_t prevCapacity = _capacity;
-                _capacity *= 2;
-                pointer newStorage = _alloc.allocate(_capacity);
-                for (size_t i = 0; i < _elementsCount; i++)
-                    _alloc.construct(newStorage + i, _storage[i]);
-                for (size_t i = 0; i < _elementsCount; i++)
+                    _alloc.construct(newStorage + i, *(_storage + i));
                     _alloc.destroy(_storage + i);
-                _alloc.deallocate(_storage, prevCapacity);
+                }
+                _alloc.deallocate(_storage, _capacity);
                 _storage = newStorage;
+                _capacity = newCapacity;
             }
     };
 }

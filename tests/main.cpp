@@ -15,12 +15,9 @@ int main(void)
     // v.push_back(2);
     // v.push_back(3);
     // v.push_back(4);
-    // std::vector<int>::reverse_iterator itLeft = v.rbegin();
-    // std::vector<int>::reverse_iterator itRight = v.rbegin();
-    // itLeft++;
-    // itLeft++;
-    // itLeft++;
-    // int result = itLeft < itRight;
-    // std::cout << result << std::endl;
+    // std::cout << v.capacity() << std::endl;
+    // v.resize(2);
+    // std::cout << v.size() << std::endl;
+    // std::cout << v.capacity() << std::endl;
     return 0;
 }

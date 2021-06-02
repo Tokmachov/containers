@@ -187,6 +187,24 @@ void VectorTestCase::initTests()
 		testVectoSize_AddOneELementToVectorOfFiveELement_SizeYieldsSix
 	};
 	VectorTestCase::allTests.push_back(t28);
+	TestNameAndFunc t29 =
+	{
+		"testVectorResize_ResizeToParamNLessThenSize_SizeIsEqualToN", 
+		testVectorResize_ResizeToParamNLessThenSize_SizeIsEqualToN
+	};
+	VectorTestCase::allTests.push_back(t29);
+	TestNameAndFunc t30 =
+	{
+		"testVectorResize_ResizeToNThatIsGreaterByThreeThenSizeAndValueIsProvided_ResultVectorIsEqualInSizeAndElementsToVectorAsIfCreatedFromInitialVectorByPushingBackThreeTimesElementsEqualToValueParameterOfResize", 
+		testVectorResize_ResizeToNThatIsGreaterByThreeThenSizeAndValueIsProvided_ResultVectorIsEqualInSizeAndElementsToVectorAsIfCreatedFromInitialVectorByPushingBackThreeTimesElementsEqualToValueParameterOfResize
+	};
+	VectorTestCase::allTests.push_back(t30);
+	TestNameAndFunc t31 =
+	{
+		"testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorMustBeEqualToInitialVectorAsIfItWasPushBackedWithValParamOfResizeNMinusSizeAndResultCapacityIsGreaterThenInitialCapacity", 
+		testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorMustBeEqualToInitialVectorAsIfItWasPushBackedWithValParamOfResizeNMinusSizeAndResultCapacityIsGreaterThenInitialCapacity
+	};
+	VectorTestCase::allTests.push_back(t31);
 }
 
 void VectorTestCase::run()
@@ -714,6 +732,54 @@ void VectorTestCase::testVectoSize_AddOneELementToVectorOfFiveELement_SizeYields
     //Assert
     assertTrue(size == 6);
 }
+void VectorTestCase::testVectorResize_ResizeToParamNLessThenSize_SizeIsEqualToN()
+{
+	//Arrange
+    ft::vector<int> vec(10, 5);
+    
+    //Act
+    size_t n = 3;
+    vec.resize(n);
+    
+    //Assert
+    assertTrue(vec.size() == n);
+}
+void VectorTestCase::testVectorResize_ResizeToNThatIsGreaterByThreeThenSizeAndValueIsProvided_ResultVectorIsEqualInSizeAndElementsToVectorAsIfCreatedFromInitialVectorByPushingBackThreeTimesElementsEqualToValueParameterOfResize()
+{
+	//Arrange
+    int val = 111;
+    ft::vector<int> actual(3, 5);
+    ft::vector<int> expected(3, 5);
+    expected.push_back(val);
+    expected.push_back(val);
+    expected.push_back(val);
+    //Act
+    size_t n = 6;
+    actual.resize(n, val);
+    
+    //Assert
+    assertTrue(areEqualInSizeAndElements(actual.begin(), actual.end(), expected.begin(), expected.end()));
+}
+void VectorTestCase::testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorMustBeEqualToInitialVectorAsIfItWasPushBackedWithValParamOfResizeNMinusSizeAndResultCapacityIsGreaterThenInitialCapacity()
+{
+	//Arrange
+    int resizeVal = 111;
+    ft::vector<int> actual(10, 5);
+    ft::vector<int>::size_type prevCapacity = actual.capacity();
+    int resizeN = actual.capacity() + 1;
+    ft::vector<int> expected = actual;
+    for (size_t i = 0; i < (resizeN - actual.size()); i++)
+        expected.push_back(resizeVal);
+    //Act
+    actual.resize(resizeN, resizeVal);
+    
+    //Assert
+    assertTrue(areEqualInSizeAndElements(actual.begin(), actual.end(), expected.begin(), expected.end()));
+    assertTrue(actual.capacity() > prevCapacity);
+}
+
+
+
 
 
 

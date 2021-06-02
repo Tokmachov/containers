@@ -84,6 +84,7 @@ class VectorTestCase : public TestCase
         static void testVectorAtConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown();
         static void testVectorAtConstMethod_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector();
         static void testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements();
+        static void testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCallFront_ReturnedValueIsFive();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

@@ -295,6 +295,12 @@ void VectorTestCase::initTests()
 		testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements
 	};
 	VectorTestCase::allTests.push_back(t46);
+	TestNameAndFunc t47 =
+	{
+		"testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCallFront_ReturnedValueIsFive", 
+		testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCallFront_ReturnedValueIsFive
+	};
+	VectorTestCase::allTests.push_back(t47);
 }
 
 void VectorTestCase::run()
@@ -1119,6 +1125,19 @@ void VectorTestCase::testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferent
 	//assertFalse();
 	//assertEqual(,);
 }
+void VectorTestCase::testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCallFront_ReturnedValueIsFive()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(5);
+    //Act
+    int returnedValue = vec.front();
+	//Assert
+	assertTrue(returnedValue == 5);
+	//assertFalse();
+	//assertEqual(,);
+}
+
 
 
 

@@ -206,6 +206,14 @@ namespace ft
                 }
                 return _storage[n];
             }
+            reference front()
+            {
+                return *_storage;
+            }
+            const_reference front() const
+            {
+                return *_storage;
+            }
             //Modifiers
             void push_back (const value_type& val)
             {

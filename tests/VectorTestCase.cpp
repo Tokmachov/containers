@@ -301,6 +301,12 @@ void VectorTestCase::initTests()
 		testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCallFront_ReturnedValueIsFive
 	};
 	VectorTestCase::allTests.push_back(t47);
+	TestNameAndFunc t48 =
+	{
+		"testVectorBackMethod_CreateVectorWithThreeDifferentStringsAndCallBackMethd_ReturnedValueIsThirdAddedString", 
+		testVectorBackMethod_CreateVectorWithThreeDifferentStringsAndCallBackMethd_ReturnedValueIsThirdAddedString
+	};
+	VectorTestCase::allTests.push_back(t48);
 }
 
 void VectorTestCase::run()
@@ -1137,6 +1143,21 @@ void VectorTestCase::testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCa
 	//assertFalse();
 	//assertEqual(,);
 }
+void VectorTestCase::testVectorBackMethod_CreateVectorWithThreeDifferentStringsAndCallBackMethd_ReturnedValueIsThirdAddedString()
+{
+	//Arrange
+    ft::vector<std::string> vec;
+    vec.push_back("Ook.");
+    vec.push_back("Ook!");
+    vec.push_back("Ook?");
+    //Act
+    std::string returnedValue = vec.back();
+	//Assert
+	assertTrue(returnedValue == std::string("Ook?"));
+	//assertFalse();
+	//assertEqual(,);
+}
+
 
 
 

@@ -214,6 +214,14 @@ namespace ft
             {
                 return *_storage;
             }
+            reference back()
+            {
+                return *(_storage + _elementsCount - 1);
+            }
+            const_reference back() const
+            {
+                return *(_storage + _elementsCount - 1);
+            }
             //Modifiers
             void push_back (const value_type& val)
             {

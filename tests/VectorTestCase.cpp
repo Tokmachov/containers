@@ -205,6 +205,24 @@ void VectorTestCase::initTests()
 		testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorMustBeEqualToInitialVectorAsIfItWasPushBackedWithValParamOfResizeNMinusSizeAndResultCapacityIsGreaterThenInitialCapacity
 	};
 	VectorTestCase::allTests.push_back(t31);
+	TestNameAndFunc t32 =
+	{
+		"testVectorCapacity_AddElementToEmtyVector_CapacityIsTwo", 
+		testVectorCapacity_AddElementToEmtyVector_CapacityIsTwo
+	};
+	VectorTestCase::allTests.push_back(t32);
+	TestNameAndFunc t33 =
+	{
+		"testVectorCapacity_CreateEmptyVector_CapacityIsZero", 
+		testVectorCapacity_CreateEmptyVector_CapacityIsZero
+	};
+	VectorTestCase::allTests.push_back(t33);
+	TestNameAndFunc t34 =
+	{
+		"testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWithTwoElements_CapcityIsInitialCapcityIncreaseByOneAndThenDoubled", 
+		testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWithTwoElements_CapcityIsInitialCapcityIncreaseByOneAndThenDoubled
+	};
+	VectorTestCase::allTests.push_back(t34);
 }
 
 void VectorTestCase::run()
@@ -777,6 +795,48 @@ void VectorTestCase::testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorM
     assertTrue(areEqualInSizeAndElements(actual.begin(), actual.end(), expected.begin(), expected.end()));
     assertTrue(actual.capacity() > prevCapacity);
 }
+void VectorTestCase::testVectorCapacity_AddElementToEmtyVector_CapacityIsTwo()
+{
+	//Arrange
+    ft::vector<int> vec;
+    size_t expectedCapacity = 2;
+    //Act
+    vec.push_back(1);
+	//Assert
+	assertTrue(vec.capacity() == expectedCapacity);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorCapacity_CreateEmptyVector_CapacityIsZero()
+{
+	//Arrange
+    ft::vector<int> vec;
+	size_t expectedCapacity = 0;
+    //Act
+    size_t receivedCapacity = vec.capacity();
+	//Assert
+	assertTrue(expectedCapacity == receivedCapacity);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWithTwoElements_CapcityIsInitialCapcityIncreaseByOneAndThenDoubled()
+{
+	//Arrange
+    ft::vector<int> vec(1,111);
+	size_t initialCapacity = vec.capacity();
+    size_t expectedCapacity = (initialCapacity + 1) * 2;
+    //Act
+    vec.push_back(2);
+    vec.push_back(3);
+	size_t actualCapacity = vec.capacity();
+    //Assert
+	assertTrue(expectedCapacity == actualCapacity);
+	//assertFalse();
+	//assertEqual(,);
+}
+
+
+
 
 
 

@@ -141,9 +141,8 @@ namespace ft
                     for (size_type i = n; i < _elementsCount; i++)
                         _alloc.destroy(_storage + i);
                     _elementsCount = n;
-                    return ;
                 }
-                if (n > _elementsCount)
+                else if (n > _elementsCount)
                 {
                     if (n >= _capacity)
                         _reallocStorage(n);
@@ -151,6 +150,8 @@ namespace ft
                         _alloc.construct(_storage + i, val);
                     _elementsCount = n;
                 }
+                else
+                    return ;
             }
             size_type capacity() const
             {

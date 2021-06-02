@@ -69,6 +69,9 @@ class VectorTestCase : public TestCase
         static void testVectorResize_ResizeToParamNLessThenSize_SizeIsEqualToN();
         static void testVectorResize_ResizeToNThatIsGreaterByThreeThenSizeAndValueIsProvided_ResultVectorIsEqualInSizeAndElementsToVectorAsIfCreatedFromInitialVectorByPushingBackThreeTimesElementsEqualToValueParameterOfResize();
         static void testVectorResize_ResizeToNThatExceedsCapacity_ResultVectorMustBeEqualToInitialVectorAsIfItWasPushBackedWithValParamOfResizeNMinusSizeAndResultCapacityIsGreaterThenInitialCapacity();
+        static void testVectorCapacity_AddElementToEmtyVector_CapacityIsTwo();
+        static void testVectorCapacity_CreateEmptyVector_CapacityIsZero();
+        static void testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWithTwoElements_CapcityIsInitialCapcityIncreaseByOneAndThenDoubled();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

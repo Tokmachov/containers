@@ -259,6 +259,18 @@ void VectorTestCase::initTests()
 		testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown
 	};
 	VectorTestCase::allTests.push_back(t40);
+	TestNameAndFunc t41 =
+	{
+		"testVectorIndexOperator_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector", 
+		testVectorIndexOperator_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector
+	};
+	VectorTestCase::allTests.push_back(t41);
+	TestNameAndFunc t42 =
+	{
+		"testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithIndexOpFirstElementOfSecondToFirstElementOfFirst_TwoVectorsAreEqualInSizeAndElements", 
+		testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithIndexOpFirstElementOfSecondToFirstElementOfFirst_TwoVectorsAreEqualInSizeAndElements
+	};
+	VectorTestCase::allTests.push_back(t42);
 }
 
 void VectorTestCase::run()
@@ -952,6 +964,57 @@ void VectorTestCase::testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_E
 	//assertFalse();
 	//assertEqual(,);
 }
+
+void VectorTestCase::testVectorIndexOperator_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector()
+{
+	//Arrange
+    ft::vector<int> initialVec(10, 999);
+	ft::vector<int> newVector;
+    //Act
+    for (size_t i = 0; i < initialVec.size(); i++)
+    {
+        newVector.push_back(initialVec[i]);
+    }
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            initialVec.begin(), 
+            initialVec.end(),
+            newVector.begin(),
+            newVector.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithIndexOpFirstElementOfSecondToFirstElementOfFirst_TwoVectorsAreEqualInSizeAndElements()
+{
+	//Arrange
+    ft::vector<int> first(2, 999);
+	ft::vector<int> second;
+    second.push_back(888);
+    second.push_back(999);
+    //Act
+    second[0] = 999;
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            first.begin(),
+            first.end(),
+            second.begin(),
+            second.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+
+
+
+
+
 
 
 

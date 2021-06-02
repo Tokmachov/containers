@@ -78,6 +78,8 @@ class VectorTestCase : public TestCase
         static void testVectorReserve_CallReserveWithNParamEqualToVectorCapacity_ResultVectorCapacityEqualsInitialCapacity();
         static void testVectorReserve_CallReserveWithNParamLessThenVectorCapacity_ResultVectorCapacityEqualsInitialCapacity();
         static void testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown();
+        static void testVectorIndexOperator_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector();
+        static void testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithIndexOpFirstElementOfSecondToFirstElementOfFirst_TwoVectorsAreEqualInSizeAndElements();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

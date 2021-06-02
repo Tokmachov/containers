@@ -72,6 +72,12 @@ class VectorTestCase : public TestCase
         static void testVectorCapacity_AddElementToEmtyVector_CapacityIsTwo();
         static void testVectorCapacity_CreateEmptyVector_CapacityIsZero();
         static void testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWithTwoElements_CapcityIsInitialCapcityIncreaseByOneAndThenDoubled();
+        static void testVectorEmpty_VectorCreatedWithDefaultConstructorNoElementsAdded_EmptyEqualsTrue();
+        static void testVectorEmpty_AddOneElementToEmtyVector_EmptyEqualsFalse();
+        static void testVectorReserve_CallReserveWithNParamGreaterThenVectorCapacity_ResutlVectorCapacityIsEqualToNParam();
+        static void testVectorReserve_CallReserveWithNParamEqualToVectorCapacity_ResultVectorCapacityEqualsInitialCapacity();
+        static void testVectorReserve_CallReserveWithNParamLessThenVectorCapacity_ResultVectorCapacityEqualsInitialCapacity();
+        static void testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

@@ -1,10 +1,10 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP 
 
+# include <stdexcept>
 # include "VectorIterator.hpp"
 # include "VectorIteratorReverse.hpp"
 # include "../utils.hpp"
-# include <sys/time.h>
 
 namespace ft
 {
@@ -156,6 +156,22 @@ namespace ft
             size_type capacity() const
             {
                 return _capacity;
+            }
+            bool empty() const
+            {
+                return (_elementsCount == 0);
+            }
+            void reserve (size_type n)
+            {
+                if (n > _alloc.max_size())
+                {
+                    throw std::length_error
+                    (
+                        "Exception in reserve method. N is greater than max_size."
+                    );
+                }
+                if (n > _capacity)
+                    _reallocStorage(n);
             }
             //Element access:
             reference operator[] (size_type n)

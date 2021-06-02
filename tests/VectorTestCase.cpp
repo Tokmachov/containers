@@ -223,6 +223,42 @@ void VectorTestCase::initTests()
 		testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWithTwoElements_CapcityIsInitialCapcityIncreaseByOneAndThenDoubled
 	};
 	VectorTestCase::allTests.push_back(t34);
+	TestNameAndFunc t35 =
+	{
+		"testVectorEmpty_VectorCreatedWithDefaultConstructorNoElementsAdded_EmptyEqualsTrue", 
+		testVectorEmpty_VectorCreatedWithDefaultConstructorNoElementsAdded_EmptyEqualsTrue
+	};
+	VectorTestCase::allTests.push_back(t35);
+	TestNameAndFunc t36 =
+	{
+		"testVectorEmpty_AddOneElementToEmtyVector_EmptyEqualsFalse", 
+		testVectorEmpty_AddOneElementToEmtyVector_EmptyEqualsFalse
+	};
+	VectorTestCase::allTests.push_back(t36);
+	TestNameAndFunc t37 =
+	{
+		"testVectorReserve_CallReserveWithNParamGreaterThenVectorCapacity_ResutlVectorCapacityIsEqualToNParam", 
+		testVectorReserve_CallReserveWithNParamGreaterThenVectorCapacity_ResutlVectorCapacityIsEqualToNParam
+	};
+	VectorTestCase::allTests.push_back(t37);
+	TestNameAndFunc t38 =
+	{
+		"testVectorReserve_CallReserveWithNParamEqualToVectorCapacity_ResultVectorCapacityEqualsInitialCapacity", 
+		testVectorReserve_CallReserveWithNParamEqualToVectorCapacity_ResultVectorCapacityEqualsInitialCapacity
+	};
+	VectorTestCase::allTests.push_back(t38);
+	TestNameAndFunc t39 =
+	{
+		"testVectorReserve_CallReserveWithNParamLessThenVectorCapacity_ResultVectorCapacityEqualsInitialCapacity", 
+		testVectorReserve_CallReserveWithNParamLessThenVectorCapacity_ResultVectorCapacityEqualsInitialCapacity
+	};
+	VectorTestCase::allTests.push_back(t39);
+	TestNameAndFunc t40 =
+	{
+		"testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown", 
+		testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown
+	};
+	VectorTestCase::allTests.push_back(t40);
 }
 
 void VectorTestCase::run()
@@ -834,6 +870,94 @@ void VectorTestCase::testVectorCapacity_VectorOfSizeOneAndCapcityTwoPushBackedWi
 	//assertFalse();
 	//assertEqual(,);
 }
+void VectorTestCase::testVectorEmpty_VectorCreatedWithDefaultConstructorNoElementsAdded_EmptyEqualsTrue()
+{
+	//Arrange
+    ft::vector<int> vec;
+    //Act
+    
+	//Assert
+	assertTrue(vec.empty());
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorEmpty_AddOneElementToEmtyVector_EmptyEqualsFalse()
+{
+	//Arrange
+    ft::vector<int> vec;
+    vec.push_back(1);
+    //Act
+    
+	//Assert
+	assertFalse(vec.empty());
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorReserve_CallReserveWithNParamGreaterThenVectorCapacity_ResutlVectorCapacityIsEqualToNParam()
+{
+	//Arrange
+    ft::vector<int> vec(1000, 999);
+    size_t n = vec.capacity() * 2;
+	//Act
+    vec.reserve(n);
+	//Assert
+	assertTrue(vec.capacity() == n);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorReserve_CallReserveWithNParamEqualToVectorCapacity_ResultVectorCapacityEqualsInitialCapacity()
+{
+	//Arrange
+    ft::vector<int> vec(1000, 999);
+    ft::vector<int>::size_type initialCapacity = vec.capacity();
+    size_t n = vec.capacity();
+	//Act
+    vec.reserve(n);
+	//Assert
+	assertTrue(vec.capacity() == initialCapacity);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorReserve_CallReserveWithNParamLessThenVectorCapacity_ResultVectorCapacityEqualsInitialCapacity()
+{
+	//Arrange
+    ft::vector<int> vec(1000, 999);
+    ft::vector<int>::size_type initialCapacity = vec.capacity();
+    size_t n = 1;
+	//Act
+    vec.reserve(n);
+	//Assert
+	assertTrue(vec.capacity() == initialCapacity);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown()
+{
+	//Arrange
+    ft::vector<int> vec(1000, 999);
+    ft::vector<int>::size_type n = vec.max_size() + 1;
+	bool isExceptionThrown = false;
+    //Act
+    try
+    {
+        vec.reserve(n);
+    }
+	catch (const std::length_error &er)
+    {
+        std::cerr << er.what() << std::endl;
+        isExceptionThrown = true;
+    }
+    //Assert
+	assertTrue(isExceptionThrown);
+	//assertFalse();
+	//assertEqual(,);
+}
+
+
+
+
+
+
 
 
 

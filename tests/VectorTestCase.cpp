@@ -271,6 +271,30 @@ void VectorTestCase::initTests()
 		testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithIndexOpFirstElementOfSecondToFirstElementOfFirst_TwoVectorsAreEqualInSizeAndElements
 	};
 	VectorTestCase::allTests.push_back(t42);
+	TestNameAndFunc t43 =
+	{
+		"testVectorAtNonConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown", 
+		testVectorAtNonConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown
+	};
+	VectorTestCase::allTests.push_back(t43);
+	TestNameAndFunc t44 =
+	{
+		"testVectorAtConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown", 
+		testVectorAtConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown
+	};
+	VectorTestCase::allTests.push_back(t44);
+	TestNameAndFunc t45 =
+	{
+		"testVectorAtConstMethod_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector", 
+		testVectorAtConstMethod_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector
+	};
+	VectorTestCase::allTests.push_back(t45);
+	TestNameAndFunc t46 =
+	{
+		"testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements", 
+		testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements
+	};
+	VectorTestCase::allTests.push_back(t46);
 }
 
 void VectorTestCase::run()
@@ -1010,6 +1034,95 @@ void VectorTestCase::testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInF
 	//assertFalse();
 	//assertEqual(,);
 }
+void VectorTestCase::testVectorAtNonConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown()
+{
+	//Arrange
+    ft::vector<int> vec(10, 999);
+	bool isExceptionThrown = false;
+    //Act
+    try
+    {
+        vec.at(vec.size() + 1);
+    }
+	catch (const std::out_of_range &ex)
+    {
+        std::cerr << ex.what() << std::endl;
+        isExceptionThrown = true;
+    }
+    //Assert
+	assertTrue(isExceptionThrown);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAtConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown()
+{
+//Arrange
+    const ft::vector<int> vec(10, 999);
+	bool isExceptionThrown = false;
+    //Act
+    try
+    {
+        vec.at(vec.size() + 1);
+    }
+	catch (const std::out_of_range &ex)
+    {
+        std::cerr << ex.what() << std::endl;
+        isExceptionThrown = true;
+    }
+    //Assert
+	assertTrue(isExceptionThrown);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAtConstMethod_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector()
+{
+	//Arrange
+    ft::vector<int> initialVec(10, 999);
+	ft::vector<int> newVector;
+    //Act
+    for (size_t i = 0; i < initialVec.size(); i++)
+    {
+        newVector.push_back(initialVec.at(i));
+    }
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            initialVec.begin(), 
+            initialVec.end(),
+            newVector.begin(),
+            newVector.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements()
+{
+	//Arrange
+    ft::vector<int> first(2, 999);
+	ft::vector<int> second;
+    second.push_back(888);
+    second.push_back(999);
+    //Act
+    second.at(0) = 999;
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            first.begin(),
+            first.end(),
+            second.begin(),
+            second.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+
+
+
+
 
 
 

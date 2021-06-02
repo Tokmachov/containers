@@ -182,6 +182,30 @@ namespace ft
             {
                 return _storage[n];
             }
+            reference at (size_type n)
+            {
+                if (n >= _elementsCount)
+                {
+                    std::string whatArg
+                    (
+                        "Exception in \"at\" method. N is out of range."
+                    );
+                    throw std::out_of_range(whatArg);
+                }
+                return _storage[n];
+            }
+            const_reference at (size_type n) const
+            {
+                if (n >= _elementsCount)
+                {
+                    std::string whatArg
+                    (
+                        "Exception in \"at\" method. N is out of range."
+                    );
+                    throw std::out_of_range(whatArg);
+                }
+                return _storage[n];
+            }
             //Modifiers
             void push_back (const value_type& val)
             {

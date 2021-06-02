@@ -80,6 +80,10 @@ class VectorTestCase : public TestCase
         static void testVectorReverse_CallReserveWithNParamGreaterThenMaxSize_ExceptionIsThrown();
         static void testVectorIndexOperator_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector();
         static void testVectorIndexOperator_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithIndexOpFirstElementOfSecondToFirstElementOfFirst_TwoVectorsAreEqualInSizeAndElements();
+        static void testVectorAtNonConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown();
+        static void testVectorAtConstMethod_CallAtWithValueEqualOrGreaterThenVectorSize_ExceptionIsThrown();
+        static void testVectorAtConstMethod_IterateOverZeroToVectorSizeMinusOneIndexAndCreateNewVectorFromObtainedElements_NewVectorIsEqualToInitialVector();
+        static void testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

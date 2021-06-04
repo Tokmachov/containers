@@ -43,18 +43,22 @@ void VectorTestCase::initTests()
 		testVectorIterator_VectorOfIntsIsPassedToRandomShuffleAlgorithm_RestltVectorIsOfSizeAsBeforeShuffleButElementsAreInDifferentOrder
 	};
 	VectorTestCase::allTests.push_back(t4);
-	TestNameAndFunc t5 =
+	    
+    TestNameAndFunc t5 =
 	{
 		"testVectorIterator_SortVectorOfRandomIntsFromOneToFive_SortedVectorOfIntsFromOneTwoFive", 
 		testVectorIterator_SortVectorOfRandomIntsFromOneToFive_SortedVectorOfIntsFromOneTwoFive
 	};
-	VectorTestCase::allTests.push_back(t5);
-	TestNameAndFunc t6 =
+    VectorTestCase::allTests.push_back(t5);
+
+
+    TestNameAndFunc t6 =
 	{
 		"testVectorIterator_SortTenInts_SortedVectorOfInts", 
 		testVectorIterator_SortTenInts_SortedVectorOfInts
 	};
-	VectorTestCase::allTests.push_back(t6);
+    
+    VectorTestCase::allTests.push_back(t6);
 	TestNameAndFunc t7 =
 	{
 		"testVectorIterator_SortTenIntsWithSortHeap_SortedVectorOfInts", 
@@ -307,12 +311,73 @@ void VectorTestCase::initTests()
 		testVectorBackMethod_CreateVectorWithThreeDifferentStringsAndCallBackMethd_ReturnedValueIsThirdAddedString
 	};
 	VectorTestCase::allTests.push_back(t48);
+	TestNameAndFunc t49 =
+	{
+		"testVectorAssignRangeMethod_AssignSrcVectorToTargetVectorWhichIsInitiallyDifferentFromSrcVectorInElementsAndSize_SrcVectorEqualsTargetVectorInElementsAndSize", 
+		testVectorAssignRangeMethod_AssignSrcVectorToTargetVectorWhichIsInitiallyDifferentFromSrcVectorInElementsAndSize_SrcVectorEqualsTargetVectorInElementsAndSize
+	};
+	VectorTestCase::allTests.push_back(t49);
+	TestNameAndFunc t50 =
+	{
+		"testVectorAssignRangeMethod_AssignSrcNonEmptyVectorToTargetEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize", 
+		testVectorAssignRangeMethod_AssignSrcNonEmptyVectorToTargetEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize
+	};
+	VectorTestCase::allTests.push_back(t50);
+	TestNameAndFunc t51 =
+	{
+		"testVectorAssignRangeMethod_AssignSrcEmptyVectorToTargetNonEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize", 
+		testVectorAssignRangeMethod_AssignSrcEmptyVectorToTargetNonEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize
+	};
+	VectorTestCase::allTests.push_back(t51);
+	TestNameAndFunc t52 =
+	{
+		"testVectorAssignRangeMethod_AssignSrcVectorThatHasSizeMoreThenTargetVectorCapacity_SrcVectorEqualsTargetVectorInElementsAndSizeAndTargetVectorCapacityIsGreaterThenInitialTargetVectorCapacity", 
+		testVectorAssignRangeMethod_AssignSrcVectorThatHasSizeMoreThenTargetVectorCapacity_SrcVectorEqualsTargetVectorInElementsAndSizeAndTargetVectorCapacityIsGreaterThenInitialTargetVectorCapacity
+	};
+	VectorTestCase::allTests.push_back(t52);
+	TestNameAndFunc t53 =
+	{
+		"testVectorAssignRangeMethod_AssignToTargetOfSizeFiveSrcOfSizeTwo_TargetOfSizeTwo", 
+		testVectorAssignRangeMethod_AssignToTargetOfSizeFiveSrcOfSizeTwo_TargetOfSizeTwo
+	};
+	VectorTestCase::allTests.push_back(t53);
+	TestNameAndFunc t54 =
+	{
+		"testVectorAssignRangeMethod_AssignToEmptyTargetSrcOfSizeTwo_TargetOfSizeTwo", 
+		testVectorAssignRangeMethod_AssignToEmptyTargetSrcOfSizeTwo_TargetOfSizeTwo
+	};
+	VectorTestCase::allTests.push_back(t54);
+	TestNameAndFunc t55 =
+	{
+		"testVectorAssignRangeMethod_AssignToTargetOfSizeFiveEmptySrc_EmptyTarget", 
+		testVectorAssignRangeMethod_AssignToTargetOfSizeFiveEmptySrc_EmptyTarget
+	};
+	VectorTestCase::allTests.push_back(t55);
+	TestNameAndFunc t56 =
+	{
+		"testVectorAssignFillMethod_AssignFillTargetWithElementsDifferentFromTargetAndQtyIsLessThenTargetSize_TargetSizeIsEqualToQtyTargerElementsAreEqualToFillElements", 
+		testVectorAssignFillMethod_AssignFillTargetWithElementsDifferentFromTargetAndQtyIsLessThenTargetSize_TargetSizeIsEqualToQtyTargerElementsAreEqualToFillElements
+	};
+	VectorTestCase::allTests.push_back(t56);
+	TestNameAndFunc t57 =
+	{
+		"testVectorAssignFillMethod_AssignFillFiveElementsToEmtpyTarget_TargetIsFilledWithFiveElements", 
+		testVectorAssignFillMethod_AssignFillFiveElementsToEmtpyTarget_TargetIsFilledWithFiveElements
+	};
+	VectorTestCase::allTests.push_back(t57);
+	TestNameAndFunc t58 =
+	{
+		"testVectorAssignFillMethod_AssignFillZeroElementsToTargetWithSizeFive_TargetIsEmpty", 
+		testVectorAssignFillMethod_AssignFillZeroElementsToTargetWithSizeFive_TargetIsEmpty
+	};
+	VectorTestCase::allTests.push_back(t58);
 }
 
 void VectorTestCase::run()
-{
+{   
     initTests();
-    startTestLoop();
+    runAllTests();
+    runLeaks();
 }
 
 /*
@@ -329,7 +394,7 @@ void VectorTestCase::testPushBack_PushBackOneElementToEmptyVector_SizeIsOneCapac
     actual.push_back(1);
     //Assert
     assertTrue(actual[0] == 1);
-    assertTrue(actual.capacity() == 1);
+    assertTrue(actual.capacity() == 2);
     assertTrue(actual.size() == 1);
 }
 void VectorTestCase::testPushBack_PushBackTwoElementsToEmptyVEctor_SizeIsTwoCapacityIsTwoElementAddedLastIsAccessibleAtIndexOne()
@@ -354,7 +419,7 @@ void VectorTestCase::testPushBack_PushBackThreeElementsToEmptyVector_SizeIsThree
     actual.push_back(3);
     //Assert
     assertTrue(actual.size() == 3);
-    assertTrue(actual.capacity() == 4);
+    assertTrue(actual.capacity() == 6);
     assertTrue(actual[2] == 3);
 }
 void VectorTestCase::testVectorIterator_VectorOfIntsIsPassedToRandomShuffleAlgorithm_RestltVectorIsOfSizeAsBeforeShuffleButElementsAreInDifferentOrder()
@@ -375,8 +440,8 @@ void VectorTestCase::testVectorIterator_VectorOfIntsIsPassedToRandomShuffleAlgor
     //Act
     std::random_shuffle(actual.begin(), actual.end());
 	//Assert
-	//assertTrue();
-	//assertFalse();
+	// assertTrue();
+	// assertFalse();
 	for (ft::vector<int>::iterator it = actual.begin(); it < actual.end(); it++)
         std::cout << " " << *it;
     std::cout << std::endl;
@@ -524,6 +589,10 @@ void VectorTestCase::testVectorIteratorReverse_CallMinusMinusPostfix_ReturnsAndC
     stdVector.push_back(3);
     std::vector<int>::reverse_iterator itStdReverse = stdVector.rbegin();
     //Act
+    itFtReverse++;
+    itFtReverse++;
+    itStdReverse++;
+    itStdReverse++;
     ft::vector<int>::reverse_iterator itFtReceived = itFtReverse--;
     std::vector<int>::reverse_iterator itStdReceived = itStdReverse--;
 
@@ -545,6 +614,8 @@ void VectorTestCase::testVectorIteratorReverse_CallMinusMinusPrefix_ReturnsAndCh
     stdVector.push_back(3);
     std::vector<int>::reverse_iterator itStdReverse = stdVector.rbegin();
     //Act
+    itFtReverse++;
+    itStdReverse++;
     ft::vector<int>::reverse_iterator itFtReceived = --itFtReverse;
     std::vector<int>::reverse_iterator itStdReceived = --itStdReverse;
 
@@ -1143,40 +1214,206 @@ void VectorTestCase::testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCa
 	//assertFalse();
 	//assertEqual(,);
 }
+
 void VectorTestCase::testVectorBackMethod_CreateVectorWithThreeDifferentStringsAndCallBackMethd_ReturnedValueIsThirdAddedString()
 {
 	//Arrange
-    ft::vector<std::string> vec;
-    vec.push_back("Ook.");
-    vec.push_back("Ook!");
-    vec.push_back("Ook?");
+    ft::vector<std::string> v;
+    v.push_back("Ook.");
+    v.push_back("Ook!");
+    v.push_back("Ook?");
     //Act
-    std::string returnedValue = vec.back();
+    std::string returnedValue = v.back();
 	//Assert
 	assertTrue(returnedValue == std::string("Ook?"));
+	// assertFalse();
+	// assertEqual(,);
+}
+void VectorTestCase::testVectorAssignRangeMethod_AssignSrcVectorToTargetVectorWhichIsInitiallyDifferentFromSrcVectorInElementsAndSize_SrcVectorEqualsTargetVectorInElementsAndSize()
+{
+	//Arrange
+    ft::vector<std::string> target(5, "jj");
+    ft::vector<std::string> src(10, "zepher");
+	//Act
+    target.assign(src.begin(), src.end());
+    //Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            target.begin(), 
+            target.end(), 
+            src.begin(), 
+            src.end()
+        )
+    );
 	//assertFalse();
 	//assertEqual(,);
 }
+void VectorTestCase::testVectorAssignRangeMethod_AssignSrcNonEmptyVectorToTargetEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize()
+{
+	//Arrange
+    ft::vector<std::string> target;
+    ft::vector<std::string> src(10, "zepher");
+	//Act
+    target.assign(src.begin(), src.end());
+    //Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            target.begin(), 
+            target.end(), 
+            src.begin(), 
+            src.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignRangeMethod_AssignSrcEmptyVectorToTargetNonEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize()
+{
+	//Arrange
+    ft::vector<std::string> target(10, "cliff");
+    ft::vector<std::string> src;
+	//Act
+    target.assign(src.begin(), src.end());
+    //Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            target.begin(), 
+            target.end(), 
+            src.begin(), 
+            src.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignRangeMethod_AssignSrcVectorThatHasSizeMoreThenTargetVectorCapacity_SrcVectorEqualsTargetVectorInElementsAndSizeAndTargetVectorCapacityIsGreaterThenInitialTargetVectorCapacity()
+{
+	//Arrange
+    ft::vector<int> target(10, 888);
+    ft::vector<int> src(100, 999);
+    size_t initialCapacity = target.capacity();
+    //Act
+    target.assign(src.begin(), src.end());
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            target.begin(), 
+            target.end(), 
+            src.begin(), 
+            src.end()
+        )
+    );
+	assertTrue(target.capacity() > initialCapacity);
+    //assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignRangeMethod_AssignToTargetOfSizeFiveSrcOfSizeTwo_TargetOfSizeTwo()
+{
+	//Arrange
+    ft::vector<std::string> target(5, "Hello");
+	ft::vector<std::string> src(2, "Goodby");
+    //Act
+    target.assign(src.begin(), src.end());
+	//Assert
+	assertTrue(target.size() == 2);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignRangeMethod_AssignToEmptyTargetSrcOfSizeTwo_TargetOfSizeTwo()
+{
+	//Arrange
+    ft::vector<std::string> target;
+	ft::vector<std::string> src(2, "Goodby");
+    //Act
+    target.assign(src.begin(), src.end());
+	//Assert
+	assertTrue(target.size() == 2);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignRangeMethod_AssignToTargetOfSizeFiveEmptySrc_EmptyTarget()
+{
+	//Arrange
+    ft::vector<std::string> target(5, "uni");
+	ft::vector<std::string> src;
+    //Act
+    target.assign(src.begin(), src.end());
+	//Assert
+	assertTrue(target.empty());
+	//assertFalse();
 
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignFillMethod_AssignFillTargetWithElementsDifferentFromTargetAndQtyIsLessThenTargetSize_TargetSizeIsEqualToQtyTargerElementsAreEqualToFillElements()
+{
+	//Arrange
+    ft::vector<std::string> target(5, "uni");
+    //Act
+    target.assign(3, "multy");
+    ft::vector<std::string> expectedTarget(3, "multy");
+    //Assert
+	assertTrue(target.size() == 3);
+	assertTrue
+    (
+        areEqualInSizeAndElements(
+            target.begin(),
+            target.end(),
+            expectedTarget.begin(),
+            expectedTarget.end()
+        )
+    );
+    //assertFalse();
 
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignFillMethod_AssignFillFiveElementsToEmtpyTarget_TargetIsFilledWithFiveElements()
+{
+	//Arrange
+    ft::vector<std::string> target;
+    //Act
+    target.assign(5, "multy");
+    ft::vector<std::string> expectedTarget(5, "multy");
+    //Assert
+	assertTrue(target.size() == 5);
+	assertTrue
+    (
+        areEqualInSizeAndElements(
+            target.begin(),
+            target.end(),
+            expectedTarget.begin(),
+            expectedTarget.end()
+        )
+    );
+    //assertFalse();
 
+	//assertEqual(,);
+}
+void VectorTestCase::testVectorAssignFillMethod_AssignFillZeroElementsToTargetWithSizeFive_TargetIsEmpty()
+{
+	//Arrange
+    ft::vector<std::string> target(5, "multy");
+    //Act
+    target.assign(0, "multy");
+    ft::vector<std::string> expectedTarget;
+    //Assert
+	assertTrue(target.empty());
+	assertTrue
+    (
+        areEqualInSizeAndElements(
+            target.begin(),
+            target.end(),
+            expectedTarget.begin(),
+            expectedTarget.end()
+        )
+    );
+    //assertFalse();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//assertEqual(,);
+}
 
 
 

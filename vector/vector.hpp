@@ -5,7 +5,8 @@
 # include "VectorIterator.hpp"
 # include "VectorIteratorReverse.hpp"
 # include "../utils.hpp"
-
+# include <memory>
+# include <unistd.h>
 namespace ft
 {
     template < class T, class Alloc = std::allocator<T> > 
@@ -223,6 +224,32 @@ namespace ft
                 return *(_storage + _elementsCount - 1);
             }
             //Modifiers
+            template <class InputIterator>
+            void assign 
+            (
+                InputIterator first, 
+                typename enable_if<is_suitable_as_input_iterator<InputIterator>::value, InputIterator>::type last
+            )
+            {
+                for (size_type i = 0; i < _elementsCount; i++)
+                    _alloc.destroy(_storage + i);
+                size_type sourceSize = ft::distance(first, last);
+                if (sourceSize > _capacity)
+                    _reallocStorage(sourceSize);
+                for (size_type targetPos = 0; first != last; first++, targetPos++)
+                    _alloc.construct(_storage + targetPos, *first);
+                _elementsCount = sourceSize;
+            }
+            void assign (size_type n, const value_type& val)
+            {
+                for (size_type i = 0; i < _elementsCount; i++)
+                    _alloc.destroy(_storage + i);
+                if (n > _capacity)
+                    _reallocStorage(n);
+                for (size_type i = 0; i < n; i++)
+                    _alloc.construct(_storage + i, val);
+                _elementsCount = n;
+            }
             void push_back (const value_type& val)
             {
                 _pushBack(val);
@@ -232,23 +259,15 @@ namespace ft
             allocator_type _alloc;
             size_type _elementsCount;
             size_type _capacity;
-            int _memAllocCount;
             //methods
-            void _deleteStorageFromMemory()
-            {
-                for (size_t i = 0; i < _elementsCount; i++)
-                    _alloc.destroy(_storage + i);
-                _alloc.deallocate(_storage, _capacity);
-            }
             void _pushBack(const value_type& val)
             {
-                if (_isOutOfCapacity())
+                if (_elementsCount == _capacity)
+                {
                     _reallocStorage();
-                _storage[_elementsCount++] = val;
-            }
-            bool _isOutOfCapacity()
-            {
-                return _elementsCount == _capacity;
+                }
+                _alloc.construct(_storage + _elementsCount, val);
+                _elementsCount++;
             }
             void _reallocStorage(size_type newCapacity = 0)
             {
@@ -260,9 +279,18 @@ namespace ft
                     _alloc.construct(newStorage + i, *(_storage + i));
                     _alloc.destroy(_storage + i);
                 }
-                _alloc.deallocate(_storage, _capacity);
+                if (_storage != 0)
+                {
+                    _alloc.deallocate(_storage, _capacity);
+                }
                 _storage = newStorage;
                 _capacity = newCapacity;
+            }
+            void _deleteStorageFromMemory()
+            {
+                for (size_t i = 0; i < _elementsCount; i++)
+                    _alloc.destroy(_storage + i);
+                _alloc.deallocate(_storage, _capacity);
             }
     };
 }

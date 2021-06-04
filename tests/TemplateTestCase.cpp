@@ -30,7 +30,7 @@ void TemplateTestCase::initTests()
 void TemplateTestCase::run()
 {
     initTests();
-    startTestLoop();
+    runAllTests();
 }
 
 /*

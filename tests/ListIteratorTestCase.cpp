@@ -166,7 +166,7 @@ void ListIteratorTestCase::initTests()
 void ListIteratorTestCase::run()
 {
     initTests();
-    startTestLoop();
+    runAllTests();
 }
 
 /*

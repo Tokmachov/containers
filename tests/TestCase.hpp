@@ -4,7 +4,11 @@
 # include <iostream>
 # include <string>
 # include <vector>
-
+# include <stdlib.h> // getenf (to locate leaks utility in OS)
+# include <sys/types.h> //opendir (to locate leaks utility in OS)
+# include <dirent.h> //(to locate leaks utility in OS)
+# include <unistd.h> // fork() (start leaks)
+# include <errno.h>
 # define RED "\033[31m" /* Red */
 # define GREEN "\033[32m" /* Green */
 # define RESET "\033[0m"
@@ -24,14 +28,18 @@ class TestCase
         };
         static std::vector<TestNameAndFunc> allTests;
         static void initTests();
-        static void startTestLoop();
+        static void runAllTests();
+        static void runLeaks();
         template <typename T>
         static void assertEqual(T expected, T actual)
         {
             if (expected == actual)
                 std::cout << GREEN << "--- Success" << RESET << std::endl;
             else
+            {
                 std::cout << RED << "--- Failed" << RESET << std::endl;
+                exit(1);
+            }
         }
         static void assertTrue(bool result);
         static void assertFalse(bool result);
@@ -52,11 +60,8 @@ class TestCase
         TestCase( TestCase const & src );
 		TestCase &		operator=( TestCase const & rhs );
         
-        //startTests();
-        static void showTestsMenu();
-        static void readUserChoice(int &choice);
-        static void runTest(const TestNameAndFunc &testNameAndFunc);
-        static void runAllTests();
+        static void _runTest(const TestNameAndFunc &testNameAndFunc);
+        static std::string _getLeaksUtilityOSPath();
 };
 
 #endif /* ******************************************************** TESTCASE_H */

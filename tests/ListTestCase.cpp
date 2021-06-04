@@ -648,7 +648,7 @@ void ListTestCase::initTests()
 void ListTestCase::run()
 {
     initTests();
-    startTestLoop();
+    runAllTests();
 }
 
 /*

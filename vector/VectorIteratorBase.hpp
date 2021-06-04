@@ -1,5 +1,7 @@
 #ifndef VECTORITERATORBASE_HPP
 # define VECTORITERATORBASE_HPP
+# include <iostream>
+
 template <typename Value>
 class VectorIteratorBase
 {

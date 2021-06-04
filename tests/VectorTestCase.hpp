@@ -7,6 +7,7 @@
 # include <algorithm>
 # include "TestCase.hpp"
 # include "../vector/vector.hpp"
+# include <list>
 
 class VectorTestCase : public TestCase
 {
@@ -86,6 +87,18 @@ class VectorTestCase : public TestCase
         static void testVectorAtNonConstMethod_CreateTwoVectorsThatAreDifferentInFirstElementThenSetWithAtMethodFirstElementOfSecondToCopyOfFirstElementOfFirstVector_TwoVectorsAreEqualInSizeAndElements();
         static void testVectorFrontMethod_CreateEmptyVectorAndPushBackFiveAndCallFront_ReturnedValueIsFive();
         static void testVectorBackMethod_CreateVectorWithThreeDifferentStringsAndCallBackMethd_ReturnedValueIsThirdAddedString();
+        
+        static void testVectorAssignRangeMethod_AssignSrcVectorToTargetVectorWhichIsInitiallyDifferentFromSrcVectorInElementsAndSize_SrcVectorEqualsTargetVectorInElementsAndSize();
+        static void testVectorAssignRangeMethod_AssignSrcNonEmptyVectorToTargetEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize();
+        static void testVectorAssignRangeMethod_AssignSrcEmptyVectorToTargetNonEmptyVector_SrcVectorEqualsTargetVectorInElementsAndSize();
+        static void testVectorAssignRangeMethod_AssignSrcVectorThatHasSizeMoreThenTargetVectorCapacity_SrcVectorEqualsTargetVectorInElementsAndSizeAndTargetVectorCapacityIsGreaterThenInitialTargetVectorCapacity();
+        static void testVectorAssignRangeMethod_AssignToTargetOfSizeFiveSrcOfSizeTwo_TargetOfSizeTwo();
+        static void testVectorAssignRangeMethod_AssignToEmptyTargetSrcOfSizeTwo_TargetOfSizeTwo();
+        static void testVectorAssignRangeMethod_AssignToTargetOfSizeFiveEmptySrc_EmptyTarget();
+
+        static void testVectorAssignFillMethod_AssignFillTargetWithElementsDifferentFromTargetAndQtyIsLessThenTargetSize_TargetSizeIsEqualToQtyTargerElementsAreEqualToFillElements();
+        static void testVectorAssignFillMethod_AssignFillFiveElementsToEmtpyTarget_TargetIsFilledWithFiveElements();
+        static void testVectorAssignFillMethod_AssignFillZeroElementsToTargetWithSizeFive_TargetIsEmpty();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

@@ -371,6 +371,18 @@ void VectorTestCase::initTests()
 		testVectorAssignFillMethod_AssignFillZeroElementsToTargetWithSizeFive_TargetIsEmpty
 	};
 	VectorTestCase::allTests.push_back(t58);
+	TestNameAndFunc t59 =
+	{
+		"testPopBack_PopBackOnVectorWithThreeElements_VectorWithTwoElemtsAndBackReturnsSecondElement", 
+		testPopBack_PopBackOnVectorWithThreeElements_VectorWithTwoElemtsAndBackReturnsSecondElement
+	};
+	VectorTestCase::allTests.push_back(t59);
+	TestNameAndFunc t60 =
+	{
+		"testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash", 
+		testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash
+	};
+	VectorTestCase::allTests.push_back(t60);
 }
 
 void VectorTestCase::run()
@@ -1414,6 +1426,34 @@ void VectorTestCase::testVectorAssignFillMethod_AssignFillZeroElementsToTargetWi
 
 	//assertEqual(,);
 }
+void VectorTestCase::testPopBack_PopBackOnVectorWithThreeElements_VectorWithTwoElemtsAndBackReturnsSecondElement()
+{
+	//Arrange
+    ft::vector<std::string> v;
+    v.push_back("A");
+    v.push_back("B");
+    v.push_back("C");
+    //Act
+    v.pop_back();
+    //Assert
+    assertTrue(v.back() == std::string("B"));
+	assertTrue(v.size() == 2);
+    //assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash()
+{
+	//Arrange
+    ft::vector<std::string> v;
+    //Act
+    v.pop_back();
+    //Assert
+    assertTrue(true);
+    //assertFalse();
+	//assertEqual(,);
+}
+
+
 
 
 

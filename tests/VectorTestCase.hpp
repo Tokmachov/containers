@@ -99,6 +99,9 @@ class VectorTestCase : public TestCase
         static void testVectorAssignFillMethod_AssignFillTargetWithElementsDifferentFromTargetAndQtyIsLessThenTargetSize_TargetSizeIsEqualToQtyTargerElementsAreEqualToFillElements();
         static void testVectorAssignFillMethod_AssignFillFiveElementsToEmtpyTarget_TargetIsFilledWithFiveElements();
         static void testVectorAssignFillMethod_AssignFillZeroElementsToTargetWithSizeFive_TargetIsEmpty();
+
+        static void testPopBack_PopBackOnVectorWithThreeElements_VectorWithTwoElemtsAndBackReturnsSecondElement();
+        static void testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

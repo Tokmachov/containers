@@ -77,8 +77,7 @@ namespace ft
             }
             vector& operator= (const vector& x)
             {
-                for (size_type i = 0; i < _elementsCount; i++)
-                    _alloc.destroy(_storage + i);
+                _destroyCurrentElements();
                 _alloc.deallocate(_storage, _capacity);
                 _storage = _alloc.allocate(x._capacity);
                 _elementsCount = x._elementsCount;
@@ -91,7 +90,8 @@ namespace ft
             }
             ~vector()
             {
-                _deleteStorageFromMemory();
+                _destroyCurrentElements();
+                _alloc.deallocate(_storage, _capacity);
             }
             //Iterators
             iterator begin()
@@ -139,8 +139,7 @@ namespace ft
             {
                 if (n < _elementsCount)
                 {
-                    for (size_type i = n; i < _elementsCount; i++)
-                        _alloc.destroy(_storage + i);
+                    _destroyCurrentElements();
                     _elementsCount = n;
                 }
                 else if (n > _elementsCount)
@@ -231,8 +230,7 @@ namespace ft
                 typename enable_if<is_suitable_as_input_iterator<InputIterator>::value, InputIterator>::type last
             )
             {
-                for (size_type i = 0; i < _elementsCount; i++)
-                    _alloc.destroy(_storage + i);
+                _destroyCurrentElements();
                 size_type sourceSize = ft::distance(first, last);
                 if (sourceSize > _capacity)
                     _reallocStorage(sourceSize);
@@ -242,8 +240,7 @@ namespace ft
             }
             void assign (size_type n, const value_type& val)
             {
-                for (size_type i = 0; i < _elementsCount; i++)
-                    _alloc.destroy(_storage + i);
+                _destroyCurrentElements();
                 if (n > _capacity)
                     _reallocStorage(n);
                 for (size_type i = 0; i < n; i++)
@@ -253,6 +250,13 @@ namespace ft
             void push_back (const value_type& val)
             {
                 _pushBack(val);
+            }
+            void pop_back()
+            {
+                if (_elementsCount == 0)
+                    return ;
+                _alloc.destroy(_storage + _elementsCount - 1);
+                _elementsCount--;
             }
         private:
             pointer _storage;
@@ -286,11 +290,11 @@ namespace ft
                 _storage = newStorage;
                 _capacity = newCapacity;
             }
-            void _deleteStorageFromMemory()
+            void _destroyCurrentElements()
             {
                 for (size_t i = 0; i < _elementsCount; i++)
                     _alloc.destroy(_storage + i);
-                _alloc.deallocate(_storage, _capacity);
+                _elementsCount = 0;
             }
     };
 }

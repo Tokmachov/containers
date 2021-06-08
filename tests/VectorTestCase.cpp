@@ -383,6 +383,84 @@ void VectorTestCase::initTests()
 		testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash
 	};
 	VectorTestCase::allTests.push_back(t60);
+	TestNameAndFunc t61 =
+	{
+		"testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_VectorOfOneFiveTwoAndThree", 
+		testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_VectorOfOneFiveTwoAndThree
+	};
+	VectorTestCase::allTests.push_back(t61);
+	TestNameAndFunc t62 =
+	{
+		"testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToPastTheEndPosition_VectorOfOneTwoThreeFive", 
+		testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToPastTheEndPosition_VectorOfOneTwoThreeFive
+	};
+	VectorTestCase::allTests.push_back(t62);
+	TestNameAndFunc t63 =
+	{
+		"testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToBeginPosition_VectorOfFiveOneTwoThree", 
+		testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToBeginPosition_VectorOfFiveOneTwoThree
+	};
+	VectorTestCase::allTests.push_back(t63);
+	TestNameAndFunc t64 =
+	{
+		"testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_ReturnIteratorPointsAtElementInserted", 
+		testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_ReturnIteratorPointsAtElementInserted
+	};
+	VectorTestCase::allTests.push_back(t64);
+	TestNameAndFunc t65 =
+	{
+		"testInsertSingleElement_InsertThreeIntoVectorOfOneTwoWithIteratorPoiningAtTwo_VectorOfOneFiveTwoWithSizeThreeAndCapacitySix", 
+		testInsertSingleElement_InsertThreeIntoVectorOfOneTwoWithIteratorPoiningAtTwo_VectorOfOneThreeTwoWithSizeThreeAndCapacitySix
+	};
+	VectorTestCase::allTests.push_back(t65);
+	TestNameAndFunc t66 =
+	{
+		"testInsertFill_InVectorOfOneTwoInsertThreeFivesBeforTwo_VectorOfOneFiveFiveFiveTwo", 
+		testInsertFill_InVectorOfOneTwoInsertThreeFivesBeforTwo_VectorOfOneFiveFiveFiveTwo
+	};
+	VectorTestCase::allTests.push_back(t66);
+	TestNameAndFunc t67 =
+	{
+		"testInsertFill_InVectorOfSixElementInsertFiveElements_VectorCapacityIsEleven", 
+		testInsertFill_InVectorOfSixElementInsertFiveElements_VectorCapacityIsEleven
+	};
+	VectorTestCase::allTests.push_back(t67);
+	TestNameAndFunc t68 =
+	{
+		"testInsertRange_InVectorOfOneTwoInsertVectorOfThreeFourFiveWithIteratorPointingAtTwo_VectorOfOneThreeFourFiveTwoWithSizeFiveAndCapacityOfFive", 
+		testInsertRange_InVectorOfOneTwoInsertVectorOfThreeFourFiveWithIteratorPointingAtTwo_VectorOfOneThreeFourFiveTwoWithSizeFiveAndCapacityOfFive
+	};
+	VectorTestCase::allTests.push_back(t68);
+	TestNameAndFunc t69 =
+	{
+		"testInsertRange_InVectorOfOneTwoInsertVectorOfFiveFiveWithIteratorPointingAtOne_vectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour", 
+		testInsertRange_InVectorOfOneTwoInsertVectorOfFiveFiveWithIteratorPointingAtOne_vectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour
+	};
+	VectorTestCase::allTests.push_back(t69);
+	TestNameAndFunc t70 =
+	{
+		"testInsertRange_InVectorOfOneTwoInsertVectotOfFiveFiveWithIteratorPointingAtPastTheEndPosition_VectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour", 
+		testInsertRange_InVectorOfOneTwoInsertVectotOfFiveFiveWithIteratorPointingAtPastTheEndPosition_VectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour
+	};
+	VectorTestCase::allTests.push_back(t70);
+	TestNameAndFunc t71 =
+	{
+		"testEraseSingle_EraseTwoInVectorOfOneTwoThree_VectorOfOneThreeWithSizeTwo", 
+		testEraseSingle_EraseTwoInVectorOfOneTwoThree_VectorOfOneThreeWithSizeTwo
+	};
+	VectorTestCase::allTests.push_back(t71);
+	TestNameAndFunc t72 =
+	{
+		"testEraseSingle_EraseTheOnlyElementFromVectorOfOneElement_EmptyVector", 
+		testEraseSingle_EraseTheOnlyElementFromVectorOfOneElement_EmptyVector
+	};
+	VectorTestCase::allTests.push_back(t72);
+	TestNameAndFunc t73 =
+	{
+		"testEraseSingle_EraseLastElement_VectorEqualToInitialVectorWithoutLastElement", 
+		testEraseSingle_EraseLastElement_VectorEqualToInitialVectorWithoutLastElement
+	};
+	VectorTestCase::allTests.push_back(t73);
 }
 
 void VectorTestCase::run()
@@ -1452,6 +1530,386 @@ void VectorTestCase::testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash()
     //assertFalse();
 	//assertEqual(,);
 }
+void VectorTestCase::testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_VectorOfOneFiveTwoAndThree()
+{
+	//Arrange
+    ft::vector<int> vectorOfOneTwoThree;
+    vectorOfOneTwoThree.push_back(1);
+	vectorOfOneTwoThree.push_back(2);
+    vectorOfOneTwoThree.push_back(3);
+    ft::vector<int>::iterator iteratorPointingAtTwo = vectorOfOneTwoThree.begin();
+    iteratorPointingAtTwo++;
+    ft::vector<int> vectorOfOneFiveTwoThree;
+    vectorOfOneFiveTwoThree.push_back(1);
+	vectorOfOneFiveTwoThree.push_back(5);
+    vectorOfOneFiveTwoThree.push_back(2);
+    vectorOfOneFiveTwoThree.push_back(3);
+    //Act
+    vectorOfOneTwoThree.insert(iteratorPointingAtTwo, 5);
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            vectorOfOneTwoThree.begin(), 
+            vectorOfOneTwoThree.end(),
+            vectorOfOneFiveTwoThree.begin(),
+            vectorOfOneFiveTwoThree.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToPastTheEndPosition_VectorOfOneTwoThreeFive()
+{
+	//Arrange
+    ft::vector<int> vectorOfOneTwoThree;
+    vectorOfOneTwoThree.push_back(1);
+	vectorOfOneTwoThree.push_back(2);
+    vectorOfOneTwoThree.push_back(3);
+    ft::vector<int>::iterator itEnd = vectorOfOneTwoThree.end();
+    ft::vector<int> vectorOfOneTwoThreeFive;
+    vectorOfOneTwoThreeFive.push_back(1);
+    vectorOfOneTwoThreeFive.push_back(2);
+    vectorOfOneTwoThreeFive.push_back(3);
+	vectorOfOneTwoThreeFive.push_back(5);
+    //Act
+    vectorOfOneTwoThree.insert(itEnd, 5);
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            vectorOfOneTwoThree.begin(), 
+            vectorOfOneTwoThree.end(),
+            vectorOfOneTwoThreeFive.begin(),
+            vectorOfOneTwoThreeFive.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToBeginPosition_VectorOfFiveOneTwoThree()
+{
+	//Arrange
+    ft::vector<int> vectorOfOneTwoThree;
+    vectorOfOneTwoThree.push_back(1);
+	vectorOfOneTwoThree.push_back(2);
+    vectorOfOneTwoThree.push_back(3);
+    ft::vector<int>::iterator itBegin = vectorOfOneTwoThree.begin();
+    ft::vector<int> vectorOfFiveOneTwoThree;
+	vectorOfFiveOneTwoThree.push_back(5);
+    vectorOfFiveOneTwoThree.push_back(1);
+    vectorOfFiveOneTwoThree.push_back(2);
+    vectorOfFiveOneTwoThree.push_back(3);
+    //Act
+    vectorOfOneTwoThree.insert(itBegin, 5);
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            vectorOfOneTwoThree.begin(), 
+            vectorOfOneTwoThree.end(),
+            vectorOfFiveOneTwoThree.begin(),
+            vectorOfFiveOneTwoThree.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_ReturnIteratorPointsAtElementInserted()
+{
+	//Arrange
+    ft::vector<int> vectorOfOneTwoThree;
+    vectorOfOneTwoThree.push_back(1);
+	vectorOfOneTwoThree.push_back(2);
+    vectorOfOneTwoThree.push_back(3);
+    ft::vector<int>::iterator iteratorPointingAtTwo = vectorOfOneTwoThree.begin();
+    iteratorPointingAtTwo++;
+    ft::vector<int> vectorOfOneFiveTwoThree;
+    vectorOfOneFiveTwoThree.push_back(1);
+	vectorOfOneFiveTwoThree.push_back(5);
+    vectorOfOneFiveTwoThree.push_back(2);
+    vectorOfOneFiveTwoThree.push_back(3);
+    //Act
+    ft::vector<int>::iterator returnedIt = vectorOfOneTwoThree.insert(iteratorPointingAtTwo, 5);
+	//Assert
+	assertTrue(*returnedIt == 5);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertSingleElement_InsertThreeIntoVectorOfOneTwoWithIteratorPoiningAtTwo_VectorOfOneThreeTwoWithSizeThreeAndCapacitySix()
+{
+	//Arrange
+    ft::vector<int> vectorOfOneTwo;
+    vectorOfOneTwo.push_back(1);
+	vectorOfOneTwo.push_back(2);
+    
+    ft::vector<int>::iterator iteratorPointingAtTwo = vectorOfOneTwo.begin();
+    iteratorPointingAtTwo++;
+    ft::vector<int> vectorOfOneThreeTwo;
+    vectorOfOneThreeTwo.push_back(1);
+    vectorOfOneThreeTwo.push_back(3);
+    vectorOfOneThreeTwo.push_back(2);
+    //Act
+    vectorOfOneTwo.insert(iteratorPointingAtTwo, 3);
+    //Assert
+	assertTrue(
+        areEqualInSizeAndElements(
+            vectorOfOneTwo.begin(),
+            vectorOfOneTwo.end(),
+            vectorOfOneThreeTwo.begin(),
+            vectorOfOneThreeTwo.end()
+        )
+    );
+	assertTrue(vectorOfOneTwo.size() == 3);
+    assertTrue(vectorOfOneTwo.capacity() == 6);
+}
+void VectorTestCase::testInsertFill_InVectorOfOneTwoInsertThreeFivesBeforTwo_VectorOfOneFiveFiveFiveTwo()
+{
+	//Arrange
+    ft::vector<int> vectorOfoneTwo;
+    vectorOfoneTwo.push_back(1);
+	vectorOfoneTwo.push_back(2);
+    ft::vector<int>::iterator position = vectorOfoneTwo.begin();
+    position++;
+    ft::vector<int> vectorOfOneFiveFiveFiveTwo;
+    vectorOfOneFiveFiveFiveTwo.push_back(1);
+    vectorOfOneFiveFiveFiveTwo.push_back(5);
+    vectorOfOneFiveFiveFiveTwo.push_back(5);
+    vectorOfOneFiveFiveFiveTwo.push_back(5);
+    vectorOfOneFiveFiveFiveTwo.push_back(2);
+    //Act
+    vectorOfoneTwo.insert(position, 3, 5);
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            vectorOfoneTwo.begin(),
+            vectorOfoneTwo.end(),
+            vectorOfOneFiveFiveFiveTwo.begin(),
+            vectorOfOneFiveFiveFiveTwo.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertFill_InVectorOfSixElementInsertFiveElements_VectorCapacityIsEleven()
+{
+	//Arrange
+    ft::vector<int> vectorOfSixElements(6, 99);
+    ft::vector<int>::iterator position = vectorOfSixElements.begin();
+    position++;
+    ft::vector<int> expectedVector;
+    expectedVector.push_back(99);
+    expectedVector.push_back(66);
+    expectedVector.push_back(66);
+    expectedVector.push_back(66);
+    expectedVector.push_back(66);
+    expectedVector.push_back(66);
+    expectedVector.push_back(99);
+    expectedVector.push_back(99);
+    expectedVector.push_back(99);
+    expectedVector.push_back(99);
+    expectedVector.push_back(99);
+    //Act
+    vectorOfSixElements.insert(position, 5, 66);
+	//Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            vectorOfSixElements.begin(),
+            vectorOfSixElements.end(),
+            expectedVector.begin(),
+            expectedVector.end()
+        )
+    );
+	assertTrue(vectorOfSixElements.size() == 11);
+    assertTrue(vectorOfSixElements.capacity() == 11);
+    //assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertRange_InVectorOfOneTwoInsertVectorOfThreeFourFiveWithIteratorPointingAtTwo_VectorOfOneThreeFourFiveTwoWithSizeFiveAndCapacityOfFive()
+{
+	//Arrange
+    ft::vector<int> vOneTwo;
+    vOneTwo.push_back(1);
+	vOneTwo.push_back(2);
+    ft::vector<int> vThreeFourFive;
+    vThreeFourFive.push_back(3);
+	vThreeFourFive.push_back(4);
+    vThreeFourFive.push_back(5);
+    ft::vector<int>::iterator position = vOneTwo.begin();
+    position++;
+    ft::vector<int> vOneThreeFourFiveTwo;
+    vOneThreeFourFiveTwo.push_back(1);
+    vOneThreeFourFiveTwo.push_back(3);
+    vOneThreeFourFiveTwo.push_back(4);
+    vOneThreeFourFiveTwo.push_back(5);
+    vOneThreeFourFiveTwo.push_back(2);
+    //Act
+    vOneTwo.insert(position, vThreeFourFive.begin(), vThreeFourFive.end());
+    
+    //Assert
+	assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            vOneTwo.begin(),
+            vOneTwo.end(),
+            vOneThreeFourFiveTwo.begin(),
+            vOneThreeFourFiveTwo.end()
+        )
+    );
+	assertTrue(vOneTwo.size() == 5);
+    assertTrue(vOneTwo.capacity() == 5);
+    //assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertRange_InVectorOfOneTwoInsertVectorOfFiveFiveWithIteratorPointingAtOne_vectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour()
+{
+	//Arrange
+    ft::vector<int> vOneTwo;
+    vOneTwo.push_back(1);
+	vOneTwo.push_back(2);
+    ft::vector<int> vFiveFive(2, 5);
+    
+    ft::vector<int>::iterator position = vOneTwo.begin();
+    
+    ft::vector<int> vFiveFiveOneTwo;
+    vFiveFiveOneTwo.push_back(5);
+    vFiveFiveOneTwo.push_back(5);
+    vFiveFiveOneTwo.push_back(1);
+    vFiveFiveOneTwo.push_back(2);
+    //Act
+    vOneTwo.insert(position, vFiveFive.begin(), vFiveFive.end());
+    
+    //Assert
+	assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            vOneTwo.begin(),
+            vOneTwo.end(),
+            vFiveFiveOneTwo.begin(),
+            vFiveFiveOneTwo.end()
+        )
+    );
+	assertTrue(vOneTwo.size() == 4);
+    assertTrue(vOneTwo.capacity() == 4);
+    //assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testInsertRange_InVectorOfOneTwoInsertVectotOfFiveFiveWithIteratorPointingAtPastTheEndPosition_VectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour()
+{
+	//Arrange
+    ft::vector<int> vOneTwo;
+    vOneTwo.push_back(1);
+	vOneTwo.push_back(2);
+    ft::vector<int> vFiveFive(2, 5);
+    
+    ft::vector<int>::iterator position = vOneTwo.end();
+    
+    ft::vector<int> vFiveFiveOneTwo;
+    vFiveFiveOneTwo.push_back(1);
+    vFiveFiveOneTwo.push_back(2);
+    vFiveFiveOneTwo.push_back(5);
+    vFiveFiveOneTwo.push_back(5);
+    //Act
+    vOneTwo.insert(position, vFiveFive.begin(), vFiveFive.end());
+    
+    //Assert
+	assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            vOneTwo.begin(),
+            vOneTwo.end(),
+            vFiveFiveOneTwo.begin(),
+            vFiveFiveOneTwo.end()
+        )
+    );
+	assertTrue(vOneTwo.size() == 4);
+    assertTrue(vOneTwo.capacity() == 4);
+    //assertFalse();
+	//assertEqual(,);
+}
+
+void VectorTestCase::testEraseSingle_EraseTwoInVectorOfOneTwoThree_VectorOfOneThreeWithSizeTwo()
+{
+	//Arrange
+    ft::vector<int> vOneTwoThree;
+    vOneTwoThree.push_back(1);
+    vOneTwoThree.push_back(2);
+    vOneTwoThree.push_back(3);
+    ft::vector<int>::iterator it = vOneTwoThree.begin();
+    it++;
+    ft::vector<int> vOneThree;
+    vOneThree.push_back(1);
+    vOneThree.push_back(3);
+    //Act
+    vOneTwoThree.erase(it);
+    //Assert
+    assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            vOneTwoThree.begin(),
+            vOneTwoThree.end(),
+            vOneThree.begin(),
+            vOneThree.end()
+        )
+    );
+    assertTrue(vOneTwoThree.size() == 2);
+}
+void VectorTestCase::testEraseSingle_EraseTheOnlyElementFromVectorOfOneElement_EmptyVector()
+{
+	//Arrange
+    ft::vector<int> v;
+    v.push_back(1);
+    ft::vector<int>::iterator it = v.begin();
+    //Act
+    v.erase(it);
+    //Assert
+    assertTrue(v.empty() == true);
+}
+void VectorTestCase::testEraseSingle_EraseLastElement_VectorEqualToInitialVectorWithoutLastElement()
+{
+	//Arrange
+    ft::vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    ft::vector<int>::iterator it = v.end();
+    it--;
+    ft::vector<int> expected;
+    expected.push_back(1);
+    expected.push_back(2);
+    expected.push_back(3);
+    //Act
+    v.erase(it);
+    //Assert
+    assertTrue(
+        areEqualInSizeAndElements
+        (
+            v.begin(),
+            v.end(),
+            expected.begin(),
+            expected.end()
+        )
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

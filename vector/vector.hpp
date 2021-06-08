@@ -258,6 +258,68 @@ namespace ft
                 _alloc.destroy(_storage + _elementsCount - 1);
                 _elementsCount--;
             }
+            iterator insert (iterator position, const value_type& val)
+            {
+                _elementsCount++;
+                if (_elementsCount > _capacity)
+                {
+                    size_type positionOffset = &(*position) - _storage;
+                    _reallocStorage();
+                    position = iterator(_storage + positionOffset);
+                }
+                size_type memMoveSize = _elementsCount - (&(*position) - _storage) - 1;
+                _memMoveLeft(&(*position), memMoveSize, 1);
+                _alloc.construct(&(*position), val);
+                return position;
+            }
+            void insert (iterator position, size_type n, const value_type& val)
+            {
+                _elementsCount = _elementsCount + n;
+                if (_elementsCount > _capacity)
+                {
+                    size_type positionOffset = &(*position) - _storage;
+                    _reallocStorage(_elementsCount);
+                    position = iterator(_storage + positionOffset);
+                }
+                size_type memMoveSize = _elementsCount - n - (&(*position) - _storage);
+                _memMoveLeft(&(*position), memMoveSize, n);
+                for (size_type i = 0; i < n; i++)
+                    _alloc.construct(&(*position) + i, val);
+            }
+            template <class InputIterator>
+            void insert 
+            (
+                iterator position, 
+                InputIterator first, 
+                typename ft::enable_if<is_suitable_as_input_iterator<InputIterator>::value, InputIterator>::type last
+            )
+            {
+                size_type n = ft::distance(first, last);
+                _elementsCount = _elementsCount + n;
+                if (_elementsCount > _capacity)
+                {
+                    size_type positionOffset = &(*position) - _storage;
+                    _reallocStorage(_elementsCount);
+                    position = iterator(_storage + positionOffset);
+                }
+                size_type memSize = _elementsCount - n - (&(*position) - _storage);
+                _memMoveLeft(&(*position), memSize, n);
+                for (size_type i = 0; i < n; i++, first++)
+                    _alloc.construct(&(*position) + i, *first);
+            }
+            iterator erase (iterator position)
+            {
+                _alloc.destroy(&(*position));                
+                pointer lastElPtr = _storage + _elementsCount - 1;
+                pointer positionPtr = &(*position);
+                
+                while (positionPtr != lastElPtr)
+                {
+                    _alloc.construct(positionPtr, *(positionPtr + 1));
+                    positionPtr++;
+                }
+                _elementsCount--;
+            }
         private:
             pointer _storage;
             allocator_type _alloc;
@@ -295,6 +357,17 @@ namespace ft
                 for (size_t i = 0; i < _elementsCount; i++)
                     _alloc.destroy(_storage + i);
                 _elementsCount = 0;
+            }
+            void _memMoveLeft(pointer ptr, size_type memSize, size_type dst)
+            {
+                pointer newMemStart = ptr + dst;
+                pointer newMemEnd = newMemStart + memSize - 1;
+                while (newMemEnd >= newMemStart)
+                {
+                    _alloc.construct(newMemEnd, *(newMemEnd - dst));
+                    _alloc.destroy(newMemEnd - dst);
+                    newMemEnd--;
+                }
             }
     };
 }

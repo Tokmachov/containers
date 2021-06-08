@@ -102,6 +102,20 @@ class VectorTestCase : public TestCase
 
         static void testPopBack_PopBackOnVectorWithThreeElements_VectorWithTwoElemtsAndBackReturnsSecondElement();
         static void testPopBack_PopBackOnEmptyVector_DoesNothingMustNotCrash();
+        static void testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_VectorOfOneFiveTwoAndThree();
+        static void testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToPastTheEndPosition_VectorOfOneTwoThreeFive();
+        static void testInsertSingleElement_IsertFiveIntoVectorOfOneTwoThreeWithIteratorPointingToBeginPosition_VectorOfFiveOneTwoThree();
+        static void testInsertSingleElement_InsertFiveIntoVectorOfOneTwoAndThreeWithIteratorPointingAtTwo_ReturnIteratorPointsAtElementInserted();
+        static void testInsertSingleElement_InsertThreeIntoVectorOfOneTwoWithIteratorPoiningAtTwo_VectorOfOneThreeTwoWithSizeThreeAndCapacitySix();
+        static void testInsertFill_InVectorOfOneTwoInsertThreeFivesBeforTwo_VectorOfOneFiveFiveFiveTwo();
+        static void testInsertFill_InVectorOfSixElementInsertFiveElements_VectorCapacityIsEleven();
+        static void testInsertRange_InVectorOfOneTwoInsertVectorOfThreeFourFiveWithIteratorPointingAtTwo_VectorOfOneThreeFourFiveTwoWithSizeFiveAndCapacityOfFive();
+        static void testInsertRange_InVectorOfOneTwoInsertVectorOfFiveFiveWithIteratorPointingAtOne_vectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour();
+        static void testInsertRange_InVectorOfOneTwoInsertVectotOfFiveFiveWithIteratorPointingAtPastTheEndPosition_VectorOfFiveFiveOneTwoWithSizeFourAndCapacityFour();
+        
+        static void testEraseSingle_EraseTwoInVectorOfOneTwoThree_VectorOfOneThreeWithSizeTwo();
+        static void testEraseSingle_EraseTheOnlyElementFromVectorOfOneElement_EmptyVector();
+        static void testEraseSingle_EraseLastElement_VectorEqualToInitialVectorWithoutLastElement();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

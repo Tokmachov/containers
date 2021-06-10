@@ -116,6 +116,22 @@ class VectorTestCase : public TestCase
         static void testEraseSingle_EraseTwoInVectorOfOneTwoThree_VectorOfOneThreeWithSizeTwo();
         static void testEraseSingle_EraseTheOnlyElementFromVectorOfOneElement_EmptyVector();
         static void testEraseSingle_EraseLastElement_VectorEqualToInitialVectorWithoutLastElement();
+        static void testEraseSingle_EraseLastElement_ReturnedIteratorPoiningToPastTheEndElementOfContainer();
+        static void testEraseRange_EraseTwoAndThreeFromVectorOfOneTwoThreeFour_VectorOfOneFour();
+        static void testEraseRange_EraseAllElements_EmptyVectorReturnedIteratorPointsToPastTheEnd();
+
+        static void testSwap_SwapNonEmptyVectors_ThisEqualsToCopyOfXMadeBeforSwapAndXIsEqualToCopyOfThisMadeBeforeSwap();
+
+        static void testClear_CallClearOnVectorContainingSeveralElements_VectorWhichIsEmpty();
+        static void testGlobalEqual_CompareTwoVectorsEqualInSizeAndElements_true();
+        static void testGlobalEqualOp_CompareTwoEmptyVectors_true();
+        static void testGlobalOp_ComparevectorsOfDifferentSize_false();
+        
+        static void testGlobalStrictlyLessOp_CompereOneTwoAnsOneTwoThree_true();
+        static void testGlobalStrictLessOp_CompareOneTwoAndOneTwo_false();
+        static void testGlobalStrictlyLessOp_CompareOneTwoThreeAndOneTwo_false();
+    
 };
+
 
 #endif /* ************************************************ TemplateTestCase_H */

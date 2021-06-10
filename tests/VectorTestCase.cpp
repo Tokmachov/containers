@@ -461,6 +461,72 @@ void VectorTestCase::initTests()
 		testEraseSingle_EraseLastElement_VectorEqualToInitialVectorWithoutLastElement
 	};
 	VectorTestCase::allTests.push_back(t73);
+	TestNameAndFunc t74 =
+	{
+		"testEraseSingle_EraseLastElement_ReturnedIteratorPoiningToPastTheEndElementOfContainer", 
+		testEraseSingle_EraseLastElement_ReturnedIteratorPoiningToPastTheEndElementOfContainer
+	};
+	VectorTestCase::allTests.push_back(t74);
+	TestNameAndFunc t75 =
+	{
+		"testEraseRange_EraseTwoAndThreeFromVectorOfOneTwoThreeFour_VectorOfOneFour", 
+		testEraseRange_EraseTwoAndThreeFromVectorOfOneTwoThreeFour_VectorOfOneFour
+	};
+	VectorTestCase::allTests.push_back(t75);
+	TestNameAndFunc t76 =
+	{
+		"testEraseRange_EraseAllElements_EmptyVectorReturnedIteratorPointsToPastTheEnd", 
+		testEraseRange_EraseAllElements_EmptyVectorReturnedIteratorPointsToPastTheEnd
+	};
+	VectorTestCase::allTests.push_back(t76);
+	TestNameAndFunc t77 =
+	{
+		"testSwap_SwapNonEmptyVectors_ThisEqualsToCopyOfXMadeBeforSwapAndXIsEqualToCopyOfThisMadeBeforeSwap", 
+		testSwap_SwapNonEmptyVectors_ThisEqualsToCopyOfXMadeBeforSwapAndXIsEqualToCopyOfThisMadeBeforeSwap
+	};
+	VectorTestCase::allTests.push_back(t77);
+	TestNameAndFunc t78 =
+	{
+		"testClear_CallClearOnVectorContainingSeveralElements_VectorWhichIsEmpty", 
+		testClear_CallClearOnVectorContainingSeveralElements_VectorWhichIsEmpty
+	};
+	VectorTestCase::allTests.push_back(t78);
+	TestNameAndFunc t79 =
+	{
+		"testGlobalEqual_CompareTwoVectorsEqualInSizeAndElements_true", 
+		testGlobalEqual_CompareTwoVectorsEqualInSizeAndElements_true
+	};
+	VectorTestCase::allTests.push_back(t79);
+	TestNameAndFunc t80 =
+	{
+		"testGlobalEqualOp_CompareTwoEmptyVectors_true", 
+		testGlobalEqualOp_CompareTwoEmptyVectors_true
+	};
+	VectorTestCase::allTests.push_back(t80);
+	TestNameAndFunc t81 =
+	{
+		"testGlobalOp_ComparevectorsOfDifferentSize_false", 
+		testGlobalOp_ComparevectorsOfDifferentSize_false
+	};
+	VectorTestCase::allTests.push_back(t81);
+	TestNameAndFunc t82 =
+	{
+		"testGlobalStrictlyLessOp_CompereOneTwoAnsOneTwoThree_true", 
+		testGlobalStrictlyLessOp_CompereOneTwoAnsOneTwoThree_true
+	};
+	VectorTestCase::allTests.push_back(t82);
+	TestNameAndFunc t83 =
+	{
+		"testGlobalStrictLessOp_CompareOneTwoAndOneTwo_false", 
+		testGlobalStrictLessOp_CompareOneTwoAndOneTwo_false
+	};
+	VectorTestCase::allTests.push_back(t83);
+	TestNameAndFunc t84 =
+	{
+		"testGlobalStrictlyLessOp_CompareOneTwoThreeAndOneTwo_false", 
+		testGlobalStrictlyLessOp_CompareOneTwoThreeAndOneTwo_false
+	};
+	VectorTestCase::allTests.push_back(t84);
 }
 
 void VectorTestCase::run()
@@ -1897,23 +1963,206 @@ void VectorTestCase::testEraseSingle_EraseLastElement_VectorEqualToInitialVector
         )
     );
 }
+void VectorTestCase::testEraseSingle_EraseLastElement_ReturnedIteratorPoiningToPastTheEndElementOfContainer()
+{
+	//Arrange
+    ft::vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    ft::vector<int>::iterator position = v.end();
+    position--;
+    //Act
+    ft::vector<int>::iterator actualReturnedIterator = v.erase(position);
+    ft::vector<int>::iterator expectedReturnIterator = v.end();
+    //Assert
+    assertTrue(expectedReturnIterator == actualReturnedIterator);
+}
+void VectorTestCase::testEraseRange_EraseTwoAndThreeFromVectorOfOneTwoThreeFour_VectorOfOneFour()
+{
+	//Arrange
+    ft::vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    v.push_back(4);
+    ft::vector<int>::iterator first = v.begin();
+    ft::vector<int>::iterator last = v.begin();
+    first++;
+    last++;
+    last++;
+    last++;
+    ft::vector<int> expectedVector;
+    expectedVector.push_back(1);
+    expectedVector.push_back(4);
+    //Act
+    ft::vector<int>::iterator actualReturnedIterator = v.erase(first, last);
+    //Assert
+    assertTrue(
+        areEqualInSizeAndElements
+        (
+            v.begin(),
+            v.end(),
+            expectedVector.begin(),
+            expectedVector.end()
+        )
+    );
+}
+void VectorTestCase::testEraseRange_EraseAllElements_EmptyVectorReturnedIteratorPointsToPastTheEnd()
+{
+	//Arrange
+    ft::vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    v.push_back(4);
+    ft::vector<int>::iterator first = v.begin();
+    ft::vector<int>::iterator last = v.end();
+    ft::vector<int> expectedVector;
+    //Act
+    ft::vector<int>::iterator actualReturnedIterator = v.erase(first, last);
+    ft::vector<int>::iterator expectedRerurnedIterator = v.end();
+    //Assert
+    assertTrue(
+        areEqualInSizeAndElements
+        (
+            v.begin(),
+            v.end(),
+            expectedVector.begin(),
+            expectedVector.end()
+        )
+    );
+    assertTrue(expectedRerurnedIterator == actualReturnedIterator);
+}
+void VectorTestCase::testSwap_SwapNonEmptyVectors_ThisEqualsToCopyOfXMadeBeforSwapAndXIsEqualToCopyOfThisMadeBeforeSwap()
+{
+	//Arrange
+    ft::vector<std::string> v(3, "One");
+    ft::vector<std::string> x(5, "two");
 
+    ft::vector<std::string> copyOfV = v;
+    ft::vector<std::string> copyOfX = x;
+	//Act
+    v.swap(x);
+	//Assert
+	assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            v.begin(),
+            v.end(),
+            copyOfX.begin(),
+            copyOfX.end()
+        )
+    );
+	assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            x.begin(),
+            x.end(),
+            copyOfV.begin(),
+            copyOfV.end()
+        )
+    );
+    //assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testClear_CallClearOnVectorContainingSeveralElements_VectorWhichIsEmpty()
+{
+	//Arrange
+    ft::vector<std::string> v(3, "One");
+	//Act
+    v.clear();
+	//Assert
+	assertTrue(v.empty());
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testGlobalEqual_CompareTwoVectorsEqualInSizeAndElements_true()
+{
+	//Arrange
+    ft::vector<std::string> v1(3, "One");
+	ft::vector<std::string> v2(3, "One");
+    //Act
+	//Assert
+	assertTrue(v1 == v2);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testGlobalEqualOp_CompareTwoEmptyVectors_true()
+{
+	//Arrange
+    ft::vector<std::string> v1;
+	ft::vector<std::string> v2;
+    //Act
+	//Assert
+	assertTrue(v1 == v2);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testGlobalOp_ComparevectorsOfDifferentSize_false()
+{
+	//Arrange
+    ft::vector<std::string> v1(1, "Hello");
+	ft::vector<std::string> v2(2, "Hello");
+    //Act
+	//Assert
+	assertFalse(v1 == v2);
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testGlobalStrictlyLessOp_CompereOneTwoAnsOneTwoThree_true()
+{
+	//Arrange
+    ft::vector<int> v1;
+    ft::vector<int> v2;
+    v1.push_back(1);
+	v1.push_back(2);
+    v2.push_back(1);
+    v2.push_back(2);
+    v2.push_back(3);
+    //Act
+    assertTrue(v1 < v2);
+	//Assert
+	//assertTrue();
+	//assertFalse();
+	//assertEqual(,);
+}
+void VectorTestCase::testGlobalStrictLessOp_CompareOneTwoAndOneTwo_false()
+{
+	//Arrange
+    ft::vector<int> v1;
+    ft::vector<int> v2;
+    v1.push_back(1);
+	v1.push_back(2);
+    v2.push_back(1);
+    v2.push_back(2);
+    //Act
+    assertFalse(v1 < v2);
+	//Assert
+	//assertTrue();
+	//assertFalse();
+	//assertEqual(,);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void VectorTestCase::testGlobalStrictlyLessOp_CompareOneTwoThreeAndOneTwo_false()
+{
+	//Arrange
+    ft::vector<int> v1;
+    ft::vector<int> v2;
+    v1.push_back(1);
+	v1.push_back(2);
+    v1.push_back(3);
+    v2.push_back(1);
+    v2.push_back(2);
+    //Act
+    assertFalse(v1 < v2);
+	//Assert
+	//assertTrue();
+	//assertFalse();
+	//assertEqual(,);
+}
 
 
 

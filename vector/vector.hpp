@@ -1,12 +1,11 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP 
 
-# include <stdexcept>
 # include "VectorIterator.hpp"
 # include "VectorIteratorReverse.hpp"
 # include "../utils.hpp"
 # include <memory>
-# include <unistd.h>
+
 namespace ft
 {
     template < class T, class Alloc = std::allocator<T> > 
@@ -268,7 +267,7 @@ namespace ft
                     position = iterator(_storage + positionOffset);
                 }
                 size_type memMoveSize = _elementsCount - (&(*position) - _storage) - 1;
-                _memMoveLeft(&(*position), memMoveSize, 1);
+                _memMoveRight(&(*position), memMoveSize, 1);
                 _alloc.construct(&(*position), val);
                 return position;
             }
@@ -282,7 +281,7 @@ namespace ft
                     position = iterator(_storage + positionOffset);
                 }
                 size_type memMoveSize = _elementsCount - n - (&(*position) - _storage);
-                _memMoveLeft(&(*position), memMoveSize, n);
+                _memMoveRight(&(*position), memMoveSize, n);
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(&(*position) + i, val);
             }
@@ -303,23 +302,45 @@ namespace ft
                     position = iterator(_storage + positionOffset);
                 }
                 size_type memSize = _elementsCount - n - (&(*position) - _storage);
-                _memMoveLeft(&(*position), memSize, n);
+                _memMoveRight(&(*position), memSize, n);
                 for (size_type i = 0; i < n; i++, first++)
                     _alloc.construct(&(*position) + i, *first);
             }
             iterator erase (iterator position)
             {
-                _alloc.destroy(&(*position));                
-                pointer lastElPtr = _storage + _elementsCount - 1;
-                pointer positionPtr = &(*position);
-                
-                while (positionPtr != lastElPtr)
-                {
-                    _alloc.construct(positionPtr, *(positionPtr + 1));
-                    positionPtr++;
-                }
+                _alloc.destroy(&(*position));
+                size_type numberOfElementsToMoveLeft = _storage + _elementsCount - &(*position) - 1;
+                _memMoveLeft(&(*position), &(*position) + 1, numberOfElementsToMoveLeft);
                 _elementsCount--;
+                return position;
             }
+            iterator erase (iterator first, iterator last)
+            {
+                size_type elementsToMoveLeftCount = _storage + _elementsCount - &(*last);
+                pointer dst = &(*first);
+                pointer src = &(*last);
+                _elementsCount -= last - first;
+                ft::vector<int>::iterator returnIterator = first;
+                for (; first < last; first++)
+                    _alloc.destroy(&(*first));
+                _memMoveLeft(dst, src, elementsToMoveLeftCount);
+                return returnIterator;
+            }
+            void swap (vector& x)
+            {
+                std::swap(_storage, x._storage);
+                std::swap(_elementsCount, x._elementsCount);
+                std::swap(_capacity, x._capacity);
+            }
+            void clear()
+            {
+               _destroyCurrentElements();
+            }
+            allocator_type get_allocator() const
+            {
+                return _alloc;
+            }
+
         private:
             pointer _storage;
             allocator_type _alloc;
@@ -358,7 +379,7 @@ namespace ft
                     _alloc.destroy(_storage + i);
                 _elementsCount = 0;
             }
-            void _memMoveLeft(pointer ptr, size_type memSize, size_type dst)
+            void _memMoveRight(pointer ptr, size_type memSize, size_type dst)
             {
                 pointer newMemStart = ptr + dst;
                 pointer newMemEnd = newMemStart + memSize - 1;
@@ -369,7 +390,55 @@ namespace ft
                     newMemEnd--;
                 }
             }
+            void _memMoveLeft(pointer dest, pointer src, size_type srcSize)
+            {
+                while (srcSize--)
+                    _alloc.construct(dest++, *(src++));
+            }
     };
+    template <class T, class Alloc>
+    bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        if (lhs.size() != rhs.size())
+            return false;        
+        for (size_t i = 0; i < lhs.size(); i++)
+        {
+            if (lhs[i] != rhs[i])
+                return false;
+        }
+        return true;
+    }
+    template <class T, class Alloc>
+    bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return !(lhs == rhs);
+    }
+    template <class T, class Alloc>
+    bool operator< (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        size_t minLen = lhs.size() < rhs.size() ? lhs.size() : rhs.size();
+        for (size_t i = 0; i < minLen; i++)
+        {
+            if (lhs[i] != rhs[i])
+                return lhs[i] < rhs[i];
+        }
+        return lhs.size() < rhs.size();
+    }
+    template <class T, class Alloc>
+    bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return (lhs < rhs) || (lhs == rhs);
+    }
+    template <class T, class Alloc>
+    bool operator> (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return !(lhs <= rhs);
+    }
+    template <class T, class Alloc>
+    bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return !(lhs < rhs);
+    }
 }
 
 #endif

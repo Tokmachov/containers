@@ -6,7 +6,9 @@
 # include <string>
 # include "TestCase.hpp"
 # include "../map/map.hpp"
-
+# include "stdlib.h"
+# include <map>
+# include "../utils.hpp"
 class MapTestCase : public TestCase
 {
 	public:
@@ -28,6 +30,18 @@ class MapTestCase : public TestCase
         //Test functions
         //Please write declaration of test functions here
         static void testMap_CompileMap_MustNotCrash();
+        static void testInsert_InsertTenInsts_MapIsEqualToSortedVectorWithTheSameInst();
+        static void testEndIterator_TraversAllElementsFromBeginToEnd_AllElementsReceivedFromItetatorAreEqualToElementsReceivedFromEqualSTDMap();
+        static void testIsert_InsertElementAlreadyPresentInContainer_SizeRemainsTheSameReturnIsPairOfPairWithFirstEqualToInsertElementAndSecondEqualsToFalse();
+        static void testInsertRange_InsertTwoThreeFourIntoMapOfOneFive_MapOfOneTwoThreeFourFive();
+        static void testConstructorRange_CreateMapFromRangeTakenFromHoleLengthOfVector_MapIsEqualToVector();
+        static void testConstructCopy_CreateMapFromAnotherMapWithCopyConstuctor_MapEquaToSrcMap();
+        static void testAssignment_AssignSrcMapToDstMap_DstMapEqualSrcMap();
+        static void testInsertRange_InsertHoleVectorIntoMap_MapHasInitialElementsPlusElementsOfVector();
+        static void testMapIterator_IterateBackwardsFromLastToFirstElement_ElementsReveivedFromIterationFormReversedSequenceOfMapELements();
+        static void testMapIteratorPostfixMinus_InMapOfOneTwoTreeCallMinusMinusOnIteratorPointingAtTwo_IteratorPointingAtOne();
+        static void testMapIteratorPreficPlusPlus_InMapWithKeysOneTwoThreeIncrementBeginIterator_ReturnValueIsIteratorPointingAtKeyTwoAndResultIteratorIsPointingAtKeyTwo();
+        static void testMapIteratorPostfixPlusPlus_InMapWithKeysOneTwoThreeIncrementBeginIterator_ReturnValueIsBeginIteratorAndResultIteratorIsPointingAtKeyTwo();
 };
 
 #endif /* ************************************************ MapTestCase_H */

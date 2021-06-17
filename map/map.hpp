@@ -293,7 +293,22 @@ namespace ft
             }
             size_type count (const key_type& k) const
             {
-                
+                if (_searchTree(k) != _tnull)
+                    return 1;
+                return 0;
+            }
+            iterator lower_bound (const key_type& k)
+            {
+                for (iterator it = begin(); it < end(); it++)
+                {
+                    it (key_comp(it->second, k) == false)
+                        return it;
+                }
+                return it;
+            }
+            const_iterator lower_bound (const key_type& k) const
+            {
+
             }
             const_node_ptr getRoot() const
             {
@@ -311,11 +326,11 @@ namespace ft
             key_compare _compLessKey;
             size_type _size;
             
-            node_ptr _searchTree(const key_type &k)
+            node_ptr _searchTree(const key_type &k) const
             {
                 return _searchTreeHelper(_root, k);
             }
-            node_ptr _searchTreeHelper(node_ptr node, const key_type &k)
+            node_ptr _searchTreeHelper(node_ptr node, const key_type &k) const
             {
                 if (node == _tnull || _areEqual(node->value.first, k))
                 {
@@ -328,7 +343,7 @@ namespace ft
                 return _searchTreeHelper(node->right, k);
             }
             
-            bool _areEqual(const key_type &k1, const key_type &k2)
+            bool _areEqual(const key_type &k1, const key_type &k2) const
             {
                 return (!_compLessKey(k1, k2) && !_compLessKey(k2, k1));
             }

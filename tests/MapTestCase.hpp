@@ -57,6 +57,8 @@ class MapTestCase : public TestCase
         static void testMapFind_FindElementPresentInMap_RetunIsIteratorToFoundObject();
         static void testMapFind_FindElementAbsentInMap_ReturnIsEndIterator();
         static void testMapCount_CallCountWithKeyPresentInMap_OneIsReturned();
+        static void testMapCount_CallCountWithKeyAbsentInMap_ZeroIsReturned();
+        static void testMapCount_CallCountOnEmptyMap_ZeroIsReturned();
 };
 
 #endif /* ************************************************ MapTestCase_H */

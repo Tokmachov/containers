@@ -181,6 +181,24 @@ void MapTestCase::initTests()
 		testMapFind_FindElementAbsentInMap_ReturnIsEndIterator
 	};
 	MapTestCase::allTests.push_back(t27);
+	TestNameAndFunc t28 =
+	{
+		"testMapCount_CallCountWithKeyPresentInMap_OneIsReturned", 
+		testMapCount_CallCountWithKeyPresentInMap_OneIsReturned
+	};
+	MapTestCase::allTests.push_back(t28);
+	TestNameAndFunc t29 =
+	{
+		"testMapCount_CallCountWithKeyAbsentInMap_ZeroIsReturned", 
+		testMapCount_CallCountWithKeyAbsentInMap_ZeroIsReturned
+	};
+	MapTestCase::allTests.push_back(t29);
+	TestNameAndFunc t30 =
+	{
+		"testMapCount_CallCountOnEmptyMap_ZeroIsReturned", 
+		testMapCount_CallCountOnEmptyMap_ZeroIsReturned
+	};
+	MapTestCase::allTests.push_back(t30);
 }
 
 void MapTestCase::run()
@@ -921,6 +939,52 @@ void MapTestCase::testMapFind_FindElementAbsentInMap_ReturnIsEndIterator()
 	//assertFalse();
 	//assertEqual(,);
 }
+void MapTestCase::testMapCount_CallCountWithKeyPresentInMap_OneIsReturned()
+{
+	//Arrange
+    ft::map<std::string, int> ftMap1;
+    ftMap1.insert(std::pair<std::string, int>("Yellow", 10));
+    ftMap1.insert(std::pair<std::string, int>("Green", 10));
+    ftMap1.insert(std::pair<std::string, int>("White", 10));
+	//Act
+    size_t result = ftMap1.count("White");
+	//Assert
+	assertTrue(result == 1);
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapCount_CallCountWithKeyAbsentInMap_ZeroIsReturned()
+{
+	//Arrange
+    ft::map<std::string, int> ftMap1;
+    ftMap1.insert(std::pair<std::string, int>("Yellow", 10));
+    ftMap1.insert(std::pair<std::string, int>("Green", 10));
+    ftMap1.insert(std::pair<std::string, int>("White", 10));
+	//Act
+    size_t result = ftMap1.count("Black");
+	//Assert
+	assertTrue(result == 0);
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapCount_CallCountOnEmptyMap_ZeroIsReturned()
+{
+	//Arrange
+    ft::map<std::string, int> ftMap1;
+    ftMap1.insert(std::pair<std::string, int>("Yellow", 10));
+    ftMap1.insert(std::pair<std::string, int>("Green", 10));
+    ftMap1.insert(std::pair<std::string, int>("White", 10));
+	ftMap1.clear();
+    //Act
+    size_t result = ftMap1.count("Black");
+	//Assert
+	assertTrue(result == 0);
+	//assertFalse();
+	//assertEqual(,);
+}
+
+
+
 
 
 

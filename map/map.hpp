@@ -299,16 +299,23 @@ namespace ft
             }
             iterator lower_bound (const key_type& k)
             {
-                for (iterator it = begin(); it < end(); it++)
+                iterator it = begin();
+                for (; it != end(); it++)
                 {
-                    it (key_comp(it->second, k) == false)
+                    if ((_compLessKey(it->first, k)) == false)
                         return it;
                 }
                 return it;
             }
             const_iterator lower_bound (const key_type& k) const
             {
-
+                const_iterator it = begin();
+                for (; it != end(); it++)
+                {
+                    if (_compLessKey(it->first, k) == false)
+                        return it;
+                }
+                return it;
             }
             const_node_ptr getRoot() const
             {

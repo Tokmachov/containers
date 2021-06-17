@@ -199,6 +199,12 @@ void MapTestCase::initTests()
 		testMapCount_CallCountOnEmptyMap_ZeroIsReturned
 	};
 	MapTestCase::allTests.push_back(t30);
+	TestNameAndFunc t31 =
+	{
+		"testMapLowerBound_InMapWithKeysOneTwoThreeCallLowerBoundForKeyTwo_IteratorPointingAtThree", 
+		testMapLowerBound_InMapWithKeysOneTwoThreeCallLowerBoundForKeyTwo_IteratorPointingAtThree
+	};
+	MapTestCase::allTests.push_back(t31);
 }
 
 void MapTestCase::run()
@@ -982,6 +988,26 @@ void MapTestCase::testMapCount_CallCountOnEmptyMap_ZeroIsReturned()
 	//assertFalse();
 	//assertEqual(,);
 }
+void MapTestCase::testMapLowerBound_InMapWithKeysOneTwoThreeCallLowerBoundForKeyTwo_IteratorPointingAtThree()
+{
+    //Arrange
+    ft::map<int, int> ftMap1;
+    ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+	
+    ft::map<int, int>::iterator expectedIterator = ftMap1.end();
+    --expectedIterator;
+    --expectedIterator;
+    //Act
+    ft::map<int, int>::iterator returnedIterator = ftMap1.lower_bound(2);
+	
+    //Assert
+	assertTrue(returnedIterator == expectedIterator);
+	//assertFalse();
+	//assertEqual(,);
+}
+
 
 
 

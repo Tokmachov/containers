@@ -205,6 +205,18 @@ void MapTestCase::initTests()
 		testMapLowerBound_InMapWithKeysOneTwoThreeCallLowerBoundForKeyTwo_IteratorPointingAtThree
 	};
 	MapTestCase::allTests.push_back(t31);
+	TestNameAndFunc t32 =
+	{
+		"testMapUpperBound_InMapWithKeysabcdeFindUpperBoundFord_IteratorPointingToe", 
+		testMapUpperBound_InMapWithKeysabcdeFindUpperBoundFord_IteratorPointingToe
+	};
+	MapTestCase::allTests.push_back(t32);
+	TestNameAndFunc t33 =
+	{
+		"testEqualRange_InMapWithKeysabcCallEqualRangeForb_FirstIteratorPointingTobAndSecondIteratorPointingToc", 
+		testEqualRange_InMapWithKeysabcCallEqualRangeForb_FirstIteratorPointingTobAndSecondIteratorPointingToc
+	};
+	MapTestCase::allTests.push_back(t33);
 }
 
 void MapTestCase::run()
@@ -223,6 +235,8 @@ void MapTestCase::run()
 
 void MapTestCase::testMap_CompileMap_MustNotCrash()
 {
+    std::map<int, int> m1;
+    m1.lower_bound(10);
     ft::map<int, std::string> m;
     m.insert(std::pair<int, std::string>(5, "Hello"));
     m.insert(std::pair<int, std::string>(10, "no no"));
@@ -1007,6 +1021,41 @@ void MapTestCase::testMapLowerBound_InMapWithKeysOneTwoThreeCallLowerBoundForKey
 	//assertFalse();
 	//assertEqual(,);
 }
+void MapTestCase::testMapUpperBound_InMapWithKeysabcdeFindUpperBoundFord_IteratorPointingToe()
+{
+	//Arrange
+    ft::map<char,int> mymap;
+    ft::map<char,int>::iterator itup;
+    
+    mymap['a']=20;
+    mymap['b']=40;
+    mymap['c']=60;
+    mymap['d']=80;
+    mymap['e']=100;
+
+    //act
+    itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+    //assert
+    assertTrue(itup->first == 'e');
+}
+void MapTestCase::testEqualRange_InMapWithKeysabcCallEqualRangeForb_FirstIteratorPointingTobAndSecondIteratorPointingToc()
+{
+	//Arrange
+    ft::map<char,int> mymap;
+    ft::map<char,int>::iterator itup;
+    mymap['a']=20;
+    mymap['b']=40;
+    mymap['c']=60;
+    std::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> range;
+
+    //act
+    range = mymap.equal_range('b');
+    //assert
+    assertTrue(range.first->first == 'b');
+    assertTrue(range.second->first == 'c');
+}
+
+
 
 
 

@@ -60,6 +60,8 @@ class MapTestCase : public TestCase
         static void testMapCount_CallCountWithKeyAbsentInMap_ZeroIsReturned();
         static void testMapCount_CallCountOnEmptyMap_ZeroIsReturned();
         static void testMapLowerBound_InMapWithKeysOneTwoThreeCallLowerBoundForKeyTwo_IteratorPointingAtThree();
+        static void testMapUpperBound_InMapWithKeysabcdeFindUpperBoundFord_IteratorPointingToe();
+        static void testEqualRange_InMapWithKeysabcCallEqualRangeForb_FirstIteratorPointingTobAndSecondIteratorPointingToc();
 };
 
 #endif /* ************************************************ MapTestCase_H */

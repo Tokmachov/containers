@@ -70,7 +70,8 @@ namespace ft
                 const key_compare& compLessKey = key_compare(), 
                 const allocator_type& alloc = allocator_type()
             ) 
-                : _node_alloc(node_allocator()), 
+                : _node_alloc(node_allocator()),
+                _alloc(alloc),
                 _compLessPair(compLessKey), 
                 _compLessKey(compLessKey),
                 _size(0)
@@ -90,7 +91,8 @@ namespace ft
                 const key_compare& compLessKey = key_compare(),
                 const allocator_type& alloc = allocator_type()
             )
-                : _node_alloc(node_allocator()), 
+                : _node_alloc(node_allocator()),
+                _alloc(alloc),
                 _compLessPair(compLessKey),
                 _compLessKey(compLessKey),
                 _size(0)
@@ -104,7 +106,8 @@ namespace ft
                     insert(*first);
             }
             map (const map& x)
-                : _node_alloc(x._node_alloc), 
+                : _node_alloc(x._node_alloc),
+                _alloc(x._alloc),
                 _compLessPair(x._compLessPair),
                 _compLessKey(x._compLessKey)
             {
@@ -309,13 +312,39 @@ namespace ft
             }
             const_iterator lower_bound (const key_type& k) const
             {
-                const_iterator it = begin();
+                return lower_bound(k);
+            }
+            iterator upper_bound (const key_type& k)
+            {
+                iterator it = begin();
                 for (; it != end(); it++)
                 {
-                    if (_compLessKey(it->first, k) == false)
+                    if ((_compLessKey(k, it->first)) == true)
                         return it;
                 }
                 return it;
+            }
+            const_iterator upper_bound (const key_type& k) const
+            {
+                return upper_bound;
+            }
+            std::pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+            {
+                return equal_range(k);
+            }
+            std::pair<iterator,iterator> equal_range (const key_type& k)
+            {
+                std::pair<iterator, iterator> range
+                (
+                    lower_bound(k), 
+                    upper_bound(k)
+                );
+                return range;
+            }
+            //Allocator:
+            allocator_type get_allocator() const
+            {
+                return _alloc;
             }
             const_node_ptr getRoot() const
             {
@@ -327,6 +356,7 @@ namespace ft
             }
         private:
             node_allocator _node_alloc;
+            allocator_type _alloc;
             node_ptr _root;
             node_ptr _tnull;
             value_compare _compLessPair;

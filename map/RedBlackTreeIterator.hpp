@@ -85,6 +85,8 @@ namespace ft
             Node *_tnull;
             Node *_nextNode()
             {
+                if (_node == _tnull)
+                    return _tnull->right;
                 int prevPos = STOP;
                 Node *prev = 0;
                 while (true)
@@ -134,6 +136,8 @@ namespace ft
             
             Node *_prevNode()
             {
+                if (_node == _tnull)
+                    return _tnull->left;
                 int prevPos = STOP;
                 Node *prev = 0;
                 while (true)

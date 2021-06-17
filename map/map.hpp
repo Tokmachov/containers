@@ -2,6 +2,7 @@
 # define MAP_HPP
 
 # include "RedBlackTreeIterator.hpp"
+# include "../utils.hpp"
 
 namespace ft
 {
@@ -53,12 +54,14 @@ namespace ft
                 Node *right;
                 NodeColor color; 
             };
-            typedef Node<value_type> tree_node;
-            typedef typename Alloc:: template rebind< tree_node >::other node_allocator;
+            typedef Node<value_type> node;
+            typedef typename Alloc:: template rebind< node >::other node_allocator;
             typedef typename node_allocator::pointer node_ptr;
             typedef typename node_allocator::pointer const_node_ptr;
-            typedef RedBlackTreeIterator<tree_node, value_type> iterator;
-            typedef RedBlackTreeIterator<tree_node, const value_type> const_iterator;
+            typedef RedBlackTreeIterator<node, value_type> iterator;
+            typedef RedBlackTreeIterator<node, const value_type> const_iterator;
+            typedef ReverseIterator<iterator> reverse_iterator;
+            typedef ReverseIterator<iterator> const_reverse_iterator;
             typedef typename std::iterator_traits<iterator>::difference_type size_type;
             
             //constructors
@@ -67,13 +70,17 @@ namespace ft
                 const key_compare& compLessKey = key_compare(), 
                 const allocator_type& alloc = allocator_type()
             ) 
-                : _node_alloc(node_allocator()), _compLessPair(compLessKey), _size(0)
+                : _node_alloc(node_allocator()), 
+                _compLessPair(compLessKey), 
+                _compLessKey(compLessKey),
+                _size(0)
             { 
                 _tnull = _node_alloc.allocate(1);
                 _tnull->color = black;
                 _tnull->left = 0;
                 _tnull->right = 0;
                 _root = _tnull;
+                _updateMinMaxElementPassNode(_root, _tnull);
             }
             template <class InputIterator>
             map
@@ -83,7 +90,10 @@ namespace ft
                 const key_compare& compLessKey = key_compare(),
                 const allocator_type& alloc = allocator_type()
             )
-                : _node_alloc(node_allocator()), _compLessPair(compLessKey), _size(0)
+                : _node_alloc(node_allocator()), 
+                _compLessPair(compLessKey),
+                _compLessKey(compLessKey),
+                _size(0)
             {
                 _tnull = _node_alloc.allocate(1);
                 _tnull->color = black;
@@ -95,22 +105,28 @@ namespace ft
             }
             map (const map& x)
                 : _node_alloc(x._node_alloc), 
-                _compLessPair(x._compLessPair)
+                _compLessPair(x._compLessPair),
+                _compLessKey(x._compLessKey)
             {
                 _tnull = _node_alloc.allocate(1);
-                _node_alloc.construct(_tnull, *(x._tnull));
+                _tnull->color = black;
+                _tnull->left = 0;
+                _tnull->right = 0;
                 _root = _tnull;
                 for (const_iterator it = x.begin();it != x.end(); ++it)
                     insert(*it);
             }
             ~map() { _deallocateAndDestroyTree(); };
-            //Assigment operator
             map& operator= (const map& x) 
             { 
                 _deallocateAndDestroyTree();
                 _tnull = _node_alloc.allocate(1);
-                _node_alloc.construct(_tnull, *(x._tnull));
+                _tnull->color = black;
+                _tnull->left = 0;
+                _tnull->right = 0;
                 _root = _tnull;
+                _compLessPair = x._compLessPair;
+                _compLessKey = x._compLessKey;
                 for (const_iterator it = x.begin();it != x.end(); ++it)
                     insert(*it);
                 return *this;
@@ -132,50 +148,66 @@ namespace ft
             {
                 return const_iterator(_tnull, _tnull);
             }
+            reverse_iterator rbegin()
+            {
+                return reverse_iterator(end());
+            }
+            const_reverse_iterator rbegin() const
+            {
+                return const_reverse_iterator(end());
+            }
+            reverse_iterator rend()
+            {
+                return reverse_iterator(end());
+            }
+            const_reverse_iterator rend() const
+            {
+                return const_reverse_iterator(end());
+            }
             //Modifiers
             std::pair<iterator, bool> insert(value_type value)
             {
-                node_ptr node = _node_alloc.allocate(1);
-                tree_node n(value, 0, _tnull, _tnull, red);
-                _node_alloc.construct(node, n);
+                node_ptr nodeToInsert = _node_alloc.allocate(1);
+                _node_alloc.construct(nodeToInsert, node(value, 0, _tnull, _tnull, red));
                 node_ptr y = 0;
                 node_ptr x = this->_root;
 
                 while (x != _tnull) {
                 y = x;
-                if (node->value < x->value) {
+                if (_compLessPair(nodeToInsert->value, x->value)) {
                     x = x->left;
                 } 
-                else if (x->value < node->value) 
+                else if (_compLessPair(x->value, nodeToInsert->value))
                 {
                     x = x->right;
                 }
                 else
                 {
-                    _node_alloc.destroy(node);
-                    _node_alloc.deallocate(node, 1);
+                    _node_alloc.destroy(nodeToInsert);
+                    _node_alloc.deallocate(nodeToInsert, 1);
                     return std::pair<iterator, bool>(iterator(x, _tnull), false);
                 }
                 }
-                node->parent = y;
+                nodeToInsert->parent = y;
                 if (y == 0) {
-                _root = node;
-                } else if (node->value < y->value) {
-                    y->left = node;
+                _root = nodeToInsert;
+                } else if (nodeToInsert->value < y->value) {
+                    y->left = nodeToInsert;
                 } else {
-                    y->right = node;
+                    y->right = nodeToInsert;
                 }
                 _size++;
-                if (node->parent == 0) {
-                    node->color = black;
-                    return std::pair<iterator, bool>(iterator(node, _tnull), true);
+                _updateMinMaxElementPassNode(_root, _tnull);
+                if (nodeToInsert->parent == 0) {
+                    nodeToInsert->color = black;
+                    return std::pair<iterator, bool>(iterator(nodeToInsert, _tnull), true);
                 }
 
-                if (node->parent->parent == 0) {
-                    return std::pair<iterator, bool>(iterator(node, _tnull), true);
+                if (nodeToInsert->parent->parent == 0) {
+                    return std::pair<iterator, bool>(iterator(nodeToInsert, _tnull), true);
                 }
-                insertFix(node);
-                return std::pair<iterator, bool>(iterator(node, _tnull), true);
+                insertFix(nodeToInsert);
+                return std::pair<iterator, bool>(iterator(nodeToInsert, _tnull), true);
             }
             iterator insert (iterator position, const value_type& val)
             {
@@ -188,37 +220,117 @@ namespace ft
                 for (;first != last; first++)
                     insert(*first);
             }
+            void erase (iterator position)
+            {
+                _deleteNode(position->first);
+            }
+            size_type erase (const key_type& k)
+            {
+                return _deleteNode(k);
+            }
+            void erase (iterator first, iterator last)
+            {
+                for (;first != last; first++)
+                {
+                    erase(first);
+                }
+            }
+            void swap (map& x)
+            {
+                std::swap(_node_alloc, x._node_alloc);
+                std::swap(_root, x._root);
+                std::swap(_tnull, x._tnull);
+                std::swap(_compLessPair, x._compLessPair);
+                std::swap(_size, x._size);
+            }
+            void clear()
+            {
+                _deallocateAndDestroyValueNodes(_root);
+                _root = _tnull;
+                _tnull->left = 0;
+                _tnull->right = 0;
+                _updateMinMaxElementPassNode(_root, _tnull);
+                _size = 0;
+            }
+            //Capacity:
+            bool empty() const
+            {
+                return (_size == 0);
+            }
             size_type size() const
             {
                 return _size;
             }
+            size_type max_size() const
+            {
+                return _node_alloc.max_size();
+            }
+            //Element access:
+            mapped_type& operator[] (const key_type& k)
+            {
+                iterator it = (insert(value_type(k, mapped_type()))).first;
+                return it->second;
+            }
+            //Observers:
+            key_compare key_comp() const
+            {
+                return _compLessKey;
+            }
+            value_compare value_comp() const
+            {
+                return _compLessPair;
+            }
+            //Operations:
+            iterator find (const key_type& k)
+            {
+                node_ptr nPtr = _searchTree(k);
+                return iterator(nPtr, _tnull);
+            }
+            const_iterator find (const key_type& k) const
+            {
+                node_ptr nPtr = _searchTree(k);
+                return const_iterator(nPtr, _tnull);
+            }
+            size_type count (const key_type& k) const
+            {
+                
+            }
             const_node_ptr getRoot() const
             {
                 return _root;
+            }
+            const_node_ptr getTNull() const
+            {
+                return _tnull;
             }
         private:
             node_allocator _node_alloc;
             node_ptr _root;
             node_ptr _tnull;
             value_compare _compLessPair;
+            key_compare _compLessKey;
             size_type _size;
             
-            node_ptr _searchTreeHelper(node_ptr node, value_type value)
+            node_ptr _searchTree(const key_type &k)
             {
-                if (node == _tnull || _areEqual(node->value, value))
+                return _searchTreeHelper(_root, k);
+            }
+            node_ptr _searchTreeHelper(node_ptr node, const key_type &k)
+            {
+                if (node == _tnull || _areEqual(node->value.first, k))
                 {
                     return node;
                 }
-                if (_compLessPair(value, node->value))
+                if (_compLessKey(k, node->value.first))
                 {
-                    return searchTreeHelper(node->left, value);
+                    return _searchTreeHelper(node->left, k);
                 }
-                return searchTreeHelper(node->right, value);
+                return _searchTreeHelper(node->right, k);
             }
             
-            bool _areEqual(value_type v1, value_type v2)
+            bool _areEqual(const key_type &k1, const key_type &k2)
             {
-                return (!_compLessPair(v1, v2) && !compLess(v2, v1));
+                return (!_compLessKey(k1, k2) && !_compLessKey(k2, k1));
             }
             void insertFix(node_ptr k)
             {
@@ -337,6 +449,159 @@ namespace ft
                 _node_alloc.destroy(root);
                 _node_alloc.deallocate(root, 1);
             }
+            size_type _deleteNode(const key_type &key) 
+            {
+                size_type result = _deleteNodeHelper(_root, key);
+                _updateMinMaxElementPassNode(_root, _tnull);
+                return result;
+            }
+            size_type _deleteNodeHelper(node_ptr node, const key_type &key)
+            {
+                node_ptr z = _tnull;
+                node_ptr x, y;
+                while (node != _tnull) {
+                    if (node->value.first == key) {
+                    z = node;
+                    }
+
+                    if (node->value.first <= key) {
+                    node = node->right;
+                    } else {
+                    node = node->left;
+                    }
+                }
+
+                if (z == _tnull) {
+                    return 0;
+                }
+
+                y = z;
+                NodeColor y_original_color = y->color;
+                if (z->left == _tnull) {
+                    x = z->right;
+                    rbTransplant(z, z->right);
+                } else if (z->right == _tnull) {
+                    x = z->left;
+                    rbTransplant(z, z->left);
+                } else {
+                    y = minimum(z->right);
+                    y_original_color = y->color;
+                    x = y->right;
+                    if (y->parent == z) {
+                    x->parent = y;
+                    } else {
+                    rbTransplant(y, y->right);
+                    y->right = z->right;
+                    y->right->parent = y;
+                    }
+
+                rbTransplant(z, y);
+                y->left = z->left;
+                y->left->parent = y;
+                y->color = z->color;
+                }
+                delete z;
+                if (y_original_color == black) {
+                deleteFix(x);
+                }
+                _size--;
+                return 1;
+            }
+        void rbTransplant(node_ptr u, node_ptr v) 
+        {
+            if (u->parent == 0) {
+                _root = v;
+            } else if (u == u->parent->left) {
+                u->parent->left = v;
+            } else {
+                u->parent->right = v;
+            }
+            v->parent = u->parent;
+        }
+        void deleteFix(node_ptr x) 
+        {
+        node_ptr s;
+        while (x != _root && x->color == black) {
+            if (x == x->parent->left) {
+            s = x->parent->right;
+            if (s->color == red) {
+                s->color = black;
+                x->parent->color = red;
+                leftRotate(x->parent);
+                s = x->parent->right;
+            }
+
+            if (s->left->color == black && s->right->color == black) {
+                s->color = red;
+                x = x->parent;
+            } else {
+                if (s->right->color == black) {
+                s->left->color = black;
+                s->color = red;
+                rightRotate(s);
+                s = x->parent->right;
+                }
+
+                s->color = x->parent->color;
+                x->parent->color = black;
+                s->right->color = black;
+                leftRotate(x->parent);
+                x = _root;
+            }
+            } else {
+            s = x->parent->left;
+            if (s->color == red) {
+                s->color = black;
+                x->parent->color = red;
+                rightRotate(x->parent);
+                s = x->parent->left;
+            }
+
+            if (s->right->color == black && s->right->color == black) {
+                s->color = red;
+                x = x->parent;
+            } else {
+                if (s->left->color == black) {
+                s->right->color = black;
+                s->color = red;
+                leftRotate(s);
+                s = x->parent->left;
+                }
+
+                s->color = x->parent->color;
+                x->parent->color = black;
+                s->left->color = black;
+                rightRotate(x->parent);
+                x = _root;
+            }
+            }
+        }
+        x->color = black;
+        }
+        
+        node_ptr minimum(node_ptr node) {
+            if (node == _tnull)
+                return node;
+            while (node->left != _tnull)
+            {
+                node = node->left;
+            }
+            return node;
+        }
+        node_ptr maximum(node_ptr node) {
+            if (node == _tnull)
+                return node;
+            while (node->right != _tnull) 
+            {
+                node = node->right;
+            }
+            return node;
+        }
+        void _updateMinMaxElementPassNode(node_ptr root, node_ptr minMaxElementPassNode)
+        {
+            minMaxElementPassNode->left = maximum(root);
+            minMaxElementPassNode->right = minimum(root);
+        }
     };
 }
 #endif

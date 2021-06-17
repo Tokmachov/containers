@@ -42,6 +42,21 @@ class MapTestCase : public TestCase
         static void testMapIteratorPostfixMinus_InMapOfOneTwoTreeCallMinusMinusOnIteratorPointingAtTwo_IteratorPointingAtOne();
         static void testMapIteratorPreficPlusPlus_InMapWithKeysOneTwoThreeIncrementBeginIterator_ReturnValueIsIteratorPointingAtKeyTwoAndResultIteratorIsPointingAtKeyTwo();
         static void testMapIteratorPostfixPlusPlus_InMapWithKeysOneTwoThreeIncrementBeginIterator_ReturnValueIsBeginIteratorAndResultIteratorIsPointingAtKeyTwo();
+        static void testMapEnd_IterateMapBackwardsUsingIterFromEndMethod_ElementsReceivedFromIteratorFormBackwardSequence();  
+        static void testMapReversIt_IterateOverMapUsingReverseIter_ElementsReceivedFromIteratorFormBackwardSequence();  
+        static void testMapEmpty_CallEmptyOnMapWithNoElements_True();
+        static void testMapEmpty_AddElementToMapWithNoElementsAndCallEmpty_false();
+        static void testMapIndex_CallIndexWithKeyThatDoesntMatchAnyELementInContainer_SizeIsIncreaseByOneElementWithKeyCanBeFoundInContainer();
+        static void testMapInsdex_CallIndexWithKeyPresentInContainerAndAssignNewValue_SizeDoesntChangeElementWithKeyUsedIsFoundInContainerWithNewMappedValue();
+        static void testMapEraseIterator_EraseElementWithKeyPresentInMap_SizeDecrementedByOneElementIsAbsentInContainer();
+        static void testMapEraseKey_EraseElementPresentInMap_SizeIsDecreasedByOneElementIsAbsentInMapReturnedValueIsOne();
+        static void testMapEraseRange_EraseAllElementsFromMap_MapIsEmpty();
+        static void testMapSwap_MakeCopyOfTwoMapsAndThenSwapThem_ResultMapsAreEqualToTheCopiesOfTheirSwapPartners();
+        static void testMapClear_ClearMap_MapIsEmpty();
+        static void testMapClear_ClearMapAndAddThreeNewElements_MapIsEqualInSizeAndElementsToVectorContainingSameElementsAddedToMap();
+        static void testMapFind_FindElementPresentInMap_RetunIsIteratorToFoundObject();
+        static void testMapFind_FindElementAbsentInMap_ReturnIsEndIterator();
+        static void testMapCount_CallCountWithKeyPresentInMap_OneIsReturned();
 };
 
 #endif /* ************************************************ MapTestCase_H */

@@ -97,6 +97,90 @@ void MapTestCase::initTests()
 		testMapIteratorPostfixPlusPlus_InMapWithKeysOneTwoThreeIncrementBeginIterator_ReturnValueIsBeginIteratorAndResultIteratorIsPointingAtKeyTwo
 	};
 	MapTestCase::allTests.push_back(t13);
+	TestNameAndFunc t14 =
+	{
+		"testMapEnd_IterateMapBackwardsUsingIterFromEndMethod_ElementsReceivedFromIteratorFormBackwardSequence", 
+		testMapEnd_IterateMapBackwardsUsingIterFromEndMethod_ElementsReceivedFromIteratorFormBackwardSequence
+	};
+	MapTestCase::allTests.push_back(t14);
+	TestNameAndFunc t15 =
+	{
+		"testMapReversIt_IterateOverMapUsingReverseIter_ElementsReceivedFromIteratorFormBackwardSequence", 
+		testMapReversIt_IterateOverMapUsingReverseIter_ElementsReceivedFromIteratorFormBackwardSequence
+	};
+	MapTestCase::allTests.push_back(t15);
+	TestNameAndFunc t16 =
+	{
+		"testMapEmpty_CallEmptyOnMapWithNoElements_True", 
+		testMapEmpty_CallEmptyOnMapWithNoElements_True
+	};
+	MapTestCase::allTests.push_back(t16);
+	TestNameAndFunc t17 =
+	{
+		"testMapEmpty_AddElementToMapWithNoElementsAndCallEmpty_false", 
+		testMapEmpty_AddElementToMapWithNoElementsAndCallEmpty_false
+	};
+	MapTestCase::allTests.push_back(t17);
+	TestNameAndFunc t18 =
+	{
+		"testMapIndex_CallIndexWithKeyThatDoesntMatchAnyELementInContainer_SizeIsIncreaseByOneElementWithKeyCanBeFoundInContainer", 
+		testMapIndex_CallIndexWithKeyThatDoesntMatchAnyELementInContainer_SizeIsIncreaseByOneElementWithKeyCanBeFoundInContainer
+	};
+	MapTestCase::allTests.push_back(t18);
+	TestNameAndFunc t19 =
+	{
+		"testMapInsdex_CallIndexWithKeyPresentInContainerAndAssignNewValue_SizeDoesntChangeElementWithKeyUsedIsFoundInContainerWithNewMappedValue", 
+		testMapInsdex_CallIndexWithKeyPresentInContainerAndAssignNewValue_SizeDoesntChangeElementWithKeyUsedIsFoundInContainerWithNewMappedValue
+	};
+	MapTestCase::allTests.push_back(t19);
+	TestNameAndFunc t20 =
+	{
+		"testMapEraseIterator_EraseElementWithKeyPresentInMap_SizeDecrementedByOneElementIsAbsentInContainer", 
+		testMapEraseIterator_EraseElementWithKeyPresentInMap_SizeDecrementedByOneElementIsAbsentInContainer
+	};
+	MapTestCase::allTests.push_back(t20);
+	TestNameAndFunc t21 =
+	{
+		"testMapEraseKey_EraseElementPresentInMap_SizeIsDecreasedByOneElementIsAbsentInMapReturnedValueIsOne", 
+		testMapEraseKey_EraseElementPresentInMap_SizeIsDecreasedByOneElementIsAbsentInMapReturnedValueIsOne
+	};
+	MapTestCase::allTests.push_back(t21);
+	TestNameAndFunc t22 =
+	{
+		"testMapEraseRange_EraseAllElementsFromMap_MapIsEmpty", 
+		testMapEraseRange_EraseAllElementsFromMap_MapIsEmpty
+	};
+	MapTestCase::allTests.push_back(t22);
+	TestNameAndFunc t23 =
+	{
+		"testMapSwap_MakeCopyOfTwoMapsAndThenSwapThem_ResultMapsAreEqualToTheCopiesOfTheirSwapPartners", 
+		testMapSwap_MakeCopyOfTwoMapsAndThenSwapThem_ResultMapsAreEqualToTheCopiesOfTheirSwapPartners
+	};
+	MapTestCase::allTests.push_back(t23);
+	TestNameAndFunc t24 =
+	{
+		"testMapClear_ClearMap_MapIsEmpty", 
+		testMapClear_ClearMap_MapIsEmpty
+	};
+	MapTestCase::allTests.push_back(t24);
+	TestNameAndFunc t25 =
+	{
+		"testMapClear_ClearMapAndAddThreeNewElements_MapIsEqualInSizeAndElementsToVectorContainingSameElementsAddedToMap", 
+		testMapClear_ClearMapAndAddThreeNewElements_MapIsEqualInSizeAndElementsToVectorContainingSameElementsAddedToMap
+	};
+	MapTestCase::allTests.push_back(t25);
+	TestNameAndFunc t26 =
+	{
+		"testMapFind_FindElementPresentInMap_RetunIsIteratorToFoundObject", 
+		testMapFind_FindElementPresentInMap_RetunIsIteratorToFoundObject
+	};
+	MapTestCase::allTests.push_back(t26);
+	TestNameAndFunc t27 =
+	{
+		"testMapFind_FindElementAbsentInMap_ReturnIsEndIterator", 
+		testMapFind_FindElementAbsentInMap_ReturnIsEndIterator
+	};
+	MapTestCase::allTests.push_back(t27);
 }
 
 void MapTestCase::run()
@@ -117,10 +201,19 @@ void MapTestCase::testMap_CompileMap_MustNotCrash()
 {
     ft::map<int, std::string> m;
     m.insert(std::pair<int, std::string>(5, "Hello"));
-    m.insert(std::pair<int, std::string>(10, "Hello"));
+    m.insert(std::pair<int, std::string>(10, "no no"));
+    m.insert(std::pair<int, std::string>(11, "asdasd"));
+    m.insert(std::pair<int, std::string>(12, "asdasd"));
+    m.insert(std::pair<int, std::string>(13, "asdasd"));
+    m.insert(std::pair<int, std::string>(14, "asdasd"));
+    m.insert(std::pair<int, std::string>(15, "asdasd"));
+    m.insert(std::pair<int, std::string>(16, "asdasd"));
+    m.insert(std::pair<int, std::string>(17, "asdasd"));
     ft::map<int, std::string>::iterator it = m.begin();
-    ft::map<int, std::string>::const_iterator const_it = it;
-    it->second = "asdfasdfa"; 
+    it--;
+    it--;
+    it++;
+    it++;
     assertTrue(true);
 }
 void MapTestCase::testInsert_InsertTenInsts_MapIsEqualToSortedVectorWithTheSameInst()
@@ -478,5 +571,357 @@ void MapTestCase::testMapIteratorPostfixPlusPlus_InMapWithKeysOneTwoThreeIncreme
     assertTrue(returnValue == itBegin);
     assertTrue(it->first == 2);
 }
+void MapTestCase::testMapEnd_IterateMapBackwardsUsingIterFromEndMethod_ElementsReceivedFromIteratorFormBackwardSequence()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    ftMap.insert(std::pair<int, int>(4, 10));
+    ftMap.insert(std::pair<int, int>(5, 10));
+    ftMap.insert(std::pair<int, int>(6, 10));
+    ftMap.insert(std::pair<int, int>(7, 10));
+    ftMap.insert(std::pair<int, int>(8, 10));
+    ft::map<int, int>::iterator lastIt = ftMap.end();
+    lastIt--;
+    
+    std::vector<std::pair<const int, int> > v;
+    v.push_back(std::pair<int, int>(8, 10));
+    v.push_back(std::pair<int, int>(7, 10));
+    v.push_back(std::pair<int, int>(6, 10));
+    v.push_back(std::pair<int, int>(5, 10));
+    v.push_back(std::pair<int, int>(4, 10));
+    v.push_back(std::pair<int, int>(3, 10));
+    v.push_back(std::pair<int, int>(2, 10));
+    v.push_back(std::pair<int, int>(1, 10));
+    std::vector<std::pair<const int, int> >::iterator vIt = v.begin();
+
+    //Act
+    bool result = true;
+    for (; lastIt != ftMap.end(); --lastIt, vIt++)
+    {
+        if (*lastIt != *vIt)
+            result = false;
+    }
+    //Assert
+    assertTrue(result);
+    //assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapReversIt_IterateOverMapUsingReverseIter_ElementsReceivedFromIteratorFormBackwardSequence()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    ftMap.insert(std::pair<int, int>(4, 10));
+    ftMap.insert(std::pair<int, int>(5, 10));
+    ftMap.insert(std::pair<int, int>(6, 10));
+    ftMap.insert(std::pair<int, int>(7, 10));
+    ftMap.insert(std::pair<int, int>(8, 10));
+    ft::map<int, int>::reverse_iterator ItRev = ftMap.rbegin();
+    
+    std::vector<std::pair<const int, int> > v;
+    v.push_back(std::pair<int, int>(8, 10));
+    v.push_back(std::pair<int, int>(7, 10));
+    v.push_back(std::pair<int, int>(6, 10));
+    v.push_back(std::pair<int, int>(5, 10));
+    v.push_back(std::pair<int, int>(4, 10));
+    v.push_back(std::pair<int, int>(3, 10));
+    v.push_back(std::pair<int, int>(2, 10));
+    v.push_back(std::pair<int, int>(1, 10));
+    std::vector<std::pair<const int, int> >::iterator vIt = v.begin();
+
+    //Act
+    bool result = true;
+    for (; ItRev != ftMap.rend(); ItRev++, vIt++)
+    {
+        if (*ItRev != *vIt)
+            result = false;
+    }
+    //Assert
+    assertTrue(result);
+    //assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapEmpty_CallEmptyOnMapWithNoElements_True()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+
+	//Act
+    bool result = ftMap.empty();
+	//Assert
+	assertTrue(result);
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapEmpty_AddElementToMapWithNoElementsAndCallEmpty_false()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+
+	//Act
+    ftMap.insert(std::pair<const int, int>(1, 1));
+    bool result = ftMap.empty();
+	//Assert
+	assertFalse(result);
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapIndex_CallIndexWithKeyThatDoesntMatchAnyELementInContainer_SizeIsIncreaseByOneElementWithKeyCanBeFoundInContainer()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    ftMap.insert(std::pair<int, int>(4, 10));
+    ftMap.insert(std::pair<int, int>(5, 10));
+    ftMap.insert(std::pair<int, int>(6, 10));
+    ftMap.insert(std::pair<int, int>(7, 10));
+    ftMap.insert(std::pair<int, int>(8, 10));
+    size_t prevSize = ftMap.size();
+	
+    //Act
+    ftMap[22];
+	size_t newSize = ftMap.size();
+    //Assert
+    bool isNewElementInMap = false;
+    ft::map<int, int>::const_reverse_iterator itRev = ftMap.rbegin();
+    for(; itRev != ftMap.rend(); itRev++)
+    {
+        if (itRev->first == 22)
+            isNewElementInMap = true;
+    }
+    assertTrue(newSize == prevSize + 1);
+	assertTrue(isNewElementInMap);
+    //assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapInsdex_CallIndexWithKeyPresentInContainerAndAssignNewValue_SizeDoesntChangeElementWithKeyUsedIsFoundInContainerWithNewMappedValue()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    ftMap.insert(std::pair<int, int>(4, 10));
+    ftMap.insert(std::pair<int, int>(5, 10));
+    ftMap.insert(std::pair<int, int>(6, 10));
+    ftMap.insert(std::pair<int, int>(7, 10));
+    ftMap.insert(std::pair<int, int>(8, 10));
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+    size_t prevSize = ftMap.size();
+	
+    //Act
+    ftMap[8] = 999;
+	size_t newSize = ftMap.size();
+    //Assert
+    bool isNewValue = false;
+    ft::map<int, int>::const_reverse_iterator itRev = ftMap.rbegin();
+    for(; itRev != ftMap.rend(); itRev++)
+    {
+        if (itRev->first == 8 && itRev->second == 999)
+            isNewValue = true;
+    }
+    assertTrue(newSize == prevSize);
+	assertTrue(isNewValue);
+    //assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapEraseIterator_EraseElementWithKeyPresentInMap_SizeDecrementedByOneElementIsAbsentInContainer()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+    size_t oldSize = ftMap.size();
+	
+    //Act
+    ft::map<int, int>::iterator removePosition = ftMap.begin();
+    ftMap.erase(removePosition);
+    size_t newSize = ftMap.size();
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+    
+    //Assert
+    bool isElementPresent = false;
+    ft::map<int, int>::const_reverse_iterator itRev = ftMap.rbegin();
+    for(; itRev != ftMap.rend(); itRev++)
+    {
+        if (itRev->first == 1 && itRev->second == 10)
+            isElementPresent = true;
+    }
+    assertTrue(newSize == oldSize - 1);
+	assertFalse(isElementPresent);
+    //assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapEraseKey_EraseElementPresentInMap_SizeIsDecreasedByOneElementIsAbsentInMapReturnedValueIsOne()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+    size_t oldSize = ftMap.size();
+	
+    //Act
+    size_t returnValue = ftMap.erase(2);
+    size_t newSize = ftMap.size();
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+    
+    //Assert
+    bool isElementPresent = false;
+    ft::map<int, int>::const_reverse_iterator itRev = ftMap.rbegin();
+    for(; itRev != ftMap.rend(); itRev++)
+    {
+        if (itRev->first == 2 && itRev->second == 10)
+            isElementPresent = true;
+    }
+    assertTrue(newSize == oldSize - 1);
+	assertFalse(isElementPresent);
+    assertTrue(returnValue);
+    //assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapEraseRange_EraseAllElementsFromMap_MapIsEmpty()
+{
+	//Arrange
+    ft::map<int, int> ftMap;
+    ftMap.insert(std::pair<int, int>(1, 10));
+    ftMap.insert(std::pair<int, int>(2, 10));
+    ftMap.insert(std::pair<int, int>(3, 10));
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+	ft::map<int, int>::iterator itBegin = ftMap.begin();
+    ft::map<int, int>::iterator itEnd = ftMap.end();
+    
+    //Act
+    ftMap.erase(itBegin, itEnd);
+    printTree(ftMap.getRoot(), ftMap.getTNull());
+    //Assert
+    assertTrue(ftMap.empty());
+}
+void MapTestCase::testMapSwap_MakeCopyOfTwoMapsAndThenSwapThem_ResultMapsAreEqualToTheCopiesOfTheirSwapPartners()
+{
+	//Arrange
+    ft::map<int, int> ftMap1;
+    ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+    
+    ft::map<int, int> ftMap2;
+    ftMap2.insert(std::pair<int, int>(-1, 10));
+    ftMap2.insert(std::pair<int, int>(-2, 10));
+    ftMap2.insert(std::pair<int, int>(-3, 10));
+
+	ft::map<int, int> ftMap1Copy = ftMap1;
+    ft::map<int, int> ftMap2Copy = ftMap2;
+    
+    
+    //Act
+    ftMap1.swap(ftMap2);
+    //Assert
+    assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            ftMap1.begin(),
+            ftMap1.end(),
+            ftMap2Copy.begin(),
+            ftMap2Copy.end()
+        )
+    );
+    assertTrue
+    (
+        areEqualInSizeAndElements
+        (
+            ftMap2.begin(),
+            ftMap2.end(),
+            ftMap1Copy.begin(),
+            ftMap1Copy.end()
+        )
+    );
+}
+void MapTestCase::testMapClear_ClearMap_MapIsEmpty()
+{
+	//Arrange
+    //Arrange
+    ft::map<int, int> ftMap1;
+    ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+	//Act
+    ftMap1.clear();
+	//Assert
+	assertTrue(ftMap1.empty());
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapClear_ClearMapAndAddThreeNewElements_MapIsEqualInSizeAndElementsToVectorContainingSameElementsAddedToMap()
+{
+	//Arrange
+    ft::map<int, int> ftMap1;
+    ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+	
+    std::vector<std::pair<const int, int> > v;
+    v.push_back(std::pair<int, int>(1, 10));
+    v.push_back(std::pair<int, int>(2, 10));
+    v.push_back(std::pair<int, int>(3, 10));
+    //Act
+    ftMap1.clear();
+	ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+    //Assert
+	assertTrue(
+        areEqualInSizeAndElements
+        (
+            ftMap1.begin(),
+            ftMap1.end(),
+            v.begin(),
+            v.end()
+        )
+    );
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapFind_FindElementPresentInMap_RetunIsIteratorToFoundObject()
+{
+	//Arrange
+    ft::map<int, int> ftMap1;
+    ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+	//Act
+    ft::map<int, int>::iterator returnedIterator = ftMap1.find(2);
+	//Assert
+	assertTrue(returnedIterator->first == 2);
+	//assertFalse();
+	//assertEqual(,);
+}
+void MapTestCase::testMapFind_FindElementAbsentInMap_ReturnIsEndIterator()
+{
+	//Arrange
+    ft::map<int, int> ftMap1;
+    ftMap1.insert(std::pair<int, int>(1, 10));
+    ftMap1.insert(std::pair<int, int>(2, 10));
+    ftMap1.insert(std::pair<int, int>(3, 10));
+	//Act
+    ft::map<int, int>::iterator returnedIterator = ftMap1.find(5);
+	//Assert
+	assertTrue(returnedIterator == ftMap1.end());
+	//assertFalse();
+	//assertEqual(,);
+}
+
+
 
 /* ************************************************************************** */

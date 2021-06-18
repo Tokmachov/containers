@@ -10,6 +10,7 @@ namespace ft
             typedef Value value_type;
             typedef Node node_type;
             typedef ptrdiff_t difference_type;
+            typedef size_t size_type;
             typedef value_type *pointer;
             typedef value_type& reference;
             typedef std::bidirectional_iterator_tag iterator_category;

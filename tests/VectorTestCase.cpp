@@ -955,6 +955,7 @@ void VectorTestCase::testVectorReverseIter_AssignReverseIterToConstReverseIterVa
     //Act
     ft::vector<int>::reverse_iterator nonConstReverseIter = vec.rbegin();
     ft::vector<int>::const_reverse_iterator constReverseIter = nonConstReverseIter;
+    (void)constReverseIter;
     //Assert
     assertTrue(true);
 }
@@ -2007,6 +2008,7 @@ void VectorTestCase::testEraseRange_EraseTwoAndThreeFromVectorOfOneTwoThreeFour_
             expectedVector.end()
         )
     );
+    assertTrue(*actualReturnedIterator == 4);
 }
 void VectorTestCase::testEraseRange_EraseAllElements_EmptyVectorReturnedIteratorPointsToPastTheEnd()
 {

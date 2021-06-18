@@ -1047,8 +1047,8 @@ void ListTestCase::testPopBack_PopAllElementsFromListInALoop_ResultListMustBeEmp
 {
     //arrange
     ft::list<int> l;
-    int numberOfElementsToAddToList = 100;
-    for (int i = 0; i < numberOfElementsToAddToList; i++)
+    size_t numberOfElementsToAddToList = 100;
+    for (size_t i = 0; i < numberOfElementsToAddToList; i++)
         l.push_back(i);
     size_t sizeBeforePop = l.size();
     //Act
@@ -1227,8 +1227,6 @@ void ListTestCase::testEraseRange_RemoveRangeOfElementsFromList_StdContainerEffe
 
     //Assert
     assertTrue(std::equal(ftList.begin(), ftList.end(), stdList.begin()));
-    size_t s1 = ftList.size();
-    size_t s2 = stdList.size();
     assertEqual(ftList.size(), stdList.size());
 }
 //DONE

@@ -38,7 +38,7 @@ all: $(BINARY_NAME)
 $(BINARY_NAME): $(OBJS)
 		$(CC) $(OBJS) -o $(BINARY_NAME)
 
-%.o: %.cpp $(HEADERS_DIR) $(TEMPLATES)
+%.o: %.cpp $(HEADERS) $(TEMPLATES)
 	$(CC) $(COPTS)  $< -o $@
 
 clean:

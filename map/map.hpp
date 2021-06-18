@@ -61,7 +61,7 @@ namespace ft
             typedef RedBlackTreeIterator<node, const value_type> const_iterator;
             typedef ReverseIterator<iterator> reverse_iterator;
             typedef ReverseIterator<iterator, const typename iterator::value_type> const_reverse_iterator;
-            typedef typename std::iterator_traits<iterator>::difference_type size_type;
+            typedef size_t size_type;
             //constructors
             explicit map
             (

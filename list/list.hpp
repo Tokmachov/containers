@@ -44,7 +44,7 @@ namespace ft
             {
                 _past_the_end_node = _createNewNode();
                 _link(_past_the_end_node, _past_the_end_node);
-                for (int i = 0; i < n; i++)
+                for (size_type i = 0; i < n; i++)
                 {
                     Node<value_type> *newNode = _createNewNode(val);
                     _insertBefore(_past_the_end_node, newNode);
@@ -252,7 +252,7 @@ namespace ft
             void resize (size_type n, value_type val = value_type())
             {
                 Node<value_type> *current = _past_the_end_node->next;
-                int size = 0;
+                size_t size = 0;
                 for (; size != n && current != _past_the_end_node; size++, current = current->next) {}
                 if (size == n)
                     _remove(current, _past_the_end_node);
@@ -542,7 +542,6 @@ namespace ft
         typename list<T>::const_iterator itLeftBegin = lhs.begin();
         typename list<T>::const_iterator itLeftEnd = lhs.end();
         typename list<T>::const_iterator itRightBegin = rhs.begin();
-        typename list<T>::const_iterator itRightEnd = rhs.end();
         for (;itLeftBegin != itLeftEnd; itLeftBegin++, itRightBegin++)
         {
             if (*itLeftBegin != *itRightBegin)

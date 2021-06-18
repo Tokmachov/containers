@@ -584,7 +584,6 @@ void MapTestCase::testMapIteratorPreficPlusPlus_InMapWithKeysOneTwoThreeIncremen
     m.insert(std::pair<int, int>(2, 1));
     m.insert(std::pair<int, int>(3, 1));
     ft::map<int, int>::iterator it = m.begin();
-    ft::map<int, int>::iterator itBegin = m.begin();
     //Act
     ft::map<int, int>::iterator returnValue = ++it;
     

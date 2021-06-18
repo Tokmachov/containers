@@ -43,6 +43,24 @@ void QueueTestCase::initTests()
 		testQueueSize_CreateQueueFromListFilledWithTwoElements_Two
 	};
 	QueueTestCase::allTests.push_back(t4);
+	TestNameAndFunc t5 =
+	{
+		"testQueueFront_CreateQueueFromListOfOneTwoThreeAndCallFront_ReturnIsEqualToFirstElementOfList", 
+		testQueueFront_CreateQueueFromListOfOneTwoThreeAndCallFront_ReturnIsEqualToFirstElementOfList
+	};
+	QueueTestCase::allTests.push_back(t5);
+	TestNameAndFunc t6 =
+	{
+		"testQueueBack_CreateQueueFromListOfOneTwoThreeAndCallBack_ReturnIsThree", 
+		testQueueBack_CreateQueueFromListOfOneTwoThreeAndCallBack_ReturnIsThree
+	};
+	QueueTestCase::allTests.push_back(t6);
+	TestNameAndFunc t7 =
+	{
+		"testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne", 
+		testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne
+	};
+	QueueTestCase::allTests.push_back(t7);
 }
 
 void QueueTestCase::run()
@@ -98,6 +116,48 @@ void QueueTestCase::testQueueSize_CreateQueueFromListFilledWithTwoElements_Two()
     //Assert
     assertTrue(result == 2);
 }
+void QueueTestCase::testQueueFront_CreateQueueFromListOfOneTwoThreeAndCallFront_ReturnIsEqualToFirstElementOfList()
+{
+	//Arrange
+    ft::list<int> l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    ft::queue<int, ft::list<int> > q(l);
+    
+    //act
+    //Assert
+    assertTrue(q.front() == l.front());
+}
+void QueueTestCase::testQueueBack_CreateQueueFromListOfOneTwoThreeAndCallBack_ReturnIsThree()
+{
+	//Arrange
+    ft::list<int> l;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    ft::queue<int, ft::list<int> > q(l);
+    
+    //act
+    //Assert
+    assertTrue(q.back() == 3);
+}
+void QueueTestCase::testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne()
+{
+	//Arrange
+    ft::queue<int> q;
+    q.push(3);
+    q.push(2);
+    q.push(1);
+    
+    //act
+    //Assert
+    assertTrue(q.front() == 3);
+    assertTrue(q.back() == 1);
+}
+
+
+
 
 
 

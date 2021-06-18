@@ -31,7 +31,9 @@ class QueueTestCase : public TestCase
         static void testQueueEmpty_CreateQueueFromNoEmptyListAndCallEmpty_True();
         static void testQueueSize_CreateQueueFromEmptyListAndCallSize_Zero();
         static void testQueueSize_CreateQueueFromListFilledWithTwoElements_Two();
-        
+        static void testQueueFront_CreateQueueFromListOfOneTwoThreeAndCallFront_ReturnIsEqualToFirstElementOfList();
+        static void testQueueBack_CreateQueueFromListOfOneTwoThreeAndCallBack_ReturnIsThree();
+        static void testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne();
 };
 
 #endif /* ************************************************ QueueTestCase_H */

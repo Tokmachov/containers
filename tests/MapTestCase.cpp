@@ -235,23 +235,24 @@ void MapTestCase::run()
 
 void MapTestCase::testMap_CompileMap_MustNotCrash()
 {
-    std::map<int, int> m1;
-    m1.lower_bound(10);
+    // std::map<int, int> m1;
+    // m1.lower_bound(10);
     ft::map<int, std::string> m;
-    m.insert(std::pair<int, std::string>(5, "Hello"));
-    m.insert(std::pair<int, std::string>(10, "no no"));
-    m.insert(std::pair<int, std::string>(11, "asdasd"));
-    m.insert(std::pair<int, std::string>(12, "asdasd"));
-    m.insert(std::pair<int, std::string>(13, "asdasd"));
-    m.insert(std::pair<int, std::string>(14, "asdasd"));
-    m.insert(std::pair<int, std::string>(15, "asdasd"));
-    m.insert(std::pair<int, std::string>(16, "asdasd"));
-    m.insert(std::pair<int, std::string>(17, "asdasd"));
+    m.insert(std::pair<int, std::string>(5, "a"));
+    m.insert(std::pair<int, std::string>(10, "b"));
+    m.insert(std::pair<int, std::string>(11, "c"));
+    m.insert(std::pair<int, std::string>(12, "d"));
+    m.insert(std::pair<int, std::string>(13, "e"));
+    m.insert(std::pair<int, std::string>(14, "f"));
+    m.insert(std::pair<int, std::string>(15, "g"));
+    m.insert(std::pair<int, std::string>(16, "h"));
+    m.insert(std::pair<int, std::string>(17, "i"));
     ft::map<int, std::string>::iterator it = m.begin();
     it--;
     it--;
     it++;
     it++;
+    printTree(m.getRoot(), m.getEmptyNode()); 
     assertTrue(true);
 }
 void MapTestCase::testInsert_InsertTenInsts_MapIsEqualToSortedVectorWithTheSameInst()

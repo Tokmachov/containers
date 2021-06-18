@@ -1,2 +1,0 @@
-clang++ -g *.cpp
-./a.out

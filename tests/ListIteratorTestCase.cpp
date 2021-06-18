@@ -167,6 +167,7 @@ void ListIteratorTestCase::run()
 {
     initTests();
     runAllTests();
+    runLeaks();
 }
 
 /*

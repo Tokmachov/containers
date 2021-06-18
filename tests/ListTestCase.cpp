@@ -649,6 +649,7 @@ void ListTestCase::run()
 {
     initTests();
     runAllTests();
+    runLeaks();
 }
 
 /*

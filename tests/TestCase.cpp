@@ -122,7 +122,7 @@ void TestCase::runLeaks()
     }
     char *args[3];
     args[0] = const_cast<char*>(path.c_str());
-    args[1] = const_cast<char*>(std::string("a.out").c_str());
+    args[1] = const_cast<char*>(std::string("containers_tester").c_str());
     args[2] = 0;
     pid_t pid = fork();
     if (pid == 0)

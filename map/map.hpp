@@ -344,9 +344,7 @@ namespace ft
             node_ptr _makeEmptyNode()
             {
                 node_ptr nPtr = _node_alloc.allocate(1);
-                nPtr->color = black;
-                nPtr->left = 0;
-                nPtr->right = 0;
+                _node_alloc.construct(nPtr, node(value_type(), 0, 0, 0, black));
                 return nPtr;
             }
             node_ptr _makeRedNode(const value_type &v)

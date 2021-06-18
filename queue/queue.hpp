@@ -48,6 +48,30 @@ namespace ft
             {
                 _container.pop_front();
             }
+            friend bool operator== (const queue& lhs, const queue& rhs)
+            {
+                return lhs._container == rhs._container;
+            }
+            friend bool operator!= (const queue& lhs, const queue& rhs)
+            {
+                return lhs._container != rhs._container;
+            }
+            friend bool operator<  (const queue& lhs, const queue& rhs)
+            {
+                return lhs._container < rhs._container;
+            }
+            friend bool operator<= (const queue& lhs, const queue& rhs)
+            {
+                return lhs._container <= rhs._container;
+            }
+            friend bool operator>  (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+            {
+                return lhs._container > rhs._container;
+            }
+            friend bool operator>= (const queue& lhs, const queue& rhs)
+            {
+                return lhs._container >= rhs._container;
+            }
         private:
             container_type _container;
     };

@@ -29,6 +29,9 @@ class QueueTestCase : public TestCase
         //Please write declaration of test functions here
         static void testQueueEmpty_CreateQueueWithEnptyListAndCallEmpty_True();
         static void testQueueEmpty_CreateQueueFromNoEmptyListAndCallEmpty_True();
+        static void testQueueSize_CreateQueueFromEmptyListAndCallSize_Zero();
+        static void testQueueSize_CreateQueueFromListFilledWithTwoElements_Two();
+        
 };
 
 #endif /* ************************************************ QueueTestCase_H */

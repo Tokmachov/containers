@@ -58,9 +58,15 @@ void QueueTestCase::initTests()
 	TestNameAndFunc t7 =
 	{
 		"testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne", 
-		testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne
+		testQueueBack_CreateQueueAndPushThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne
 	};
 	QueueTestCase::allTests.push_back(t7);
+	TestNameAndFunc t8 =
+	{
+		"testQueuePop_PushOneTwoThreeFourCallPop_FrontReturnsTwo", 
+		testQueuePop_PushOneTwoThreeFourCallPop_FrontReturnsTwo
+	};
+	QueueTestCase::allTests.push_back(t8);
 }
 
 void QueueTestCase::run()
@@ -142,7 +148,7 @@ void QueueTestCase::testQueueBack_CreateQueueFromListOfOneTwoThreeAndCallBack_Re
     //Assert
     assertTrue(q.back() == 3);
 }
-void QueueTestCase::testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne()
+void QueueTestCase::testQueueBack_CreateQueueAndPushThreeThenTwoThenOneAndCallFrontAndBack_FrontReturnsThreeAndBackReturnsOne()
 {
 	//Arrange
     ft::queue<int> q;
@@ -155,6 +161,20 @@ void QueueTestCase::testQueueBack_CreateQueueAndPushBackThreeThenTwoThenOneAndCa
     assertTrue(q.front() == 3);
     assertTrue(q.back() == 1);
 }
+void QueueTestCase::testQueuePop_PushOneTwoThreeFourCallPop_FrontReturnsTwo()
+{
+	//Arrange
+    ft::queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    //act
+    q.pop();
+    //Assert
+    assertTrue(q.front() == 2);
+}
+
 
 
 

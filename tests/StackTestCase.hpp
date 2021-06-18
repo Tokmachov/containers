@@ -42,6 +42,7 @@ class StackTestCase : public TestCase
         static void testStackLessOp_CompareStackOfOneTwoThreeAndStackOfOneTwoFour_ReturnsTrue();
         static void testStackLessOp_CompareLhsOneTwoThreeAndRhsOneTwo_MustReturnFalse();
         static void testStackLessOrEqualOp_CompareLhsOneTwoAndRhsOneTwo_MustReturnTrue();
+        static void testStackGreateOp_CompareLhsOneTwoThreeAndRhsOneTwo_MustReturnTrue();
 };
 
 #endif /* ************************************************ TemplateTestCase_H */

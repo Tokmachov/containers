@@ -30,6 +30,10 @@ namespace ft
         {
             return lhs._container <= rhs._container;
         }
+        friend bool operator> (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container > rhs._container;
+        }
         //Member functions:
         explicit stack (const container_type& ctnr = container_type())
             : _container(ctnr) {}

@@ -103,6 +103,12 @@ void StackTestCase::initTests()
 		testStackLessOrEqualOp_CompareLhsOneTwoAndRhsOneTwo_MustReturnTrue
 	};
 	StackTestCase::allTests.push_back(t14);
+	TestNameAndFunc t15 =
+	{
+		"testStackGreateOp_CompareLhsOneTwoThreeAndRhsOneTwo_MustReturnTrue", 
+		testStackGreateOp_CompareLhsOneTwoThreeAndRhsOneTwo_MustReturnTrue
+	};
+	StackTestCase::allTests.push_back(t15);
 }
 
 void StackTestCase::run()
@@ -287,14 +293,30 @@ void StackTestCase::testStackLessOrEqualOp_CompareLhsOneTwoAndRhsOneTwo_MustRetu
     
     s1.push(1);
     s1.push(2);
+    s2.push(1);
+    s2.push(2);
+    //act
+    bool result = (s1 <= s2);
+    //Assert
+    assertTrue(result);
+}
+void StackTestCase::testStackGreateOp_CompareLhsOneTwoThreeAndRhsOneTwo_MustReturnTrue()
+{
+	//Arrange
+    ft::stack<int, ft::vector<int> > s1;
+    ft::stack<int, ft::vector<int> > s2;
+    
+    s1.push(1);
+    s1.push(2);
     s1.push(3);
     s2.push(1);
     s2.push(2);
     //act
-    bool result = (s1 < s2);
+    bool result = (s1 > s2);
     //Assert
-    assertFalse(result);
+    assertTrue(result);
 }
+
 
 
 

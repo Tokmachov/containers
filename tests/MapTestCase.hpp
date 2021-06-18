@@ -9,6 +9,7 @@
 # include "stdlib.h"
 # include <map>
 # include "../utils.hpp"
+
 class MapTestCase : public TestCase
 {
 	public:

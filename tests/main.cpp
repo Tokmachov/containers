@@ -1,4 +1,3 @@
-#include <string>
 # include "ListIteratorTestCase.hpp"
 # include "ListTestCase.hpp"
 # include "VectorTestCase.hpp"

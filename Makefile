@@ -1,11 +1,14 @@
-
 BINARY_NAME = containers_tester
 
+TEMPLATES = list/list.hpp\
+			map/map.hpp\
+			queue/queue.hpp\
+			stack/stack.hpp\
+			vector/vector.hpp
+
+TEMPLATES_DIRS = $(dir $(TEMPLATES))
+
 SRCS_DIR = tests/
-
-HEADERS_DIR = tests/
-
-CONTAINER_TEMPLATES_DIRS = list/ map/ queue/ stack/ vector/
 
 SRCS_NAMES = main.cpp \
 			ListIteratorTestCase.cpp \
@@ -15,21 +18,18 @@ SRCS_NAMES = main.cpp \
 			StackTestCase.cpp \
 			QueueTestCase.cpp \
 			TestCase.cpp
+
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NAMES))
 
 OBJS = $(SRCS:.cpp=.o)
 
-HEADERS = $(HEADERS_DIR)/*.hpp
+HEADERS_DIR = tests/
 
-CONTAINER_TEMPLATES = list/list.hpp\
-						map/map.hpp\
-						queue/queue.hpp\
-						stack/stack.hpp\
-						vector/vector.hpp
+HEADERS = $(HEADERS_DIR)/*.hpp
 
 CC = clang++
 
-COPTS = -Wall -Wextra -Werror -std=c++98 -g
+COPTS = -Wall -Wextra -Werror -std=c++98 -g -c $(addprefix -I, $(HEADERS_DIR) $(TEMPLATES_DIRS))
 
 .PHONY: all clean fclean re
 
@@ -38,8 +38,8 @@ all: $(BINARY_NAME)
 $(BINARY_NAME): $(OBJS)
 		$(CC) $(OBJS) -o $(BINARY_NAME)
 
-%.o: %.c $(SRCS) $(HEADERS) $(CONTAINER_TEMPLATES)
-	$(CC) $(COPTS) $(addprefix -I, $(HEADERS_DIR) $(CONTAINER_TEMPLATES_DIRS)) $< -o $@
+%.o: %.cpp $(HEADERS_DIR) $(TEMPLATES)
+	$(CC) $(COPTS)  $< -o $@
 
 clean:
 	rm -f $(OBJS)

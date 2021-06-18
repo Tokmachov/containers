@@ -751,7 +751,7 @@ void MapTestCase::testMapInsdex_CallIndexWithKeyPresentInContainerAndAssignNewVa
     ftMap.insert(std::pair<int, int>(6, 10));
     ftMap.insert(std::pair<int, int>(7, 10));
     ftMap.insert(std::pair<int, int>(8, 10));
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
     size_t prevSize = ftMap.size();
 	
     //Act
@@ -777,14 +777,14 @@ void MapTestCase::testMapEraseIterator_EraseElementWithKeyPresentInMap_SizeDecre
     ftMap.insert(std::pair<int, int>(1, 10));
     ftMap.insert(std::pair<int, int>(2, 10));
     ftMap.insert(std::pair<int, int>(3, 10));
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
     size_t oldSize = ftMap.size();
 	
     //Act
     ft::map<int, int>::iterator removePosition = ftMap.begin();
     ftMap.erase(removePosition);
     size_t newSize = ftMap.size();
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
     
     //Assert
     bool isElementPresent = false;
@@ -806,13 +806,13 @@ void MapTestCase::testMapEraseKey_EraseElementPresentInMap_SizeIsDecreasedByOneE
     ftMap.insert(std::pair<int, int>(1, 10));
     ftMap.insert(std::pair<int, int>(2, 10));
     ftMap.insert(std::pair<int, int>(3, 10));
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
     size_t oldSize = ftMap.size();
 	
     //Act
     size_t returnValue = ftMap.erase(2);
     size_t newSize = ftMap.size();
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
     
     //Assert
     bool isElementPresent = false;
@@ -835,13 +835,13 @@ void MapTestCase::testMapEraseRange_EraseAllElementsFromMap_MapIsEmpty()
     ftMap.insert(std::pair<int, int>(1, 10));
     ftMap.insert(std::pair<int, int>(2, 10));
     ftMap.insert(std::pair<int, int>(3, 10));
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
 	ft::map<int, int>::iterator itBegin = ftMap.begin();
     ft::map<int, int>::iterator itEnd = ftMap.end();
     
     //Act
     ftMap.erase(itBegin, itEnd);
-    printTree(ftMap.getRoot(), ftMap.getTNull());
+    printTree(ftMap.getRoot(), ftMap.getEmptyNode());
     //Assert
     assertTrue(ftMap.empty());
 }

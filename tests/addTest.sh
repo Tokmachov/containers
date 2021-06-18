@@ -1,2 +1,2 @@
 #!/bin/bash
-./addFunc MapTestCase.hpp MapTestCase.cpp
+./addFunc StackTestCase.hpp StackTestCase.cpp

@@ -275,8 +275,8 @@ void ListIteratorTestCase::testIteratorYieldsCorrectValueWhenDereferencedWithArr
 
     //Assert
     assertEqual(expected1, actual1);
-    assertEqual(expected1, actual1);
-    assertEqual(expected1, actual1);
+    assertEqual(expected2, actual2);
+    assertEqual(expected3, actual3);
 }
 //DONE
 void ListIteratorTestCase::testMutableIteratorAllowsToCorrectlySetListValue()
@@ -512,8 +512,8 @@ void ListIteratorTestCase::testConstIteratorYieldsCorrectValueWhenDereferencedWi
 
     //Assert
     assertEqual(expected1, actual1);
-    assertEqual(expected1, actual1);
-    assertEqual(expected1, actual1);
+    assertEqual(expected2, actual2);
+    assertEqual(expected3, actual3);
 }
 //DONE
 void ListIteratorTestCase::testPrefixPlusPlusSetsConstIteratorToCorrectPosition()

@@ -53,8 +53,7 @@ namespace ft
             };
             //a++
             RedBlackTreeIterator operator++(int) 
-            { 
-
+            {
                 RedBlackTreeIterator tmp = *this;
                 ++(*this);
                 return tmp;

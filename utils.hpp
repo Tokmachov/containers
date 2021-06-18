@@ -87,19 +87,23 @@ namespace ft
         printSubtree(root, tnull, "");
         std::cout << std::endl;
     }
-    template <typename Iterator>
+    template <typename Iterator, typename Value = typename Iterator::value_type>
     class ReverseIterator
     {
         public:
             typedef typename std::iterator_traits<Iterator>::iterator_category iterator_category;
-            typedef typename std::iterator_traits<Iterator>::value_type value_type;
+            typedef Value value_type;
             typedef typename std::iterator_traits<Iterator>::difference_type difference_type;
-            typedef typename std::iterator_traits<Iterator>::pointer pointer;
-            typedef typename std::iterator_traits<Iterator>::reference reference;
+            typedef value_type *pointer;
+            typedef value_type &reference;
             typedef Iterator base_iter_type;
         
         ReverseIterator(const base_iter_type & iter)
             : _base(iter) {}
+        operator ReverseIterator<Iterator, const value_type>()
+        {
+            return ReverseIterator<Iterator, const value_type>(_base);
+        }
         //X a;
         ReverseIterator() : _base() {}
         //X b(a);

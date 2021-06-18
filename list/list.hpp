@@ -290,6 +290,8 @@ namespace ft
         }
         void splice (iterator position, list& x, iterator first, iterator last)
         {
+            if (x.empty())
+                return ;
             Node<value_type> *targetStart = position._currentElement->prev;
             Node<value_type> *targetEnd = position._currentElement;
             Node<value_type> *rangeStart = first._currentElement;
@@ -459,7 +461,7 @@ namespace ft
                         continue ;   
                     }
                     //target goes to result list
-                    if ((targetFirst != targetLast) && (srcFirst == srcLast) || !(comp(srcFirst->data, targetFirst->data)))
+                    if (((targetFirst != targetLast) && (srcFirst == srcLast)) || !(comp(srcFirst->data, targetFirst->data)))
                     {
                         nodeToMove = targetFirst;
                         targetFirst = targetFirst->next;
@@ -532,70 +534,68 @@ namespace ft
             }
     };
 
-}
-
-template <class T, class Alloc>
-bool operator== (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs)
-{
-    if (lhs.size() != rhs.size())
-        return false;
-    typename ft::list<T>::const_iterator itLeftBegin = lhs.begin();
-    typename ft::list<T>::const_iterator itLeftEnd = lhs.end();
-    typename ft::list<T>::const_iterator itRightBegin = rhs.begin();
-    typename ft::list<T>::const_iterator itRightEnd = rhs.end();
-    for (;itLeftBegin != itLeftEnd; itLeftBegin++, itRightBegin++)
+    template <class T, class Alloc>
+    bool operator== (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
     {
-        if (*itLeftBegin != *itRightBegin)
+        if (lhs.size() != rhs.size())
             return false;
-    }
-    return true;
-}
-
-template <class T, class Alloc>
-bool operator!= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs)
-{
-    return !(lhs == rhs);
-}
-
-template <class T, class Alloc>
-bool operator<  (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs)
-{
-    typename ft::list<T>::const_iterator itLeftBegin = lhs.begin();
-    typename ft::list<T>::const_iterator itLeftEnd = lhs.end();
-    typename ft::list<T>::const_iterator itRightBegin = rhs.begin();
-    typename ft::list<T>::const_iterator itRightEnd = rhs.end();
-    for (;(itLeftBegin != itLeftEnd) && (itRightBegin != itRightEnd); itLeftBegin++, itRightBegin++)
-    {
-        if (*itLeftBegin != *itRightBegin)
-            return *itLeftBegin < *itRightBegin;
-    }
-    if ((itLeftBegin == itLeftEnd) && (itRightBegin != itRightEnd))
+        typename list<T>::const_iterator itLeftBegin = lhs.begin();
+        typename list<T>::const_iterator itLeftEnd = lhs.end();
+        typename list<T>::const_iterator itRightBegin = rhs.begin();
+        typename list<T>::const_iterator itRightEnd = rhs.end();
+        for (;itLeftBegin != itLeftEnd; itLeftBegin++, itRightBegin++)
+        {
+            if (*itLeftBegin != *itRightBegin)
+                return false;
+        }
         return true;
-    return false;
-}
+    }
 
-template <class T, class Alloc>
-bool operator<= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs)
-{
-    return (lhs < rhs) || (lhs == rhs);
-}
+    template <class T, class Alloc>
+    bool operator!= (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+    {
+        return !(lhs == rhs);
+    }
+    template <class T, class Alloc>
+    bool operator<  (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+    {
+        typename list<T>::const_iterator itLeftBegin = lhs.begin();
+        typename list<T>::const_iterator itLeftEnd = lhs.end();
+        typename list<T>::const_iterator itRightBegin = rhs.begin();
+        typename list<T>::const_iterator itRightEnd = rhs.end();
+        for (;(itLeftBegin != itLeftEnd) && (itRightBegin != itRightEnd); itLeftBegin++, itRightBegin++)
+        {
+            if (*itLeftBegin != *itRightBegin)
+                return *itLeftBegin < *itRightBegin;
+        }
+        if ((itLeftBegin == itLeftEnd) && (itRightBegin != itRightEnd))
+            return true;
+        return false;
+    }
 
-template <class T, class Alloc>
-bool operator>  (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs)
-{
-    return !(lhs < rhs) && !(lhs == rhs);
-}
+    template <class T, class Alloc>
+    bool operator<= (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+    {
+        return (lhs < rhs) || (lhs == rhs);
+    }
 
-template <class T, class Alloc>
-bool operator>= (const ft::list<T,Alloc>& lhs, const ft::list<T,Alloc>& rhs)
-{
-    return !(lhs < rhs);
-}
+    template <class T, class Alloc>
+    bool operator>  (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+    {
+        return !(lhs < rhs) && !(lhs == rhs);
+    }
 
-template <class T, class Alloc>
-void swap (ft::list<T,Alloc>& x, ft::list<T,Alloc>& y)
-{
-    x.swap(y);
+    template <class T, class Alloc>
+    bool operator>= (const list<T,Alloc>& lhs, const list<T,Alloc>& rhs)
+    {
+        return !(lhs < rhs);
+    }
+
+    template <class T, class Alloc>
+    void swap (list<T,Alloc>& x, list<T,Alloc>& y)
+    {
+        x.swap(y);
+    }
 }
 
 #endif

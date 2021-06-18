@@ -5,9 +5,10 @@
 # include "../utils.hpp"
 # include "MapTestCase.hpp"
 # include "StackTestCase.hpp"
+# include "QueueTestCase.hpp"
 
 int	main()
 {
-	StackTestCase::run();
+	QueueTestCase::run();
 	return 0;
 }

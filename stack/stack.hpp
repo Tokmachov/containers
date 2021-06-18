@@ -1,11 +1,11 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-#include <deque>
+# include "../list/list.hpp"
 
 namespace ft
 {
-    template <class T, class Container = std::deque<T> >
+    template <class T, class Container = ft::list<T> >
     class stack
     {
         //Member types
@@ -13,31 +13,6 @@ namespace ft
             typedef T value_type;
             typedef Container container_type;
             typedef size_t size_type;
-        //Global ops overloads
-        friend bool operator== (const stack& lhs, const stack& rhs)
-        {
-            return lhs._container == rhs._container;
-        }
-        friend bool operator!= (const stack& lhs, const stack& rhs)
-        {
-            return lhs._container != rhs._container;
-        }
-        friend bool operator< (const stack& lhs, const stack& rhs)
-        {
-            return lhs._container < rhs._container;
-        }
-        friend bool operator<= (const stack& lhs, const stack& rhs)
-        {
-            return lhs._container <= rhs._container;
-        }
-        friend bool operator> (const stack& lhs, const stack& rhs)
-        {
-            return lhs._container > rhs._container;
-        }
-        friend bool operator>= (const stack& lhs, const stack& rhs)
-        {
-            return lhs._container >= rhs._container;
-        }
         //Member functions:
         explicit stack (const container_type& ctnr = container_type())
             : _container(ctnr) {}
@@ -64,6 +39,31 @@ namespace ft
         void pop()
         {
             _container.pop_back();
+        }
+        //Global ops overloads
+        friend bool operator== (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container == rhs._container;
+        }
+        friend bool operator!= (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container != rhs._container;
+        }
+        friend bool operator< (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container < rhs._container;
+        }
+        friend bool operator<= (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container <= rhs._container;
+        }
+        friend bool operator> (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container > rhs._container;
+        }
+        friend bool operator>= (const stack& lhs, const stack& rhs)
+        {
+            return lhs._container >= rhs._container;
         }
         private:
             container_type _container;

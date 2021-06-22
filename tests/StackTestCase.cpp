@@ -119,7 +119,9 @@ void StackTestCase::initTests()
 
 void StackTestCase::run()
 {
+    allTests.clear();
     initTests();
+    printTestName("Stack");
     runAllTests();
     runLeaks();
 }

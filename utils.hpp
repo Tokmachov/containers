@@ -42,6 +42,44 @@ namespace ft
             dist++;
         return dist;
     }
+    template <typename InputIterator>
+    bool equal(InputIterator first1, InputIterator last1, InputIterator first2)
+    {
+        for (; first1 != last1; first1++, first2++)
+        {
+            if (*first1 != *first2)
+                return false;
+        }
+        return true;
+    }
+    template <typename InputIterator>
+    bool lexicographical_compare
+    (
+        InputIterator first1, 
+        InputIterator last1, 
+        InputIterator first2, 
+        InputIterator last2
+    )
+    {
+        for (; first1 != last1 && first2 != last2; first1++, first2++)
+        {
+            if (*first1 != *first2)
+                return *first1 < *first2;
+        }
+        if ((*first1 == *last1) && (*first2 != *last2))
+            return true;
+        return false;
+    }
+    template <typename Node>
+    std::string colorLetter(Node *n)
+    {
+        if (n->color == 0)
+            return std::string("(R)");
+        else if (n->color == 1)
+            return std::string("(B)");
+        else
+            return std::string("X");
+    }
     template <typename Node>
     static void printSubtree(Node* root, Node *tnull, const std::string& prefix)
     {
@@ -66,13 +104,13 @@ namespace ft
         {
                 bool printStrand = (hasLeft && hasRight && (root->right->right != tnull || root->right->left != NULL));
                 std::string newPrefix = prefix + (printStrand ? "│   " : "    ");
-                std::cout << root->right->value.first << std::endl;
+                std::cout << root->right->value.first << colorLetter(root->right) << std::endl;
                 printSubtree(root->right, tnull, newPrefix);
         }
 
         if (hasLeft)
         {
-                std::cout << (hasRight ? prefix : "") << "└── " << root->left->value.first << std::endl;
+                std::cout << (hasRight ? prefix : "") << "└── " << root->left->value.first << colorLetter(root->left) << std::endl;
                 printSubtree(root->left, tnull, prefix + "    ");
         }
     }
@@ -83,7 +121,7 @@ namespace ft
         {
                 return;
         }
-        std::cout << root->value.first << std::endl;
+        std::cout << root->value.first << colorLetter(root) << std::endl;
         printSubtree(root, tnull, "");
         std::cout << std::endl;
     }
@@ -194,6 +232,17 @@ namespace ft
     operator+(typename ReverseIterator<Iter>::difference_type n, const ReverseIterator<Iter>& x)
     {
         return ReverseIterator<Iter>(x.base() - n);
+    }
+    template <typename InputIterator>
+    void printContainer(InputIterator first, InputIterator last)
+    {
+        std::cout << "---Container_print_start---\n";
+        for (;first != last; first++) 
+        {
+            std::cout << " |" << *first << "|";
+        }
+        std::cout << std::endl;
+        std::cout << "---Container_print_end---\n";
     }
 }
 

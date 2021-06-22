@@ -8,13 +8,13 @@ class VectorIteratorBase
     public:
         VectorIteratorBase(Value *storagePtr)
             : _storagePtr(storagePtr) {}
-        bool operator==(const VectorIteratorBase<Value> &rhs)
+        friend bool operator==(const VectorIteratorBase<Value> &lhs, const VectorIteratorBase<Value> &rhs)
         {
-            return _storagePtr == rhs._storagePtr;
+            return lhs._storagePtr == rhs._storagePtr;
         }
-        bool operator!=(const VectorIteratorBase<Value> &rhs)
+        friend bool operator!=(const VectorIteratorBase<Value> &lhs, const VectorIteratorBase<Value> &rhs)
         {
-            return _storagePtr != rhs._storagePtr;
+            return lhs._storagePtr != rhs._storagePtr;
         }
     protected:
         Value *_storagePtr;

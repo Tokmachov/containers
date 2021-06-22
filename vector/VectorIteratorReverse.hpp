@@ -23,8 +23,9 @@ namespace ft
             //(random_access_iterator requirement) X b(a)
             VectorIteratorReverse<Value>(const VectorIteratorReverse<Value> &src)
                 : VectorIteratorBase<Value>(src._storagePtr) {}
-            
             //(random_access_iterator requirement) b = a
+            VectorIteratorReverse<Value>(const VectorIteratorBase<Value> &src)
+                : VectorIteratorBase<Value>(src) {}
             VectorIteratorReverse &operator=(const VectorIteratorReverse &rhs)
             {
                 this->_storagePtr = rhs._storagePtr;
@@ -89,21 +90,21 @@ namespace ft
             }
             
             //(random_access_iterator requirement) a < b, a > b, a <= b, a >= b
-            bool operator<(const VectorIteratorReverse &rhs)
+            friend bool operator<(const VectorIteratorReverse &lhs, const VectorIteratorReverse &rhs)
             {
-                return this->_storagePtr > rhs._storagePtr;
+                return lhs._storagePtr > rhs._storagePtr;
             }
-            bool operator>(const VectorIteratorReverse &rhs)
+            friend bool operator>(const VectorIteratorReverse &lhs, const VectorIteratorReverse &rhs)
             {
-                return this->_storagePtr < rhs._storagePtr;
+                return lhs._storagePtr < rhs._storagePtr;
             }
-            bool operator<=(const VectorIteratorReverse &rhs)
+            friend bool operator<=(const VectorIteratorReverse &lhs, const VectorIteratorReverse &rhs)
             {
-                return !(this->operator> (rhs));
+                return lhs._storagePtr >= rhs._storagePtr;
             }
-            bool operator>=(const VectorIteratorReverse &rhs)
+            friend bool operator>=(const VectorIteratorReverse &lhs, const VectorIteratorReverse &rhs)
             {
-                return !(this->operator< (rhs));
+                return lhs._storagePtr <= rhs._storagePtr;
             }
             
             //(random_access_iterator requirement) it == it1 it != it1 

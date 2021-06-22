@@ -531,7 +531,9 @@ void VectorTestCase::initTests()
 
 void VectorTestCase::run()
 {   
+    allTests.clear();
     initTests();
+    printTestName("Vector");
     runAllTests();
     runLeaks();
 }

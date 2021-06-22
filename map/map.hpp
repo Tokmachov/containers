@@ -101,7 +101,8 @@ namespace ft
                 : _node_alloc(x._node_alloc),
                 _alloc(x._alloc),
                 _compLessPair(x._compLessPair),
-                _compLessKey(x._compLessKey)
+                _compLessKey(x._compLessKey),
+                _size(0)
             {
                 _emptyNode = _makeEmptyNode();
                 _root = _emptyNode;
@@ -116,6 +117,7 @@ namespace ft
                 _root = _emptyNode;
                 _compLessPair = x._compLessPair;
                 _compLessKey = x._compLessKey;
+                _size = 0;
                 for (const_iterator it = x.begin();it != x.end(); ++it)
                     insert(*it);
                 return *this;
@@ -213,8 +215,26 @@ namespace ft
             }
             void erase (iterator first, iterator last)
             {
-                for (;first != last; first++)
-                    erase(first);
+                while (first != last)
+                {
+                    iterator tmp = first;
+                    first++;
+                    erase(tmp);
+                }
+            }
+            mapped_type& at (const key_type& k)
+            {
+                node_ptr n = _searchTree(_root, k);
+                if (n == _emptyNode)
+                    throw std::out_of_range("map::at:  key not found");
+                return n->value.second;
+            }
+            const mapped_type& at (const key_type& k) const
+            {
+                node_ptr n = _searchTree(_root, k);
+                if (n == _emptyNode)
+                    throw std::out_of_range("map::at:  key not found");
+                return n->value.second;
             }
             void swap (map& x)
             {
@@ -630,5 +650,68 @@ namespace ft
             minMaxElementPassNode->right = _getMinNode(root);
         }
     };
+    template <class Key, class T, class Compare, class Allocator>
+    bool operator==
+    (
+        const map<Key, T, Compare, Allocator>& x, 
+        const map<Key, T, Compare, Allocator>& y
+    )
+    {
+        return x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin());
+    }
+    template <class Key, class T, class Compare, class Allocator>
+    bool operator< 
+    (
+        const map<Key, T, Compare, Allocator>& x, 
+        const map<Key, T, Compare, Allocator>& y
+    )
+    {
+        return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
+    }
+    template <class Key, class T, class Compare, class Allocator>
+    bool operator!=
+    (
+        const map<Key, T, Compare, Allocator>& x, 
+        const map<Key, T, Compare, Allocator>& y
+    )
+    {
+        return !(x == y);
+    }
+    template <class Key, class T, class Compare, class Allocator>
+    bool operator>
+    (
+        const map<Key, T, Compare, Allocator>& x, 
+        const map<Key, T, Compare, Allocator>& y
+    )
+    {
+        return (y < x);
+    }
+    template <class Key, class T, class Compare, class Allocator>
+    bool operator>=
+    (
+        const map<Key, T, Compare, Allocator>& x, 
+        const map<Key, T, Compare, Allocator>& y
+    )
+    {
+        return !(x < y);
+    }
+    template <class Key, class T, class Compare, class Allocator>
+    bool operator<=
+    (
+        const map<Key, T, Compare, Allocator>& x, 
+        const map<Key, T, Compare, Allocator>& y
+    )
+    {
+        return !(y < x);
+    }
+    template <class Key, class T, class Compare, class Allocator>
+    void swap
+    (
+        map<Key, T, Compare, Allocator>& x,
+        map<Key, T, Compare, Allocator>& y
+    )
+    {
+        x.swap(y);
+    }
 }
 #endif

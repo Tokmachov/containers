@@ -56,6 +56,7 @@ class TestCase
             bool equal2 = std::equal(first2, last2, first1);
             return equal1 && equal2;
         }
+        static void printTestName(const std::string &n);
     private:
         TestCase( TestCase const & src );
 		TestCase &		operator=( TestCase const & rhs );

@@ -21,7 +21,7 @@ void ListIteratorTestCase::initTests()
     TestNameAndFunc t1 = 
     { 
         "testIteratorsOfTwoListsWithSameSequencesMustNotBeEqual", 
-        testCopyConstructionMustProduceEqualIterators
+        testIteratorsOfTwoListsWithSameSequencesMustNotBeEqual
     };
     ListIteratorTestCase::allTests.push_back(t1);
     TestNameAndFunc t2 = 
@@ -165,7 +165,10 @@ void ListIteratorTestCase::initTests()
 
 void ListIteratorTestCase::run()
 {
+    
+    allTests.clear();
     initTests();
+    printTestName("ListIterator");
     runAllTests();
     runLeaks();
 }
@@ -184,12 +187,10 @@ void ListIteratorTestCase::testIteratorsOfTwoListsWithSameSequencesMustNotBeEqua
     l1.push_back(1);
     ft::list<int>::iterator it = l.begin();
     ft::list<int>::iterator it1 = l1.begin();
-    
+   
     //Act
-    int expected = false;
-    int actual = (it == it1);
     //Assert
-    assertEqual(expected, actual);
+    assertFalse(it == it1);
 }
 //DONE
 void ListIteratorTestCase::testCopyConstructionMustProduceEqualIterators()

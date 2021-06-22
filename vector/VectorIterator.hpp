@@ -1,8 +1,8 @@
 #ifndef VECTORITERATOR_HPP
 # define VECTORITERATOR_HPP
 
-#include "VectorIteratorBase.hpp"
-
+# include "VectorIteratorBase.hpp"
+# include "VectorIteratorReverse.hpp"
 namespace ft
 {
     template <typename Value>
@@ -14,7 +14,6 @@ namespace ft
             typedef Value* pointer;
             typedef Value& reference;
             typedef std::random_access_iterator_tag iterator_category;
-            
             //(random_access_iterator requirement) X a
             VectorIterator()
                 : VectorIteratorBase<Value>(0) {}
@@ -23,9 +22,6 @@ namespace ft
             //(random_access_iterator requirement) X b(a)
             VectorIterator<Value>(const VectorIterator<Value> &src)
                 : VectorIteratorBase<Value>(src._storagePtr) {}
-            
-            // VectorIterator(const VectorIterator &src)
-            //     : VectorIteratorBase<const Value>(src._storagePtr) {}
             
             //(random_access_iterator requirement) it = it1
             VectorIterator &operator=(const VectorIterator &rhs)
@@ -91,21 +87,21 @@ namespace ft
             }
             
             //(random_access_iterator requirement) a < b, a > b, a <= b, a >= b
-            bool operator<(const VectorIterator &rhs)
+            friend bool operator<(const VectorIterator &lhs, const VectorIterator &rhs)
             {
-                return this->_storagePtr < rhs._storagePtr;
+                return lhs._storagePtr < rhs._storagePtr;
             }
-            bool operator>(const VectorIterator &rhs)
+            friend bool operator>(const VectorIterator &lhs, const VectorIterator &rhs)
             {
-                return this->_storagePtr > rhs._storagePtr;
+                return lhs._storagePtr > rhs._storagePtr;
             }
-            bool operator<=(const VectorIterator &rhs)
+            friend bool operator<=(const VectorIterator &lhs, const VectorIterator &rhs)
             {
-                return this->_storagePtr <= rhs._storagePtr;
+                return lhs._storagePtr <= rhs._storagePtr;
             }
-            bool operator>=(const VectorIterator &rhs)
+            friend bool operator>=(const VectorIterator &lhs, const VectorIterator &rhs)
             {
-                return this->_storagePtr >= rhs._storagePtr;
+                return lhs._storagePtr >= rhs._storagePtr;
             }
             
             //(random_access_iterator requirement) it == it1 it != it1 defined in VectorIteratorBase

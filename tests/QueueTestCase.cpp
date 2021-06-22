@@ -71,7 +71,9 @@ void QueueTestCase::initTests()
 
 void QueueTestCase::run()
 {
+    allTests.clear();
     initTests();
+    printTestName("Queue");
     runAllTests();
     runLeaks();
 }

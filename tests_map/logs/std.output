@@ -1,0 +1,107 @@
+default_constructor
+empty: 1 size: 0
+map:
+
+constructor_first_last
+empty: 0 size: 20
+map:
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+copy_constructor
+empty: 0 size: 20
+map:
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+brackets
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 
+at
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 
+map::at:  key not found
+insert_val
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+empty: 0 size: 20
+map:
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+insert_position_val
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+empty: 0 size: 20
+map:
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+insert_first_last
+empty: 0 size: 20
+map:
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 4 val: 4 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | 
+key: 8 val: 8 | key: 9 val: 9 | key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | 
+key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+erase_position
+empty: 0 size: 17
+map:
+key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 5 val: 5 | key: 6 val: 6 | key: 7 val: 7 | key: 8 val: 8 | key: 9 val: 9 | 
+key: 10 val: 10 | key: 11 val: 11 | key: 12 val: 12 | key: 13 val: 13 | key: 14 val: 14 | key: 15 val: 15 | key: 16 val: 16 | key: 17 val: 17 | 
+key: 18 val: 18 | 
+erase_key
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+0
+empty: 0 size: 10
+map:
+key: 1 val: 1 | key: 3 val: 3 | key: 5 val: 5 | key: 7 val: 7 | key: 9 val: 9 | key: 11 val: 11 | key: 13 val: 13 | key: 15 val: 15 | 
+key: 17 val: 17 | key: 19 val: 19 | 
+erase_firts_last
+empty: 0 size: 8
+map:
+key: 0 val: 0 | key: 1 val: 1 | key: 2 val: 2 | key: 3 val: 3 | key: 16 val: 16 | key: 17 val: 17 | key: 18 val: 18 | key: 19 val: 19 | 
+empty: 1 size: 0
+map:
+
+swap
+empty: 0 size: 10
+map:
+key: 1 val: 1 | key: 3 val: 3 | key: 5 val: 5 | key: 7 val: 7 | key: 9 val: 9 | key: 11 val: 11 | key: 13 val: 13 | key: 15 val: 15 | 
+key: 17 val: 17 | key: 19 val: 19 | 
+empty: 0 size: 10
+map:
+key: 0 val: 0 | key: 2 val: 2 | key: 4 val: 4 | key: 6 val: 6 | key: 8 val: 8 | key: 10 val: 10 | key: 12 val: 12 | key: 14 val: 14 | 
+key: 16 val: 16 | key: 18 val: 18 | 
+clear
+empty: 1 size: 0
+map:
+
+find
+0
+15
+1
+count
+1
+1
+0
+lower_bound
+0
+15
+1
+upper_bound
+1
+16
+1
+equal_range
+5
+reverse_iterator
+19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 

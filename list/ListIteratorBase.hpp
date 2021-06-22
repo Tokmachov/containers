@@ -9,7 +9,6 @@ class ListIteratorBase
     friend class list;
     protected:
         Node<Value> *_currentElement;
-        int el;
     public:
         
         ListIteratorBase() : _currentElement(0) {}

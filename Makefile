@@ -38,14 +38,14 @@ all: $(BINARY_NAME)
 $(BINARY_NAME): $(OBJS)
 		$(CC) $(OBJS) -o $(BINARY_NAME)
 
-%.o: %.cpp $(HEADERS) $(TEMPLATES)
+%.o: %.cpp
 	$(CC) $(COPTS)  $< -o $@
 
 clean:
 	rm -f $(OBJS)
 
-fclean: clean
-	rm -f $(NAME)
+fclean:	clean
+	rm -f $(BINARY_NAME)
 
 re: fclean all
 

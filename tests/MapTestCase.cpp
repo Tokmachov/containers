@@ -221,7 +221,9 @@ void MapTestCase::initTests()
 
 void MapTestCase::run()
 {
+    allTests.clear();
     initTests();
+    printTestName("Map");
     runAllTests();
     runLeaks();
 }

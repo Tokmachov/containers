@@ -237,8 +237,9 @@ namespace ft
             }
             iterator erase (iterator position)
             {
+                iterator toReturn = iterator(position._currentElement->next);
                 _remove(position._currentElement);
-                return ++position;
+                return toReturn;
             }
             iterator erase (iterator first, iterator last)
             {
@@ -430,8 +431,12 @@ namespace ft
             void _remove(Node<value_type> *first, Node<value_type> *last)
             {
                 _link(first->prev, last);
-                for (; first != last; first = first->next)
-                    _destroyAndDeallocate(first);
+                while (first != last)
+                {
+                    node_ptr toDelete = first;
+                    first = first->next;
+                    _destroyAndDeallocate(toDelete);
+                }
             }
             static bool isLeftStrictlyLessThenRight(value_type left, value_type right)
             {

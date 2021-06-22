@@ -647,7 +647,9 @@ void ListTestCase::initTests()
 
 void ListTestCase::run()
 {
+    allTests.clear();
     initTests();
+    printTestName("List");
     runAllTests();
     runLeaks();
 }

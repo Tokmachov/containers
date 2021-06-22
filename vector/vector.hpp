@@ -5,7 +5,7 @@
 # include "VectorIteratorReverse.hpp"
 # include "../utils.hpp"
 # include <memory>
-
+# include <stdexcept>
 namespace ft
 {
     template < class T, class Alloc = std::allocator<T> > 
@@ -51,7 +51,7 @@ namespace ft
             )
                 : _storage(0), _alloc(alloc), _elementsCount(0), _capacity(0)
             {
-                size_t dist = distance(first, last);
+                size_t dist = ft::distance(first, last);
                 _storage = _alloc.allocate(dist);
                 _elementsCount = dist;
                 _capacity = dist;
@@ -136,18 +136,22 @@ namespace ft
             }
             void resize (size_type n, value_type val = value_type())
             {
+                if (n > max_size())
+                    throw std::length_error(std::string("vector"));
                 if (n < _elementsCount)
                 {
-                    _destroyCurrentElements();
+                    for (size_type i = n; i < _elementsCount; i++)
+                        _alloc.destroy(_storage + i);
                     _elementsCount = n;
                 }
                 else if (n > _elementsCount)
                 {
                     if (n >= _capacity)
-                        _reallocStorage(n);
+                        _reallocStorage(_elementsCount, _capacity, n);
                     for (size_type i = _elementsCount; i < n; i++)
                         _alloc.construct(_storage + i, val);
                     _elementsCount = n;
+                    _capacity = n;
                 }
                 else
                     return ;
@@ -166,11 +170,14 @@ namespace ft
                 {
                     throw std::length_error
                     (
-                        "Exception in reserve method. N is greater than max_size."
+                        "allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size"
                     );
                 }
                 if (n > _capacity)
-                    _reallocStorage(n);
+                {
+                    _reallocStorage(_elementsCount, _capacity, n);
+                    _capacity = n;
+                }
             }
             //Element access:
             reference operator[] (size_type n)
@@ -187,7 +194,7 @@ namespace ft
                 {
                     std::string whatArg
                     (
-                        "Exception in \"at\" method. N is out of range."
+                        "vector"
                     );
                     throw std::out_of_range(whatArg);
                 }
@@ -229,10 +236,24 @@ namespace ft
                 typename enable_if<is_suitable_as_input_iterator<InputIterator>::value, InputIterator>::type last
             )
             {
+                if (last < first)
+                {
+                    _destroyCurrentElements();
+                    _alloc.deallocate(_storage, _capacity);
+                    _storage = 0;
+                    _capacity = 0;
+                    throw std::length_error(std::string("vector"));
+                }
+                ft::vector<value_type> srcCopy(first, last);
+                first = srcCopy.begin();
+                last = srcCopy.end();
                 _destroyCurrentElements();
                 size_type sourceSize = ft::distance(first, last);
                 if (sourceSize > _capacity)
-                    _reallocStorage(sourceSize);
+                {
+                    _reallocStorage(_elementsCount, _capacity, sourceSize);
+                    _capacity = sourceSize;
+                }
                 for (size_type targetPos = 0; first != last; first++, targetPos++)
                     _alloc.construct(_storage + targetPos, *first);
                 _elementsCount = sourceSize;
@@ -241,7 +262,10 @@ namespace ft
             {
                 _destroyCurrentElements();
                 if (n > _capacity)
-                    _reallocStorage(n);
+                {
+                    _reallocStorage(_elementsCount, _capacity, n);
+                    _capacity = n;
+                }
                 for (size_type i = 0; i < n; i++)
                     _alloc.construct(_storage + i, val);
                 _elementsCount = n;
@@ -259,31 +283,37 @@ namespace ft
             }
             iterator insert (iterator position, const value_type& val)
             {
-                _elementsCount++;
-                if (_elementsCount > _capacity)
+                value_type val_cpy = val;
+                if (_elementsCount + 1 > _capacity)
                 {
+                    size_type newCapacity = (_capacity + 1) * 2;
                     size_type positionOffset = &(*position) - _storage;
-                    _reallocStorage();
+                    _reallocStorage(_elementsCount, _capacity, newCapacity);
+                    _capacity = newCapacity;
                     position = iterator(_storage + positionOffset);
                 }
-                size_type memMoveSize = _elementsCount - (&(*position) - _storage) - 1;
+                size_type memMoveSize = _elementsCount - (&(*position) - _storage);
                 _memMoveRight(&(*position), memMoveSize, 1);
-                _alloc.construct(&(*position), val);
+                _alloc.construct(&(*position), val_cpy);
+                _elementsCount++;
                 return position;
             }
             void insert (iterator position, size_type n, const value_type& val)
             {
-                _elementsCount = _elementsCount + n;
-                if (_elementsCount > _capacity)
+                value_type val_cpy = val;
+                size_type newElementsCount = _elementsCount + n;
+                if (newElementsCount > _capacity)
                 {
                     size_type positionOffset = &(*position) - _storage;
-                    _reallocStorage(_elementsCount);
+                    _reallocStorage(_elementsCount, _capacity, newElementsCount);
+                    _capacity = newElementsCount;
                     position = iterator(_storage + positionOffset);
                 }
-                size_type memMoveSize = _elementsCount - n - (&(*position) - _storage);
+                size_type memMoveSize = _elementsCount - ((&(*position) - _storage));
                 _memMoveRight(&(*position), memMoveSize, n);
                 for (size_type i = 0; i < n; i++)
-                    _alloc.construct(&(*position) + i, val);
+                    _alloc.construct(&(*position) + i, val_cpy);
+                _elementsCount = newElementsCount;
             }
             template <class InputIterator>
             void insert 
@@ -293,18 +323,25 @@ namespace ft
                 typename ft::enable_if<is_suitable_as_input_iterator<InputIterator>::value, InputIterator>::type last
             )
             {
-                size_type n = ft::distance(first, last);
-                _elementsCount = _elementsCount + n;
-                if (_elementsCount > _capacity)
+                if (last < first)
+                    return ;
+                ft::vector<value_type> insertRangeCopy(first, last);
+                first = insertRangeCopy.begin();
+                last = insertRangeCopy.end();
+                size_type nElementsToInsert = ft::distance(first, last);
+                size_type newElementsCount = _elementsCount + nElementsToInsert;
+                if (newElementsCount > _capacity)
                 {
                     size_type positionOffset = &(*position) - _storage;
-                    _reallocStorage(_elementsCount);
+                    _reallocStorage(_elementsCount, _capacity, newElementsCount);
+                    _capacity = newElementsCount;
                     position = iterator(_storage + positionOffset);
                 }
-                size_type memSize = _elementsCount - n - (&(*position) - _storage);
-                _memMoveRight(&(*position), memSize, n);
-                for (size_type i = 0; i < n; i++, first++)
+                size_type memSize = _elementsCount - (&(*position) - _storage);
+                _memMoveRight(&(*position), memSize, nElementsToInsert);
+                for (size_type i = 0; i < nElementsToInsert; i++, first++)
                     _alloc.construct(&(*position) + i, *first);
+                _elementsCount = newElementsCount;
             }
             iterator erase (iterator position)
             {
@@ -320,7 +357,7 @@ namespace ft
                 pointer dst = &(*first);
                 pointer src = &(*last);
                 _elementsCount -= last - first;
-                ft::vector<int>::iterator returnIterator = first;
+                iterator returnIterator = first;
                 for (; first < last; first++)
                     _alloc.destroy(&(*first));
                 _memMoveLeft(dst, src, elementsToMoveLeftCount);
@@ -347,19 +384,21 @@ namespace ft
             size_type _elementsCount;
             size_type _capacity;
             //methods
-            void _pushBack(const value_type& val)
+            void _pushBack(value_type val)
             {
                 if (_elementsCount == _capacity)
                 {
-                    _reallocStorage();
+                    size_type newCapacity = (_capacity + 1) * 2;
+                    _reallocStorage(_elementsCount, _capacity, newCapacity);
+                    _capacity = newCapacity;
                 }
                 _alloc.construct(_storage + _elementsCount, val);
                 _elementsCount++;
             }
-            void _reallocStorage(size_type newCapacity = 0)
+            void _reallocStorage(size_type _elementsCount, size_type currentCapacity, size_type newCapacity)
             {
-                if (newCapacity == 0 || newCapacity <= _capacity)
-                    newCapacity = (_capacity + 1) * 2;
+                if (newCapacity <= currentCapacity)
+                    throw std::invalid_argument("new capacity is invalid");
                 pointer newStorage = _alloc.allocate(newCapacity);
                 for (size_t i = 0; i < _elementsCount; i++)
                 {
@@ -371,7 +410,6 @@ namespace ft
                     _alloc.deallocate(_storage, _capacity);
                 }
                 _storage = newStorage;
-                _capacity = newCapacity;
             }
             void _destroyCurrentElements()
             {
@@ -382,11 +420,11 @@ namespace ft
             void _memMoveRight(pointer ptr, size_type memSize, size_type dst)
             {
                 pointer newMemStart = ptr + dst;
-                pointer newMemEnd = newMemStart + memSize - 1;
-                while (newMemEnd >= newMemStart)
+                pointer newMemEnd = newMemStart + memSize;
+                while (newMemEnd > newMemStart)
                 {
-                    _alloc.construct(newMemEnd, *(newMemEnd - dst));
-                    _alloc.destroy(newMemEnd - dst);
+                    _alloc.construct(newMemEnd - 1, *(newMemEnd - dst - 1));
+                    _alloc.destroy(newMemEnd - dst - 1);
                     newMemEnd--;
                 }
             }
